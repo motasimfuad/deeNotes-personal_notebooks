@@ -20,7 +20,7 @@ class Notebook {
 final sampleNotebook = Notebook(
   id: 1,
   name: 'Travel',
-  cover: 'assets/images/notebooks/bg-2.jpg',
+  cover: 'assets/images/notebooks/bg-1.jpg',
   labels: [
     Label(id: 1, name: 'Label 1'),
     Label(id: 1, name: 'LABEL 2'),

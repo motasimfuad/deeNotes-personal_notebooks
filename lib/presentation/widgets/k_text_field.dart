@@ -11,6 +11,7 @@ class KTextField extends StatefulWidget {
   final bool hasBorder;
   final bool hasBottomMargin;
   final bool smallPadding;
+  final Function? onChanged;
 
   const KTextField({
     Key? key,
@@ -23,6 +24,7 @@ class KTextField extends StatefulWidget {
     this.hasBorder = false,
     this.hasBottomMargin = true,
     this.smallPadding = false,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -39,6 +41,9 @@ class _KTextFieldState extends State<KTextField> {
         bottom: widget.hasBottomMargin ? 15.h : 0.h,
       ),
       child: TextField(
+        onChanged: (value) {
+          widget.onChanged;
+        },
         controller: widget.controller,
         textInputAction: TextInputAction.next,
         obscureText: widget.isPassword && isVisible,

@@ -6,12 +6,18 @@ import 'package:notebooks/presentation/widgets/k_appbar.dart';
 import 'package:notebooks/presentation/widgets/k_fab.dart';
 import 'package:notebooks/presentation/widgets/k_text_field.dart';
 
-class CreateNotebook extends StatelessWidget {
+class CreateNotebook extends StatefulWidget {
   const CreateNotebook({Key? key}) : super(key: key);
 
   @override
+  State<CreateNotebook> createState() => _CreateNotebookState();
+}
+
+class _CreateNotebookState extends State<CreateNotebook> {
+  @override
   Widget build(BuildContext context) {
     double notebookHeight = MediaQuery.of(context).size.height * 0.35;
+
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       extendBody: true,
@@ -39,7 +45,6 @@ class CreateNotebook extends StatelessWidget {
                   scrollDirection: Axis.vertical,
                   physics: const ClampingScrollPhysics(),
                   child: Column(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       FractionalTranslation(
                         translation: const Offset(0, 0),

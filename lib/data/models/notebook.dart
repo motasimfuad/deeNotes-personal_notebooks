@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
+
 import 'package:notebooks/data/models/label.dart';
 import 'package:notebooks/data/models/note.dart';
 
 class Notebook {
-  int id;
+  int? id;
   String name;
   String cover;
   List<Label?>? labels;
   List<Note?>? notes;
+  bool? isLocked;
   Notebook({
-    required this.id,
+    this.id,
     required this.name,
     required this.cover,
     this.labels,
     this.notes,
+    this.isLocked = false,
   });
+
+  //
 }
 
+// delete later
 final sampleNotebook = Notebook(
   id: 1,
   name: 'Travel',

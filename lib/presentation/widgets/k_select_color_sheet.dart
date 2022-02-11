@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:notebooks/data/models/note_color.dart';
 
 import 'package:notebooks/presentation/widgets/k_appbar.dart';
+
+import '../../data/data_providers/note_colors_provider.dart';
 
 class KSelectColorSheet extends StatefulWidget {
   const KSelectColorSheet({
@@ -15,6 +16,7 @@ class KSelectColorSheet extends StatefulWidget {
 
 class _KSelectColorSheetState extends State<KSelectColorSheet> {
   int isSelected = 0;
+  var noteColorsProvider = NoteColorsProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,7 @@ class _KSelectColorSheetState extends State<KSelectColorSheet> {
                     mainAxisSpacing: 15.h,
                     childAspectRatio: 1,
                   ),
-                  itemCount: noteColors.length,
+                  itemCount: noteColorsProvider.noteColors.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
@@ -57,7 +59,7 @@ class _KSelectColorSheetState extends State<KSelectColorSheet> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: noteColors[index].color,
+                          color: noteColorsProvider.noteColors[index].color,
                           borderRadius: BorderRadius.all(
                             Radius.circular(5.r),
                           ),

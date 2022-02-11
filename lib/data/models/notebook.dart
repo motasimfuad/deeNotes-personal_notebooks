@@ -62,7 +62,7 @@ class Notebook {
       notes: map['notes'] != null
           ? List<Note?>.from(map['notes']?.map((x) => Note?.fromMap(x)))
           : null,
-      isLocked: map['isLocked'],
+      isLocked: map['isLocked'] == 1 ? true : false,
     );
   }
 

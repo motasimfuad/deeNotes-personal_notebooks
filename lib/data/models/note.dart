@@ -73,8 +73,8 @@ class Note {
       id: map['id']?.toInt(),
       title: map['title'] ?? '',
       description: map['description'] ?? '',
-      isFavorite: map['isFavorite'] ?? false,
-      isLocked: map['isLocked'],
+      isFavorite: map['isFavorite'] == 1 ? true : false,
+      isLocked: map['isLocked'] == 1 ? true : false,
       notebook: map['notebook'],
       color: Color(map['color']),
       createdAt: map['createdAt'] != null

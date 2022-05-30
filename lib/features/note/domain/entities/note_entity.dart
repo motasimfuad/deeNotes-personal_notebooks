@@ -7,7 +7,7 @@ class NoteEntity extends Equatable {
   final int? id;
   final String title;
   final String description;
-  final bool isFavorite;
+  final bool? isFavorite;
   final bool? isLocked;
   final Color color;
   final DateTime? createdAt;

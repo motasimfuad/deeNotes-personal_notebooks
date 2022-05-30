@@ -2,22 +2,25 @@ import 'package:flutter/material.dart';
 
 import 'package:notebooks/data/models/label.dart';
 import 'package:notebooks/features/note/data/models/note_model.dart';
+import 'package:notebooks/features/note/domain/entities/note_entity.dart';
+import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
-class NotebookModel {
-  int? id;
-  String name;
-  String cover;
-  List<Label?>? labels;
-  List<NoteModel?>? notes;
-  bool isLocked;
+class NotebookModel extends NotebookEntity {
   NotebookModel({
-    this.id,
-    required this.name,
-    required this.cover,
-    this.labels,
-    this.notes,
-    this.isLocked = false,
-  });
+    int? id,
+    required String name,
+    required String cover,
+    List<Label?>? labels,
+    List<NoteEntity?>? notes,
+    required bool isLocked,
+  }) : super(
+          id: id,
+          name: name,
+          cover: cover,
+          labels: labels,
+          notes: notes,
+          isLocked: isLocked,
+        );
 
   NotebookModel copyWith({
     int? id,
@@ -77,7 +80,7 @@ class NotebookModel {
 }
 
 // delete later
-final sampleNotebook = NotebookModel(
+final sampleNotebook = NotebookEntity(
   id: 1,
   name: 'Travel',
   cover: 'assets/images/notebooks/bg-1.jpg',
@@ -90,7 +93,8 @@ final sampleNotebook = NotebookModel(
     Label(id: 1, name: 'LABEL 2'),
     Label(id: 1, name: 'LABEL 2'),
   ],
-  notes: [
+  isLocked: false,
+  notes: const [
     NoteModel(
       id: 32,
       title: 'Note 1',

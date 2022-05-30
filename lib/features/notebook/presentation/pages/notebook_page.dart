@@ -3,15 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notebooks/features/note/data/models/note_model.dart';
 import 'package:notebooks/features/note/presentation/pages/view_note_screen/view_note_screen.dart';
 
-import 'package:notebooks/features/notebook/data/models/notebook_model.dart';
 import 'package:notebooks/features/note/presentation/widgets/note_item.dart';
+import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 import 'package:notebooks/features/notebook/presentation/widgets/notebook_persistent_header.dart';
 import 'package:notebooks/features/note/presentation/pages/create_note_page.dart';
 
 import 'package:notebooks/core/widgets/k_fab.dart';
 
 class NoteBookPage extends StatelessWidget {
-  NotebookModel notebook;
+  NotebookEntity notebook;
   NoteBookPage({
     Key? key,
     required this.notebook,

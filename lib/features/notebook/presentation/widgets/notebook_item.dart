@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
-import 'package:notebooks/features/notebook/data/models/notebook_model.dart';
+import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
 class NotebookItem extends StatelessWidget {
-  NotebookModel? notebook;
+  NotebookEntity? notebook;
   NotebookItem({
     Key? key,
     this.notebook,

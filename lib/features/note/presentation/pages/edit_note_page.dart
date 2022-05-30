@@ -9,6 +9,7 @@ import 'package:notebooks/core/widgets/k_fab.dart';
 import 'package:notebooks/core/widgets/k_labels.dart';
 import 'package:notebooks/core/widgets/k_select_color_sheet.dart';
 import 'package:notebooks/core/widgets/k_text_field.dart';
+import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
 class EditNotePage extends StatefulWidget {
   NoteModel note;
@@ -34,7 +35,7 @@ class _EditNotePageState extends State<EditNotePage> {
 
   @override
   Widget build(BuildContext context) {
-    NotebookModel notebook = sampleNotebook;
+    NotebookEntity notebook = sampleNotebook;
     // Note note = sampleNote;
     return Scaffold(
       body: SafeArea(

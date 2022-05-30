@@ -69,8 +69,11 @@ class AllNotebooksPage extends StatelessWidget {
           label: 'New Notebook',
           icon: Icons.add_to_photos,
           onPressed: () async {
-            DataRepository.instance
-                .createNotebook(NotebookModel(name: 'book name 2', cover: ''));
+            DataRepository.instance.createNotebook(NotebookModel(
+              name: 'book name 2',
+              cover: '',
+              isLocked: false,
+            ));
             // DataRepository.instance.;
             // DataRepository.instance.getAllNotebooks();
             var notebook = await DataRepository.instance.findNotebook(13);

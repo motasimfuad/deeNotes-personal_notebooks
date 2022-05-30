@@ -4,14 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 import 'package:notebooks/features/note/data/models/note_model.dart';
-import 'package:notebooks/features/notebook/data/models/notebook_model.dart';
 import 'package:notebooks/core/router/app_router.dart';
 import 'package:notebooks/core/widgets/k_labels.dart';
+import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
 import '../../../../../core/widgets/k_appbar.dart';
 
 class ViewNoteScreen extends StatelessWidget {
-  NotebookModel notebook;
+  NotebookEntity notebook;
   NoteModel note;
   ViewNoteScreen({
     Key? key,

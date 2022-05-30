@@ -3,15 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notebooks/core/widgets/k_appbar.dart';
 
 import 'package:notebooks/features/note/data/models/note_model.dart';
-import 'package:notebooks/features/notebook/data/models/notebook_model.dart';
 import 'package:notebooks/core/widgets/k_add_label_sheet.dart';
 import 'package:notebooks/core/widgets/k_fab.dart';
 import 'package:notebooks/core/widgets/k_labels.dart';
 import 'package:notebooks/core/widgets/k_select_color_sheet.dart';
 import 'package:notebooks/core/widgets/k_text_field.dart';
+import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
 class CreateNotePage extends StatelessWidget {
-  NotebookModel notebook;
+  NotebookEntity notebook;
   NoteModel note;
   CreateNotePage({
     Key? key,

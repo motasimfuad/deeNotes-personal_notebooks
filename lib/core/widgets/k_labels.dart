@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:notebooks/features/notebook/data/models/notebook_model.dart';
 import 'package:notebooks/core/widgets/k_icon_button.dart';
+import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
 class KLabels extends StatelessWidget {
-  final NotebookModel notebook;
+  final NotebookEntity notebook;
   final VoidCallback? onPressed;
   final bool showAddButton;
   const KLabels({

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/constants/strings.dart';
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key, required this.title}) : super(key: key);
 

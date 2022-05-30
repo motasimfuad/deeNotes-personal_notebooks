@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:notebooks/data/models/note.dart';
+import 'package:notebooks/features/note/data/models/note.dart';
 
 class Label {
   int? id;

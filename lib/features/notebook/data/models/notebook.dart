@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:notebooks/data/models/label.dart';
-import 'package:notebooks/data/models/note.dart';
+import 'package:notebooks/features/note/data/models/note.dart';
 
 class Notebook {
   int? id;

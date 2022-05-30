@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
-import 'package:notebooks/data/models/notebook.dart';
+import 'package:notebooks/features/notebook/data/models/notebook.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -134,8 +134,7 @@ void _onCreateDb(Database db, int version) async {
 }
 
 _createNotebooksTable(Database db) async {
-  await db.execute(
-      '''
+  await db.execute('''
         CREATE TABLE IF NOT EXISTS $_notebookTable (
           $_notebookId	INTEGER NOT NULL,
           $_notebookName	TEXT NOT NULL,

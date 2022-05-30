@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:notebooks/data/models/label.dart';
 
-import '../data_providers/note_colors_provider.dart';
+import '../../../../data/data_providers/note_colors_provider.dart';
 
 class Note {
   int? id;

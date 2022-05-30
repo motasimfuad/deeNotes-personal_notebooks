@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:notebooks/data/models/notebook.dart';
+import 'package:notebooks/features/notebook/data/models/notebook.dart';
 import 'package:notebooks/presentation/screens/all_notebooks_screen/widgets/notebook_item.dart';
 import 'package:notebooks/presentation/screens/notebook_screen/notebook_screen.dart';
 import 'package:notebooks/presentation/widgets/k_fab.dart';

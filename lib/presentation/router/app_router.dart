@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notebooks/bottom_nav.dart';
-import 'package:notebooks/data/models/note.dart';
-import 'package:notebooks/data/models/notebook.dart';
+import 'package:notebooks/features/note/data/models/note.dart';
+import 'package:notebooks/features/notebook/data/models/notebook.dart';
 import 'package:notebooks/presentation/screens/all_notebooks_screen/all_notebooks_screen.dart';
 import 'package:notebooks/presentation/screens/create_notebook/create_notebook.dart';
 import 'package:notebooks/presentation/screens/edit_note_screen/edit_note_screen.dart';

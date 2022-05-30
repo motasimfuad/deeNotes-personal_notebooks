@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:notebooks/data/models/notebook.dart';
+import 'package:notebooks/features/notebook/data/models/notebook.dart';
 import 'package:notebooks/presentation/widgets/k_icon_button.dart';
 
 class KLabels extends StatelessWidget {

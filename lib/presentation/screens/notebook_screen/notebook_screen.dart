@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:notebooks/data/models/note.dart';
+import 'package:notebooks/features/note/data/models/note.dart';
 
-import 'package:notebooks/data/models/notebook.dart';
+import 'package:notebooks/features/notebook/data/models/notebook.dart';
 import 'package:notebooks/presentation/screens/create_note/create_note.dart';
 import 'package:notebooks/presentation/screens/notebook_screen/widgets/note_item.dart';
 import 'package:notebooks/presentation/screens/notebook_screen/widgets/notebook_persistent_header.dart';

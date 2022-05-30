@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:notebooks/presentation/screens/all_notebooks_screen/all_notebooks_screen.dart';
-import 'package:notebooks/presentation/screens/favorite_notes/favorite_notes.dart';
-import 'package:notebooks/presentation/screens/settings_screen/settings_screen.dart';
+import 'package:notebooks/features/note/presentation/pages/favorite_notes_page.dart';
+import 'package:notebooks/features/settings/presentation/pages/settings_screen.dart';
+
+import 'features/notebook/presentation/pages/all_notebooks_page.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({Key? key}) : super(key: key);
@@ -15,8 +16,8 @@ class _BottomNavState extends State<BottomNav> {
 
   var screens = [
     // const MyHomePage(title: 'Hi'),
-    const AllNotebooksScreen(),
-    const FavoriteNotes(),
+    const AllNotebooksPage(),
+    const FavoriteNotesPage(),
     const SettingsScreen(),
   ];
 

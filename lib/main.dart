@@ -4,7 +4,7 @@ import 'package:notebooks/data/repositories/data_repository.dart';
 
 import 'core/constants/strings.dart';
 import 'core/themes/app_theme.dart';
-import 'presentation/router/app_router.dart';
+import 'core/router/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,8 +18,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
-      data: MediaQueryData.fromWindow(WidgetsBinding.instance!
-          .window), // like this it works and produces correct font sizes
+      data: MediaQueryData.fromWindow(
+        WidgetsBinding.instance.window,
+      ), // like this it works and produces correct font sizes
       child: ScreenUtilInit(
         minTextAdapt: true,
         designSize: const Size(392.7, 834.9),

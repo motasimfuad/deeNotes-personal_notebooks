@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:notebooks/data/models/notebook.dart';
 import 'package:path_provider/path_provider.dart';
@@ -7,7 +9,7 @@ import 'package:path/path.dart';
 const String _dbName = 'notebooks.db';
 const int _dbVersion = 1;
 
-const String _notebookTableName = 'notebooks';
+const String _notebookTable = 'notebooks';
 const String _notebookId = 'id';
 const String _notebookName = 'name';
 const String _notebookCover = 'cover';
@@ -20,30 +22,33 @@ class DataRepository {
   static Database? _database;
 
   // get database or throw error
-  Database _getDatabaseOrThrow() {
+  Future<Database> _getDatabaseOrThrow() async {
     final db = _database;
     if (db != null) {
       return db;
     } else {
+      await createDatabase();
       debugPrint('db is not open');
       throw ('Thrown error: db is not open');
     }
   }
 
   // create database
+  // ignore: body_might_complete_normally_nullable
   Future<Database?> createDatabase() async {
     if (_database != null) {
       return _database;
+    } else {
+      try {
+        final directory = await getApplicationDocumentsDirectory();
+        final path = join(directory.path, _dbName);
+        _database = await openDatabase(path,
+            version: _dbVersion, onCreate: _onCreateDb);
+        return _database;
+      } catch (e) {
+        debugPrint(e.toString());
+      }
     }
-    try {
-      final direcrtory = await getApplicationDocumentsDirectory();
-      final path = join(direcrtory.path, _dbName);
-      await openDatabase(path, version: _dbVersion, onCreate: _onCreateDb);
-      return _database;
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-    return null;
   }
 
   // delete database
@@ -57,9 +62,9 @@ class DataRepository {
 
   // create notebook
   Future createNotebook(Notebook notebook) async {
-    final db = _getDatabaseOrThrow();
+    final db = await _getDatabaseOrThrow();
     final notebookId = db.insert(
-      _notebookTableName,
+      _notebookTable,
       notebook.toMap(),
     );
     return notebookId;
@@ -67,9 +72,9 @@ class DataRepository {
 
   // update notebook
   Future updateNotebook(Notebook notebook) async {
-    final db = _getDatabaseOrThrow();
+    final db = await _getDatabaseOrThrow();
     final count = await db.update(
-      _notebookTableName,
+      _notebookTable,
       notebook.toMap(),
       where: '$_notebookId = ?',
       whereArgs: [notebook.id],
@@ -77,59 +82,61 @@ class DataRepository {
     return count;
   }
 
-  //fetch single notebook
-  Future<Notebook> findNotebook(String notebookName) async {
-    final db = _getDatabaseOrThrow();
+  //read single notebook
+  Future<Notebook> findNotebook(int id) async {
+    final db = await _getDatabaseOrThrow();
     final result = await db.query(
-      _notebookTableName,
+      _notebookTable,
       limit: 1,
-      where: '$_notebookName = ?',
-      whereArgs: [notebookName],
+      where: '$_notebookId = ?',
+      whereArgs: [id],
     );
 
     if (result.isNotEmpty) {
       return Notebook.fromMap(result.first);
     } else {
-      throw 'no notebook found';
+      throw Exception('ID $id not found!');
     }
   }
 
   // get all notebooks
   Future<List<Notebook>> getAllNotebooks() async {
-    final db = _getDatabaseOrThrow();
-    var allRows = await db.query(_notebookTableName);
+    final db = await _getDatabaseOrThrow();
+    var allRows = await db.query(_notebookTable);
     var notebooksIterable =
         allRows.map((notebook) => Notebook.fromMap(notebook));
     final notebooks = notebooksIterable.toList();
+    log(notebooks.toString());
     return notebooks;
   }
 
   // delete notebook
-  Future<void> deleteNotebook({required int notebookId}) async {
-    final db = _getDatabaseOrThrow();
+  Future<int> deleteNotebook({required int notebookId}) async {
+    final db = await _getDatabaseOrThrow();
     final deleteCount = await db.delete(
-      _notebookTableName,
+      _notebookTable,
       where: '$_notebookId = ?',
       whereArgs: [notebookId],
     );
+    return deleteCount;
   }
 
   // delete all notebooks
   Future<int> deleteAllNotebooks() async {
-    final db = _getDatabaseOrThrow();
-    return db.delete(_notebookTableName);
+    final db = await _getDatabaseOrThrow();
+    return db.delete(_notebookTable);
   }
 }
 
 void _onCreateDb(Database db, int version) async {
   await _createNotebooksTable(db);
-  await _createNotesTable(db);
+  // await _createNotesTable(db);
 }
 
 _createNotebooksTable(Database db) async {
   await db.execute(
       '''
-        CREATE TABLE IF NOT EXISTS $_notebookTableName (
+        CREATE TABLE IF NOT EXISTS $_notebookTable (
           $_notebookId	INTEGER NOT NULL,
           $_notebookName	TEXT NOT NULL,
           $_notebookCover	TEXT NOT NULL,

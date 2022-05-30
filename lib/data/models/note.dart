@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:notebooks/data/models/label.dart';
-import 'package:notebooks/data/models/notebook.dart';
 
 import '../data_providers/note_colors_provider.dart';
 
@@ -16,7 +15,7 @@ class Note {
   bool? isLocked;
   Color color;
   DateTime? createdAt;
-  Notebook notebook;
+  int notebookId;
   List<Label>? labels;
   Note({
     this.id,
@@ -25,7 +24,7 @@ class Note {
     this.isFavorite = false,
     this.isLocked = false,
     required this.color,
-    required this.notebook,
+    required this.notebookId,
     this.createdAt,
     this.labels,
   });
@@ -38,7 +37,7 @@ class Note {
     bool? isLocked,
     Color? color,
     DateTime? createdAt,
-    Notebook? notebook,
+    int? notebookId,
     List<Label>? labels,
   }) {
     return Note(
@@ -50,7 +49,7 @@ class Note {
       color: color ?? this.color,
       createdAt: createdAt ?? this.createdAt,
       labels: labels ?? this.labels,
-      notebook: notebook ?? this.notebook,
+      notebookId: notebookId ?? this.notebookId,
     );
   }
 
@@ -61,7 +60,7 @@ class Note {
       'description': description,
       'isFavorite': isFavorite,
       'isLocked': isLocked,
-      'notebook': notebook,
+      'notebookId': notebookId,
       'color': color.value,
       'createdAt': createdAt?.millisecondsSinceEpoch,
       'labels': labels?.map((x) => x.toMap()).toList(),
@@ -75,7 +74,7 @@ class Note {
       description: map['description'] ?? '',
       isFavorite: map['isFavorite'] == 1 ? true : false,
       isLocked: map['isLocked'] == 1 ? true : false,
-      notebook: map['notebook'],
+      notebookId: map['notebookId'],
       color: Color(map['color']),
       createdAt: map['createdAt'] != null
           ? DateTime.fromMillisecondsSinceEpoch(map['createdAt'])
@@ -92,7 +91,7 @@ class Note {
 
   @override
   String toString() {
-    return 'Note(id: $id, title: $title, description: $description, isFavorite: $isFavorite, isLocked: $isLocked, color: $color, createdAt: $createdAt, labels: $labels, notebook: $notebook)';
+    return 'Note(id: $id, title: $title, description: $description, isFavorite: $isFavorite, isLocked: $isLocked, color: $color, createdAt: $createdAt, labels: $labels, notebookId: $notebookId)';
   }
 
   @override
@@ -106,7 +105,7 @@ class Note {
         other.isFavorite == isFavorite &&
         other.isLocked == isLocked &&
         other.color == color &&
-        other.notebook == notebook &&
+        other.notebookId == notebookId &&
         other.createdAt == createdAt &&
         listEquals(other.labels, labels);
   }
@@ -120,7 +119,7 @@ class Note {
         isLocked.hashCode ^
         color.hashCode ^
         createdAt.hashCode ^
-        notebook.hashCode ^
+        notebookId.hashCode ^
         labels.hashCode;
   }
 }
@@ -133,7 +132,7 @@ final sampleNote = Note(
   description:
       'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
   color: noteColorsProvider.noteColors[20].color,
-  notebook: Notebook(id: 1, cover: '', name: ''),
+  notebookId: 1,
   labels: [
     Label(id: 01, name: 'label 1'),
     Label(id: 02, name: 'label 2'),

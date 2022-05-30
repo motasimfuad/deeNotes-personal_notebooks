@@ -27,7 +27,12 @@ class NotebookItem extends StatelessWidget {
             spreadRadius: 1,
           )
         ],
-        borderRadius: BorderRadius.all(Radius.circular(12.r)),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(12.r),
+          topRight: Radius.circular(30.r),
+          bottomLeft: Radius.circular(12.r),
+          bottomRight: Radius.circular(30.r),
+        ),
         image: notebook?.cover != null
             ? DecorationImage(
                 image: AssetImage(notebook!.cover),
@@ -39,7 +44,12 @@ class NotebookItem extends StatelessWidget {
               ),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(12.r)),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(12.r),
+          topRight: Radius.circular(29.r),
+          bottomLeft: Radius.circular(12.r),
+          bottomRight: Radius.circular(29.r),
+        ),
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(

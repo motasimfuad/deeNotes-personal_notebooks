@@ -34,6 +34,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const AllNotebooksScreen(),
         );
+
       case createNotebook:
         return MaterialPageRoute(
           builder: (_) => const CreateNotebook(),

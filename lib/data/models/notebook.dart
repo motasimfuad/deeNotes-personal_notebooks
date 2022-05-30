@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:notebooks/data/models/label.dart';
@@ -12,7 +9,7 @@ class Notebook {
   String cover;
   List<Label?>? labels;
   List<Note?>? notes;
-  bool? isLocked;
+  bool isLocked;
   Notebook({
     this.id,
     required this.name,
@@ -45,31 +42,27 @@ class Notebook {
       'id': id,
       'name': name,
       'cover': cover,
-      'labels': labels?.map((x) => x?.toMap()).toList(),
-      'notes': notes?.map((x) => x?.toMap()).toList(),
-      'isLocked': isLocked,
+      // 'labels': labels?.map((x) => x?.toMap()).toList(),
+      // 'notes': notes?.map((x) => x?.toMap()).toList(),
+      'isLocked': isLocked ? 1 : 0,
     };
   }
 
   factory Notebook.fromMap(Map<String, dynamic> map) {
     return Notebook(
       id: map['id']?.toInt(),
-      name: map['name'] ?? '',
-      cover: map['cover'] ?? '',
-      labels: map['labels'] != null
-          ? List<Label?>.from(map['labels']?.map((x) => Label?.fromMap(x)))
-          : null,
-      notes: map['notes'] != null
-          ? List<Note?>.from(map['notes']?.map((x) => Note?.fromMap(x)))
-          : null,
-      isLocked: map['isLocked'] == 1 ? true : false,
+      name: map['name'] as String,
+      cover: map['cover'] as String,
+      // labels: map['labels']
+      // // != null ? List<Label?>.from(map['labels']?.map((x) => Label?.fromMap(x)))
+      // //     : null
+      // ,
+      // notes: map['notes']
+      // // != null ? List<Note?>.from(map['notes']?.map((x) => Note?.fromMap(x))) : null
+      // ,
+      isLocked: (map['isLocked'] as int) == 1 ? true : false,
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory Notebook.fromJson(String source) =>
-      Notebook.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -77,27 +70,10 @@ class Notebook {
   }
 
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is Notebook &&
-        other.id == id &&
-        other.name == name &&
-        other.cover == cover &&
-        listEquals(other.labels, labels) &&
-        listEquals(other.notes, notes) &&
-        other.isLocked == isLocked;
-  }
+  bool operator ==(covariant Notebook other) => id == other.id;
 
   @override
-  int get hashCode {
-    return id.hashCode ^
-        name.hashCode ^
-        cover.hashCode ^
-        labels.hashCode ^
-        notes.hashCode ^
-        isLocked.hashCode;
-  }
+  int get hashCode => id.hashCode;
 }
 
 // delete later
@@ -120,63 +96,7 @@ final sampleNotebook = Notebook(
       title: 'Note 1',
       description: 'description',
       color: Colors.red,
-      notebook: Notebook(id: 1, cover: '', name: ''),
-    ),
-    Note(
-      id: 31,
-      title: 'Note 2',
-      description: 'description 2',
-      color: Colors.pink,
-      notebook: Notebook(id: 1, cover: '', name: ''),
-    ),
-    Note(
-      id: 31,
-      title: 'Note 2',
-      description: 'description 2' * 150,
-      color: Colors.purple,
-      notebook: Notebook(id: 1, cover: '', name: ''),
-    ),
-    Note(
-      id: 31,
-      title: 'Note 2',
-      description: 'description 2',
-      color: Colors.black,
-      notebook: Notebook(id: 1, cover: '', name: ''),
-    ),
-    Note(
-      id: 31,
-      title: 'Note 2',
-      description: 'description 2',
-      color: Colors.black,
-      notebook: Notebook(id: 1, cover: '', name: ''),
-    ),
-    Note(
-      id: 31,
-      title: 'Note 2',
-      description: 'description 2',
-      color: Colors.black,
-      notebook: Notebook(id: 1, cover: '', name: ''),
-    ),
-    Note(
-      id: 31,
-      title: 'Note 2',
-      description: 'description 2',
-      color: Colors.black,
-      notebook: Notebook(id: 1, cover: '', name: ''),
-    ),
-    Note(
-      id: 31,
-      title: 'Note 2',
-      description: 'description 2',
-      color: Colors.black,
-      notebook: Notebook(id: 1, cover: '', name: ''),
-    ),
-    Note(
-      id: 31,
-      title: 'Note 2',
-      description: 'description 2',
-      color: Colors.black,
-      notebook: Notebook(id: 1, cover: '', name: ''),
+      notebookId: 1,
     ),
   ],
 );

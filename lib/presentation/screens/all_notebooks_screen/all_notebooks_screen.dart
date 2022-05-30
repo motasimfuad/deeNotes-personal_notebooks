@@ -5,6 +5,8 @@ import 'package:notebooks/presentation/screens/all_notebooks_screen/widgets/note
 import 'package:notebooks/presentation/screens/notebook_screen/notebook_screen.dart';
 import 'package:notebooks/presentation/widgets/k_fab.dart';
 
+import '../../../data/repositories/data_repository.dart';
+
 class AllNotebooksScreen extends StatelessWidget {
   const AllNotebooksScreen({Key? key}) : super(key: key);
 
@@ -36,7 +38,7 @@ class AllNotebooksScreen extends StatelessWidget {
               primary: false,
               padding: EdgeInsets.only(
                   left: 20.w, right: 20.w, bottom: 70.h, top: 5.h),
-              itemCount: 20,
+              itemCount: 5,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 20.w,
@@ -66,8 +68,16 @@ class AllNotebooksScreen extends StatelessWidget {
         child: KFab(
           label: 'New Notebook',
           icon: Icons.add_to_photos,
-          onPressed: () {
-            Navigator.of(context).pushNamed('createNotebook');
+          onPressed: () async {
+            DataRepository.instance
+                .createNotebook(Notebook(name: 'book name 2', cover: ''));
+            // DataRepository.instance.;
+            // DataRepository.instance.getAllNotebooks();
+            var notebook = await DataRepository.instance.findNotebook(13);
+            print(notebook);
+            // DataRepository.instance.closeDatabase();
+
+            // Navigator.of(context).pushNamed('createNotebook');
           },
         ),
       ),

@@ -4,7 +4,6 @@ import 'package:notebooks/features/notebook/data/models/notebook_model.dart';
 import 'package:notebooks/features/notebook/presentation/widgets/notebook_item.dart';
 import 'package:notebooks/core/widgets/k_fab.dart';
 
-import '../../../../data/repositories/data_repository.dart';
 import 'notebook_page.dart';
 
 class AllNotebooksPage extends StatelessWidget {
@@ -69,18 +68,18 @@ class AllNotebooksPage extends StatelessWidget {
           label: 'New Notebook',
           icon: Icons.add_to_photos,
           onPressed: () async {
-            DataRepository.instance.createNotebook(NotebookModel(
-              name: 'book name 2',
-              cover: '',
-              isLocked: false,
-            ));
-            // DataRepository.instance.;
+            // DataRepository.instance.createNotebook(NotebookModel(
+            //   name: 'book name 2',
+            //   cover: '',
+            //   isLocked: false,
+            // ));
+
             // DataRepository.instance.getAllNotebooks();
-            var notebook = await DataRepository.instance.findNotebook(13);
-            print(notebook);
+            // var notebook = await DataRepository.instance.findNotebook(13);
+            // print(notebook);
             // DataRepository.instance.closeDatabase();
 
-            // Navigator.of(context).pushNamed('createNotebook');
+            Navigator.of(context).pushNamed('createNotebook');
           },
         ),
       ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:notebooks/features/note/data/models/note.dart';
+import 'package:notebooks/features/note/data/models/note_model.dart';
 import 'package:notebooks/features/note/presentation/pages/view_note_screen/view_note_screen.dart';
 
-import 'package:notebooks/features/notebook/data/models/notebook.dart';
+import 'package:notebooks/features/notebook/data/models/notebook_model.dart';
 import 'package:notebooks/features/note/presentation/widgets/note_item.dart';
 import 'package:notebooks/features/notebook/presentation/widgets/notebook_persistent_header.dart';
 import 'package:notebooks/features/note/presentation/pages/create_note_page.dart';
@@ -11,7 +11,7 @@ import 'package:notebooks/features/note/presentation/pages/create_note_page.dart
 import 'package:notebooks/core/widgets/k_fab.dart';
 
 class NoteBookPage extends StatelessWidget {
-  Notebook notebook;
+  NotebookModel notebook;
   NoteBookPage({
     Key? key,
     required this.notebook,
@@ -52,7 +52,7 @@ class NoteBookPage extends StatelessWidget {
                       ),
                       itemCount: notebook.notes?.length,
                       itemBuilder: (BuildContext context, int index) {
-                        var selectedNote = notebook.notes?[index] as Note;
+                        var selectedNote = notebook.notes?[index] as NoteModel;
                         return GestureDetector(
                           onTap: () => Navigator.push(
                             context,

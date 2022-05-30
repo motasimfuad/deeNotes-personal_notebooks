@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notebooks/core/widgets/k_appbar.dart';
 
-import 'package:notebooks/features/note/data/models/note.dart';
-import 'package:notebooks/features/notebook/data/models/notebook.dart';
+import 'package:notebooks/features/note/data/models/note_model.dart';
+import 'package:notebooks/features/notebook/data/models/notebook_model.dart';
 import 'package:notebooks/core/widgets/k_add_label_sheet.dart';
 import 'package:notebooks/core/widgets/k_fab.dart';
 import 'package:notebooks/core/widgets/k_labels.dart';
@@ -11,7 +11,7 @@ import 'package:notebooks/core/widgets/k_select_color_sheet.dart';
 import 'package:notebooks/core/widgets/k_text_field.dart';
 
 class EditNotePage extends StatefulWidget {
-  Note note;
+  NoteModel note;
   EditNotePage({
     Key? key,
     required this.note,
@@ -34,7 +34,7 @@ class _EditNotePageState extends State<EditNotePage> {
 
   @override
   Widget build(BuildContext context) {
-    Notebook notebook = sampleNotebook;
+    NotebookModel notebook = sampleNotebook;
     // Note note = sampleNote;
     return Scaffold(
       body: SafeArea(

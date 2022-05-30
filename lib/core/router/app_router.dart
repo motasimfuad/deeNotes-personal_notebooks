@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:notebooks/bottom_nav.dart';
-import 'package:notebooks/features/note/data/models/note.dart';
+import 'package:notebooks/features/note/data/models/note_model.dart';
 import 'package:notebooks/features/note/presentation/pages/view_note_screen/view_note_full_screen.dart';
 import 'package:notebooks/features/note/presentation/pages/view_note_screen/view_note_screen.dart';
-import 'package:notebooks/features/notebook/data/models/notebook.dart';
+import 'package:notebooks/features/notebook/data/models/notebook_model.dart';
 
 import 'package:notebooks/features/note/presentation/pages/edit_note_page.dart';
 import 'package:notebooks/features/note/presentation/pages/favorite_notes_page.dart';
@@ -50,15 +50,15 @@ class AppRouter {
       //   );
 
       case viewNote:
-        final note = settings.arguments as Note;
-        final notebook = settings.arguments as Notebook;
+        final note = settings.arguments as NoteModel;
+        final notebook = settings.arguments as NotebookModel;
         return MaterialPageRoute(
           builder: (context) => ViewNoteScreen(notebook: notebook, note: note),
           settings: settings,
         );
 
       case viewNoteFullScreen:
-        final note = settings.arguments as Note;
+        final note = settings.arguments as NoteModel;
         return MaterialPageRoute(
           builder: (context) => ViewNoteFullScreen(note: note),
           settings: settings,
@@ -67,7 +67,7 @@ class AppRouter {
       case editNote:
         return MaterialPageRoute(
           builder: (_) => EditNotePage(
-            note: settings.arguments as Note,
+            note: settings.arguments as NoteModel,
           ),
         );
 

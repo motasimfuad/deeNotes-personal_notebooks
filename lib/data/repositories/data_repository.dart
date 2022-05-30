@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
-import 'package:notebooks/features/notebook/data/models/notebook.dart';
+import 'package:notebooks/features/notebook/data/models/notebook_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -61,7 +61,7 @@ class DataRepository {
   }
 
   // create notebook
-  Future createNotebook(Notebook notebook) async {
+  Future createNotebook(NotebookModel notebook) async {
     final db = await _getDatabaseOrThrow();
     final notebookId = db.insert(
       _notebookTable,
@@ -71,7 +71,7 @@ class DataRepository {
   }
 
   // update notebook
-  Future updateNotebook(Notebook notebook) async {
+  Future updateNotebook(NotebookModel notebook) async {
     final db = await _getDatabaseOrThrow();
     final count = await db.update(
       _notebookTable,
@@ -83,7 +83,7 @@ class DataRepository {
   }
 
   //read single notebook
-  Future<Notebook> findNotebook(int id) async {
+  Future<NotebookModel> findNotebook(int id) async {
     final db = await _getDatabaseOrThrow();
     final result = await db.query(
       _notebookTable,
@@ -93,18 +93,18 @@ class DataRepository {
     );
 
     if (result.isNotEmpty) {
-      return Notebook.fromMap(result.first);
+      return NotebookModel.fromMap(result.first);
     } else {
       throw Exception('ID $id not found!');
     }
   }
 
   // get all notebooks
-  Future<List<Notebook>> getAllNotebooks() async {
+  Future<List<NotebookModel>> getAllNotebooks() async {
     final db = await _getDatabaseOrThrow();
     var allRows = await db.query(_notebookTable);
     var notebooksIterable =
-        allRows.map((notebook) => Notebook.fromMap(notebook));
+        allRows.map((notebook) => NotebookModel.fromMap(notebook));
     final notebooks = notebooksIterable.toList();
     log(notebooks.toString());
     return notebooks;

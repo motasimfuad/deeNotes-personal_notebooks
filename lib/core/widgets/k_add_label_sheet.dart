@@ -3,11 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notebooks/core/widgets/k_appbar.dart';
 import 'package:notebooks/core/widgets/k_button.dart';
 
-import 'package:notebooks/features/notebook/data/models/notebook.dart';
+import 'package:notebooks/features/notebook/data/models/notebook_model.dart';
 import 'package:notebooks/core/widgets/k_text_field.dart';
 
 class KAddLabelSheet extends StatelessWidget {
-  Notebook notebook;
+  NotebookModel notebook;
   KAddLabelSheet({
     Key? key,
     required this.notebook,

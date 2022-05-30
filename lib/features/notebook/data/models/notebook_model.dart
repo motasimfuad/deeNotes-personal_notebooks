@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:notebooks/data/models/label.dart';
-import 'package:notebooks/features/note/data/models/note.dart';
+import 'package:notebooks/features/note/data/models/note_model.dart';
 
-class Notebook {
+class NotebookModel {
   int? id;
   String name;
   String cover;
   List<Label?>? labels;
-  List<Note?>? notes;
+  List<NoteModel?>? notes;
   bool isLocked;
-  Notebook({
+  NotebookModel({
     this.id,
     required this.name,
     required this.cover,
@@ -19,15 +19,15 @@ class Notebook {
     this.isLocked = false,
   });
 
-  Notebook copyWith({
+  NotebookModel copyWith({
     int? id,
     String? name,
     String? cover,
     List<Label?>? labels,
-    List<Note?>? notes,
+    List<NoteModel?>? notes,
     bool? isLocked,
   }) {
-    return Notebook(
+    return NotebookModel(
       id: id ?? this.id,
       name: name ?? this.name,
       cover: cover ?? this.cover,
@@ -48,8 +48,8 @@ class Notebook {
     };
   }
 
-  factory Notebook.fromMap(Map<String, dynamic> map) {
-    return Notebook(
+  factory NotebookModel.fromMap(Map<String, dynamic> map) {
+    return NotebookModel(
       id: map['id']?.toInt(),
       name: map['name'] as String,
       cover: map['cover'] as String,
@@ -70,14 +70,14 @@ class Notebook {
   }
 
   @override
-  bool operator ==(covariant Notebook other) => id == other.id;
+  bool operator ==(covariant NotebookModel other) => id == other.id;
 
   @override
   int get hashCode => id.hashCode;
 }
 
 // delete later
-final sampleNotebook = Notebook(
+final sampleNotebook = NotebookModel(
   id: 1,
   name: 'Travel',
   cover: 'assets/images/notebooks/bg-1.jpg',
@@ -91,7 +91,7 @@ final sampleNotebook = Notebook(
     Label(id: 1, name: 'LABEL 2'),
   ],
   notes: [
-    Note(
+    NoteModel(
       id: 32,
       title: 'Note 1',
       description: 'description',

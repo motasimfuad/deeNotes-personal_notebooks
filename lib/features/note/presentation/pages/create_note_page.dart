@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notebooks/core/widgets/k_appbar.dart';
 
-import 'package:notebooks/features/note/data/models/note.dart';
-import 'package:notebooks/features/notebook/data/models/notebook.dart';
+import 'package:notebooks/features/note/data/models/note_model.dart';
+import 'package:notebooks/features/notebook/data/models/notebook_model.dart';
 import 'package:notebooks/core/widgets/k_add_label_sheet.dart';
 import 'package:notebooks/core/widgets/k_fab.dart';
 import 'package:notebooks/core/widgets/k_labels.dart';
@@ -11,8 +11,8 @@ import 'package:notebooks/core/widgets/k_select_color_sheet.dart';
 import 'package:notebooks/core/widgets/k_text_field.dart';
 
 class CreateNotePage extends StatelessWidget {
-  Notebook notebook;
-  Note note;
+  NotebookModel notebook;
+  NoteModel note;
   CreateNotePage({
     Key? key,
     required this.notebook,

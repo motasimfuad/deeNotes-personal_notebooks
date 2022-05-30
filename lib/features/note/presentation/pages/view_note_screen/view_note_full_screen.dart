@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notebooks/core/widgets/k_appbar.dart';
 
-import 'package:notebooks/features/note/data/models/note.dart';
+import 'package:notebooks/features/note/data/models/note_model.dart';
 
 class ViewNoteFullScreen extends StatefulWidget {
-  Note note;
+  NoteModel note;
   ViewNoteFullScreen({
     Key? key,
     required this.note,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:notebooks/features/note/data/models/note.dart';
+import 'package:notebooks/features/note/data/models/note_model.dart';
 
 class NoteItem extends StatelessWidget {
-  Note note;
+  NoteModel note;
   NoteItem({
     Key? key,
     required this.note,

@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:notebooks/features/note/data/models/note.dart';
+import 'package:notebooks/features/note/data/models/note_model.dart';
 
 class Label {
   int? id;
   String name;
-  List<Note>? notes;
+  List<NoteModel>? notes;
   Label({
     this.id,
     required this.name,
@@ -15,7 +15,7 @@ class Label {
   Label copyWith({
     int? id,
     String? name,
-    List<Note>? notes,
+    List<NoteModel>? notes,
   }) {
     return Label(
       id: id ?? this.id,
@@ -37,7 +37,7 @@ class Label {
       id: map['id']?.toInt(),
       name: map['name'] ?? '',
       notes: map['notes'] != null
-          ? List<Note>.from(map['notes']?.map((x) => Note.fromMap(x)))
+          ? List<NoteModel>.from(map['notes']?.map((x) => NoteModel.fromMap(x)))
           : null,
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:notebooks/features/notebook/data/models/notebook.dart';
+import 'package:notebooks/features/notebook/data/models/notebook_model.dart';
 import 'package:notebooks/features/notebook/presentation/widgets/notebook_item.dart';
 import 'package:notebooks/core/widgets/k_fab.dart';
 
@@ -70,7 +70,7 @@ class AllNotebooksPage extends StatelessWidget {
           icon: Icons.add_to_photos,
           onPressed: () async {
             DataRepository.instance
-                .createNotebook(Notebook(name: 'book name 2', cover: ''));
+                .createNotebook(NotebookModel(name: 'book name 2', cover: ''));
             // DataRepository.instance.;
             // DataRepository.instance.getAllNotebooks();
             var notebook = await DataRepository.instance.findNotebook(13);

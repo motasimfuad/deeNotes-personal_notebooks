@@ -7,7 +7,7 @@ import 'package:notebooks/data/models/label.dart';
 
 import '../../../../data/data_providers/note_colors_provider.dart';
 
-class Note {
+class NoteModel {
   int? id;
   String title;
   String description;
@@ -17,7 +17,7 @@ class Note {
   DateTime? createdAt;
   int notebookId;
   List<Label>? labels;
-  Note({
+  NoteModel({
     this.id,
     required this.title,
     required this.description,
@@ -29,7 +29,7 @@ class Note {
     this.labels,
   });
 
-  Note copyWith({
+  NoteModel copyWith({
     int? id,
     String? title,
     String? description,
@@ -40,7 +40,7 @@ class Note {
     int? notebookId,
     List<Label>? labels,
   }) {
-    return Note(
+    return NoteModel(
       id: id ?? this.id,
       title: title ?? this.title,
       description: description ?? this.description,
@@ -67,8 +67,8 @@ class Note {
     };
   }
 
-  factory Note.fromMap(Map<String, dynamic> map) {
-    return Note(
+  factory NoteModel.fromMap(Map<String, dynamic> map) {
+    return NoteModel(
       id: map['id']?.toInt(),
       title: map['title'] ?? '',
       description: map['description'] ?? '',
@@ -87,7 +87,8 @@ class Note {
 
   String toJson() => json.encode(toMap());
 
-  factory Note.fromJson(String source) => Note.fromMap(json.decode(source));
+  factory NoteModel.fromJson(String source) =>
+      NoteModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -98,7 +99,7 @@ class Note {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Note &&
+    return other is NoteModel &&
         other.id == id &&
         other.title == title &&
         other.description == description &&
@@ -126,7 +127,7 @@ class Note {
 
 // delete later
 var noteColorsProvider = NoteColorsProvider();
-final sampleNote = Note(
+final sampleNote = NoteModel(
   id: 32,
   title: 'This is the first note',
   description:

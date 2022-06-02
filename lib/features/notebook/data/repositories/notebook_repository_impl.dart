@@ -23,9 +23,9 @@ class NotebookRepositoryImpl implements NotebookRepository {
     try {
       final futureNotebook =
           await _localDataSource.createNotebook(notebookModel);
-      return right(futureNotebook);
+      return Right(futureNotebook);
     } on LocalException {
-      return left(LocalFailure());
+      return Left(LocalFailure());
     }
   }
 
@@ -39,7 +39,7 @@ class NotebookRepositoryImpl implements NotebookRepository {
   }
 
   @override
-  Future<Either<Failure, void>> deleteNotebook(int notebookId) async {
+  Future<Either<Failure, int>> deleteNotebook(int notebookId) async {
     try {
       return Right(await _localDataSource.deleteNotebook(notebookId));
     } on LocalException {
@@ -93,9 +93,9 @@ class NotebookRepositoryImpl implements NotebookRepository {
     try {
       final futureNotebook =
           await _localDataSource.updateNotebook(notebookModel);
-      return right(futureNotebook);
+      return Right(futureNotebook);
     } on LocalException {
-      return left(LocalFailure());
+      return Left(LocalFailure());
     }
   }
 }

@@ -7,6 +7,6 @@ abstract class NotebookRepository {
   Future<Either<Failure, int>> updateNotebook(NotebookEntity notebook);
   Future<Either<Failure, NotebookEntity>> findNotebook(int id);
   Future<Either<Failure, List<NotebookEntity>>> getAllNotebooks();
-  Future<Either<Failure, void>> deleteNotebook(int notebookId);
+  Future<Either<Failure, int>> deleteNotebook(int notebookId);
   Future<Either<Failure, int>> deleteAllNotebooks();
 }

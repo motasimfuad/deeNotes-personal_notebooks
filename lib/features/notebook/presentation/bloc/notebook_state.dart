@@ -25,12 +25,7 @@ class NotebookListError extends NotebookState {
   List<Object> get props => [message];
 }
 
-class NotebookCreated extends NotebookState {
-  final NotebookEntity notebook;
-  const NotebookCreated({required this.notebook});
-  @override
-  List<Object> get props => [notebook];
-}
+class NotebookCreated extends NotebookState {}
 
 class NotebookUpdated extends NotebookState {
   final NotebookEntity notebook;

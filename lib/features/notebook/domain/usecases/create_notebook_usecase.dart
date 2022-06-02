@@ -1,6 +1,7 @@
-import 'package:equatable/equatable.dart';
-import 'package:notebooks/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
+import 'package:equatable/equatable.dart';
+
+import 'package:notebooks/core/error/failures.dart';
 import 'package:notebooks/core/usecases/usecase.dart';
 import 'package:notebooks/features/notebook/domain/repositories/notebook_repository.dart';
 
@@ -18,7 +19,11 @@ class CreateNotebookUsecase implements UseCase<int, Params> {
 
 class Params extends Equatable {
   final NotebookEntity notebook;
-  const Params(this.notebook);
+  final int? notebookId;
+  const Params({
+    required this.notebook,
+    this.notebookId,
+  });
   @override
   List<Object> get props => [notebook];
 }

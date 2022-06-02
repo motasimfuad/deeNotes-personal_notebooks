@@ -67,6 +67,15 @@ class NotebookModel extends NotebookEntity {
     );
   }
 
+  NotebookModel fromEntity(NotebookEntity notebookEntity) => NotebookModel(
+        id: notebookEntity.id,
+        name: notebookEntity.name,
+        cover: notebookEntity.cover,
+        labels: notebookEntity.labels,
+        notes: notebookEntity.notes,
+        isLocked: notebookEntity.isLocked,
+      );
+
   @override
   String toString() {
     return 'Notebook(id: $id, name: $name, cover: $cover, labels: $labels, notes: $notes, isLocked: $isLocked)';

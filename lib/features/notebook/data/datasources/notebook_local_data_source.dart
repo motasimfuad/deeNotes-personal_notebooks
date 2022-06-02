@@ -16,9 +16,6 @@ abstract class NotebookLocalDataSource {
 
 const String _notebookTable = 'notebooks';
 const String _notebookId = 'id';
-const String _notebookName = 'name';
-const String _notebookCover = 'cover';
-const String _notebookLocked = 'isLocked';
 
 class NotebookLocalDataSourceImpl implements NotebookLocalDataSource {
   final DataRepository _db = DataRepository.instance;

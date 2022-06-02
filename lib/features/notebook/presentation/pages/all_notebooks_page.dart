@@ -76,10 +76,10 @@ class AllNotebooksPage extends StatelessWidget {
 
             // DataRepository.instance.getAllNotebooks();
             // var notebook = await DataRepository.instance.findNotebook(13);
-            // print(notebook);
+            // print('notebook: $notebook');
             // DataRepository.instance.closeDatabase();
 
-            Navigator.of(context).pushNamed('createNotebook');
+            // Navigator.of(context).pushNamed('createNotebook');
           },
         ),
       ),

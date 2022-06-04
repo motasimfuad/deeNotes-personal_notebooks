@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:notebooks/data/repositories/data_repository.dart';
+import 'dependency_injection.dart' as di;
 
 import 'core/constants/strings.dart';
 import 'core/themes/app_theme.dart';
@@ -8,7 +8,8 @@ import 'core/router/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await DataRepository.instance.createDatabase();
+  await di.init();
+  // await DataRepository.instance.createDatabase();
   runApp(const App());
 }
 

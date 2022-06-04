@@ -18,11 +18,12 @@ const String _notebookTable = 'notebooks';
 const String _notebookId = 'id';
 
 class NotebookLocalDataSourceImpl implements NotebookLocalDataSource {
-  final DataRepository _db = DataRepository.instance;
+  final DataRepository dataRepo;
+  NotebookLocalDataSourceImpl({required this.dataRepo});
 
   @override
   Future<int> createNotebook(NotebookModel notebook) async {
-    final db = await _db.getDatabaseOrThrow();
+    final db = await dataRepo.getDatabaseOrThrow();
     final notebookId = db.insert(
       _notebookTable,
       notebook.toMap(),
@@ -32,13 +33,13 @@ class NotebookLocalDataSourceImpl implements NotebookLocalDataSource {
 
   @override
   Future<int> deleteAllNotebooks() async {
-    final db = await _db.getDatabaseOrThrow();
+    final db = await dataRepo.getDatabaseOrThrow();
     return db.delete(_notebookTable);
   }
 
   @override
   Future<int> deleteNotebook(int notebookId) async {
-    final db = await _db.getDatabaseOrThrow();
+    final db = await dataRepo.getDatabaseOrThrow();
     final deleteCount = await db.delete(
       _notebookTable,
       where: '$_notebookId = ?',
@@ -49,7 +50,7 @@ class NotebookLocalDataSourceImpl implements NotebookLocalDataSource {
 
   @override
   Future<NotebookModel> findNotebook(int id) async {
-    final db = await _db.getDatabaseOrThrow();
+    final db = await dataRepo.getDatabaseOrThrow();
     final result = await db.query(
       _notebookTable,
       limit: 1,
@@ -67,7 +68,7 @@ class NotebookLocalDataSourceImpl implements NotebookLocalDataSource {
 
   @override
   Future<List<NotebookModel>> getAllNotebooks() async {
-    final db = await _db.getDatabaseOrThrow();
+    final db = await dataRepo.getDatabaseOrThrow();
     var allRows = await db.query(_notebookTable);
     var notebooksIterable =
         allRows.map((notebook) => NotebookModel.fromMap(notebook));
@@ -77,7 +78,7 @@ class NotebookLocalDataSourceImpl implements NotebookLocalDataSource {
 
   @override
   Future<int> updateNotebook(NotebookModel notebook) async {
-    final db = await _db.getDatabaseOrThrow();
+    final db = await dataRepo.getDatabaseOrThrow();
     final count = await db.update(
       _notebookTable,
       notebook.toMap(),

@@ -6,7 +6,8 @@ import 'package:notebooks/features/notebook/domain/usecases/create_notebook_usec
     as create;
 import 'package:notebooks/features/notebook/domain/usecases/delete_all_notebooks_usecase.dart';
 import 'package:notebooks/features/notebook/domain/usecases/delete_notebook_usecase.dart';
-import 'package:notebooks/features/notebook/domain/usecases/find_notebook_usecase.dart';
+import 'package:notebooks/features/notebook/domain/usecases/find_notebook_usecase.dart'
+    as find;
 import 'package:notebooks/features/notebook/domain/usecases/get_all_notebooks_usecase.dart';
 import 'package:notebooks/features/notebook/domain/usecases/update_notebook_usecase.dart';
 
@@ -23,7 +24,7 @@ String errMsg = "Something went wrong!";
 class NotebookBloc extends Bloc<NotebookEvent, NotebookState> {
   GetAllNotebooksUsecase getAllNotebooks;
   create.CreateNotebookUsecase createNotebook;
-  FindNotebookUsecase findNotebook;
+  find.FindNotebookUsecase findNotebook;
   UpdateNotebookUsecase updateNotebook;
   DeleteNotebookUsecase deleteNotebook;
   DeleteAllNotebooksUsecase deleteAllNotebooks;
@@ -52,6 +53,16 @@ class NotebookBloc extends Bloc<NotebookEvent, NotebookState> {
         either.fold(
           (failure) => emit(NotebookCreatedFailed(message: errMsg)),
           (result) => emit(NotebookCreated()),
+        );
+      }
+
+      if (event is FindNotebookEvent) {
+        emit(NotebookLoading());
+        final params = find.Params(id: event.id);
+        final either = await findNotebook(params);
+        either.fold(
+          (failure) => emit(NotebookListError(message: errMsg)),
+          (result) => emit(NotebookLoaded(notebook: result)),
         );
       }
     });

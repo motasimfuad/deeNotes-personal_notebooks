@@ -47,3 +47,12 @@ class NotebookCreatedFailed extends NotebookState {
   @override
   List<Object> get props => [message];
 }
+
+class NotebookLoading extends NotebookState {}
+
+class NotebookLoaded extends NotebookState {
+  final NotebookEntity notebook;
+  const NotebookLoaded({required this.notebook});
+  @override
+  List<Object> get props => [notebook];
+}

@@ -16,7 +16,7 @@ class _BottomNavState extends State<BottomNav> {
 
   var screens = [
     // const MyHomePage(title: 'Hi'),
-    const AllNotebooksPage(),
+    AllNotebooksPage(),
     const FavoriteNotesPage(),
     const SettingsScreen(),
   ];

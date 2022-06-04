@@ -33,7 +33,7 @@ class NotebookItem extends StatelessWidget {
           bottomLeft: Radius.circular(12.r),
           bottomRight: Radius.circular(30.r),
         ),
-        image: notebook?.cover != null
+        image: (notebook?.cover != null && notebook?.cover != '')
             ? DecorationImage(
                 image: AssetImage(notebook!.cover),
                 fit: BoxFit.cover,

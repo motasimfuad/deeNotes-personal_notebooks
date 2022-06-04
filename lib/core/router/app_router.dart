@@ -33,7 +33,7 @@ class AppRouter {
         );
       case notebooks:
         return MaterialPageRoute(
-          builder: (_) => const AllNotebooksPage(),
+          builder: (_) => AllNotebooksPage(),
         );
 
       case createNotebook:

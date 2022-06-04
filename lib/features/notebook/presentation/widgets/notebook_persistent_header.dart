@@ -19,7 +19,10 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
     return Stack(
       children: [
         Image.asset(
-          notebook.cover,
+          // ignore: unnecessary_null_comparison
+          (notebook.cover != null && notebook.cover != '')
+              ? notebook.cover
+              : 'assets/images/notebooks/no-image.png',
           fit: BoxFit.cover,
           width: MediaQuery.of(context).size.width,
           height: expandedHeight,

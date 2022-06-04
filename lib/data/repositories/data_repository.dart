@@ -24,9 +24,10 @@ class DataRepository {
     if (db != null) {
       return db;
     } else {
-      await createDatabase();
-      debugPrint('db is not open');
-      throw ('Thrown error: db is not open');
+      final newDb = await createDatabase();
+      return newDb as Database;
+      // debugPrint('db is not open');
+      // throw ('Thrown error: db is not open');
     }
   }
 

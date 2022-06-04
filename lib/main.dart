@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:notebooks/all_providers.dart';
 import 'dependency_injection.dart' as di;
 
 import 'core/constants/strings.dart';
@@ -21,26 +22,27 @@ class App extends StatelessWidget {
     return MediaQuery(
       data: MediaQueryData.fromWindow(
         WidgetsBinding.instance.window,
-      ), // like this it works and produces correct font sizes
+      ),
       child: ScreenUtilInit(
         minTextAdapt: true,
         designSize: const Size(392.7, 834.9),
-        builder: () => MaterialApp(
-          builder: (context, widget) {
-            //add this line
-            ScreenUtil.setContext(context);
-            return MediaQuery(
-              //Setting font does not change with system font size
-              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-              child: widget!,
-            );
-          },
-          title: Strings.appTitle,
-          theme: AppTheme.lightTheme,
-          // darkTheme: AppTheme.darkTheme,
-          debugShowCheckedModeBanner: false,
-          initialRoute: AppRouter.home,
-          onGenerateRoute: AppRouter.onGenerateRoute,
+        builder: () => AllProviders(
+          child: MaterialApp(
+            builder: (context, widget) {
+              //add this line
+              ScreenUtil.setContext(context);
+              return MediaQuery(
+                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                child: widget!,
+              );
+            },
+            title: Strings.appTitle,
+            theme: AppTheme.lightTheme,
+            // darkTheme: AppTheme.darkTheme,
+            debugShowCheckedModeBanner: false,
+            initialRoute: AppRouter.home,
+            onGenerateRoute: AppRouter.onGenerateRoute,
+          ),
         ),
       ),
     );

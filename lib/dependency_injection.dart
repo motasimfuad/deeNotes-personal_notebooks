@@ -11,40 +11,40 @@ import 'package:notebooks/features/notebook/domain/usecases/get_all_notebooks_us
 import 'package:notebooks/features/notebook/domain/usecases/update_notebook_usecase.dart';
 import 'package:notebooks/features/notebook/presentation/bloc/notebook_bloc.dart';
 
-final di = GetIt.instance;
+final getIt = GetIt.instance;
 
 Future<void> init() async {
   //! Features
   // Blocs
-  di.registerFactory(() => NotebookBloc(
-        getAllNotebooks: di(),
-        createNotebook: di(),
-        findNotebook: di(),
-        updateNotebook: di(),
-        deleteNotebook: di(),
-        deleteAllNotebooks: di(),
+  getIt.registerFactory(() => NotebookBloc(
+        getAllNotebooks: getIt(),
+        createNotebook: getIt(),
+        findNotebook: getIt(),
+        updateNotebook: getIt(),
+        deleteNotebook: getIt(),
+        deleteAllNotebooks: getIt(),
       ));
 
   // UseCases
-  di.registerLazySingleton(() => GetAllNotebooksUsecase(di()));
-  di.registerLazySingleton(() => CreateNotebookUsecase(di()));
-  di.registerLazySingleton(() => FindNotebookUsecase(di()));
-  di.registerLazySingleton(() => UpdateNotebookUsecase(di()));
-  di.registerLazySingleton(() => DeleteNotebookUsecase(di()));
-  di.registerLazySingleton(() => DeleteAllNotebooksUsecase(di()));
+  getIt.registerLazySingleton(() => GetAllNotebooksUsecase(getIt()));
+  getIt.registerLazySingleton(() => CreateNotebookUsecase(getIt()));
+  getIt.registerLazySingleton(() => FindNotebookUsecase(getIt()));
+  getIt.registerLazySingleton(() => UpdateNotebookUsecase(getIt()));
+  getIt.registerLazySingleton(() => DeleteNotebookUsecase(getIt()));
+  getIt.registerLazySingleton(() => DeleteAllNotebooksUsecase(getIt()));
 
   // Repositories
-  di.registerLazySingleton<NotebookRepository>(
-    () => NotebookRepositoryImpl(di()),
+  getIt.registerLazySingleton<NotebookRepository>(
+    () => NotebookRepositoryImpl(getIt()),
   );
 
   //data sources
-  di.registerLazySingleton<NotebookLocalDataSource>(
-    () => NotebookLocalDataSourceImpl(dataRepo: di()),
+  getIt.registerLazySingleton<NotebookLocalDataSource>(
+    () => NotebookLocalDataSourceImpl(dataRepo: getIt()),
   );
 
   //! core
 
   //! data
-  di.registerLazySingleton<DataRepository>(() => DataRepository.instance);
+  getIt.registerLazySingleton<DataRepository>(() => DataRepository.instance);
 }

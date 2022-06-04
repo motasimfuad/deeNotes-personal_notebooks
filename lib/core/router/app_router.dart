@@ -76,10 +76,3 @@ class AppRouter {
     }
   }
 }
-
-// extension NavigatorStateExtentions on NavigatorState {
-//   Future<void> toNoteScreen({note, notebook}) => pushNamed(
-//         AppRouter.viewNote,
-//         arguments: note, notebook;
-//       );
-// }

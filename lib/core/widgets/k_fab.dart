@@ -22,7 +22,7 @@ class KFab extends StatelessWidget {
       label: Text(label),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(13.r),
+          Radius.circular(15.r),
         ),
       ),
     );

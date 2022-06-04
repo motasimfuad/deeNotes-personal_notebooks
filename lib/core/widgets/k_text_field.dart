@@ -11,7 +11,7 @@ class KTextField extends StatefulWidget {
   final bool hasBorder;
   final bool hasBottomMargin;
   final bool smallPadding;
-  final Function? onChanged;
+  final Function(String)? onChanged;
 
   const KTextField({
     Key? key,
@@ -41,9 +41,7 @@ class _KTextFieldState extends State<KTextField> {
         bottom: widget.hasBottomMargin ? 15.h : 0.h,
       ),
       child: TextField(
-        onChanged: (value) {
-          widget.onChanged;
-        },
+        onChanged: widget.onChanged,
         controller: widget.controller,
         textInputAction: TextInputAction.next,
         obscureText: widget.isPassword && isVisible,
@@ -85,14 +83,14 @@ class _KTextFieldState extends State<KTextField> {
                     color: Colors.grey.shade300,
                   ),
                   borderRadius:
-                      BorderRadius.circular(widget.smallPadding ? 9.r : 12.r),
+                      BorderRadius.circular(widget.smallPadding ? 10.r : 15.r),
                 ),
                 disabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.grey.shade300,
                   ),
                   borderRadius:
-                      BorderRadius.circular(widget.smallPadding ? 9.r : 12.r),
+                      BorderRadius.circular(widget.smallPadding ? 10.r : 15.r),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
@@ -100,7 +98,7 @@ class _KTextFieldState extends State<KTextField> {
                     width: 2.w,
                   ),
                   borderRadius:
-                      BorderRadius.circular(widget.smallPadding ? 9.r : 12.r),
+                      BorderRadius.circular(widget.smallPadding ? 10.r : 15.r),
                 ),
                 suffixIcon: widget.isPassword
                     ? IconButton(
@@ -121,7 +119,7 @@ class _KTextFieldState extends State<KTextField> {
                       ),
                 contentPadding: EdgeInsets.symmetric(
                   horizontal: 15.w,
-                  vertical: widget.smallPadding ? 8.w : 20.h,
+                  vertical: widget.smallPadding ? 8.w : 15.h,
                 ),
               ),
       ),

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:notebooks/data/data_providers/notebook_covers_provider.dart';
 
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 import 'package:notebooks/features/notebook/domain/usecases/create_notebook_usecase.dart'
@@ -65,6 +66,14 @@ class NotebookBloc extends Bloc<NotebookEvent, NotebookState> {
           (failure) => emit(NotebookListError(message: errMsg)),
           (result) => emit(NotebookLoaded(notebook: result)),
         );
+      }
+
+      if (event is ViewNotebookOnCreatePageEvent) {
+        print(event.cover?.name);
+        emit(ViewNotebookOnCreatePageState(
+          cover: event.cover!,
+          notebookName: event.notebookName,
+        ));
       }
     });
   }

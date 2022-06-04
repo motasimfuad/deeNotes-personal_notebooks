@@ -42,3 +42,12 @@ class DeleteNotebookEvent extends NotebookEvent {
 class DeleteAllNotebooksEvent extends NotebookEvent {
   const DeleteAllNotebooksEvent();
 }
+
+class ViewNotebookOnCreatePageEvent extends NotebookEvent {
+  final String? notebookName;
+  final NotebookCover? cover;
+  const ViewNotebookOnCreatePageEvent({
+    this.notebookName,
+    this.cover,
+  });
+}

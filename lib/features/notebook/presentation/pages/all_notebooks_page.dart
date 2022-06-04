@@ -103,7 +103,7 @@ class AllNotebooksPage extends StatelessWidget {
                           //   ),
                           // );
                           router.pushNamed(
-                            notebookScreen,
+                            AppRouters.notebookPage,
                             params: {
                               'notebookId': notebooks[index].id.toString(),
                             },
@@ -128,6 +128,8 @@ class AllNotebooksPage extends StatelessWidget {
           label: 'New Notebook',
           icon: Icons.add_to_photos,
           onPressed: () async {
+            router.pushNamed(AppRouters.createNotebookPage);
+
             // DataRepository.instance.createNotebook(NotebookModel(
             //   name: 'book name 2',
             //   cover: '',

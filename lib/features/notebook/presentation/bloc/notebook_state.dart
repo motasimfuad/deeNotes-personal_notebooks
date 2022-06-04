@@ -56,3 +56,17 @@ class NotebookLoaded extends NotebookState {
   @override
   List<Object> get props => [notebook];
 }
+
+class ViewNotebookOnCreatePageState extends NotebookState {
+  final String? notebookName;
+  final NotebookCover cover;
+  const ViewNotebookOnCreatePageState({
+    this.notebookName,
+    required this.cover,
+  });
+  @override
+  List<Object> get props => [
+        cover
+        // notebookName as String,
+      ];
+}

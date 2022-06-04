@@ -28,7 +28,7 @@ class KIconButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: bgColor ?? Colors.grey.shade200,
           borderRadius: BorderRadius.all(
-            Radius.circular(8.r),
+            Radius.circular(10.r),
           ),
         ),
         child: Icon(

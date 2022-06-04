@@ -2,36 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notebooks/bottom_nav.dart';
 import 'package:notebooks/features/notebook/presentation/pages/all_notebooks_page.dart';
+import 'package:notebooks/features/notebook/presentation/pages/create_notebook_page.dart';
 import 'package:notebooks/features/notebook/presentation/pages/notebook_page.dart';
 
-// class AppRouter {
-const String home = '/';
-const String notebooks = 'notebooks';
-const String favorites = 'favorites';
-const String notebookScreen = 'notebook';
-const String createNote = 'createNote';
-const String createNotebook = 'createNotebook';
-const String viewNote = 'viewNote';
-const String viewNoteFullScreen = 'viewNoteFullScreen';
-const String editNote = 'editNote';
-
+class AppRouters {
+  static const String homePage = '/';
+  static const String notebooksPage = 'notebooks';
+  static const String favoritesPage = 'favorites';
+  static const String notebookPage = 'notebook';
+  static const String createNotePage = 'create-note';
+  static const String createNotebookPage = 'create-notebook';
+  static const String viewNotePage = 'viewNote';
+  static const String viewNoteFullScreenPage = 'viewNoteFullScreen';
+  static const String editNotePage = 'editNote';
+}
 // AppRouter._();
 
 final router = GoRouter(
   urlPathStrategy: UrlPathStrategy.path,
-  initialLocation: home,
+  initialLocation: AppRouters.homePage,
   routes: [
     GoRoute(
-      name: home,
-      path: home,
+      name: AppRouters.homePage,
+      path: AppRouters.homePage,
       pageBuilder: (context, state) => MaterialPage(
         key: state.pageKey,
         child: const BottomNav(),
       ),
     ),
     GoRoute(
-      name: notebooks,
-      path: '/$notebooks',
+      name: AppRouters.notebooksPage,
+      path: '/${AppRouters.notebooksPage}',
       pageBuilder: (context, state) {
         return MaterialPage(
           key: state.pageKey,
@@ -40,7 +41,7 @@ final router = GoRouter(
       },
       routes: [
         GoRoute(
-          name: notebookScreen,
+          name: AppRouters.notebookPage,
           path: ':notebookId',
           pageBuilder: (context, state) {
             final notebookId = state.params['notebookId'];
@@ -51,6 +52,16 @@ final router = GoRouter(
           },
         ),
       ],
+    ),
+    GoRoute(
+      name: AppRouters.createNotebookPage,
+      path: '/${AppRouters.createNotebookPage}',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const CreateNotebookPage(),
+        );
+      },
     ),
   ],
 );

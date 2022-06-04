@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:notebooks/features/notebook/data/models/notebook_model.dart';
+import 'package:notebooks/core/router/app_router.dart';
 import 'package:notebooks/features/notebook/presentation/widgets/notebook_item.dart';
 import 'package:notebooks/core/widgets/k_fab.dart';
 
 import '../../domain/entities/notebook_entity.dart';
 import '../bloc/notebook_bloc.dart';
-import 'notebook_page.dart';
 
 class AllNotebooksPage extends StatelessWidget {
   AllNotebooksPage({Key? key}) : super(key: key);
@@ -38,9 +37,9 @@ class AllNotebooksPage extends StatelessWidget {
 
           BlocConsumer<NotebookBloc, NotebookState>(
             listener: (context, state) {
-              if (state is NotebookInitial) {
-                context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
-              }
+              // if (state is NotebookInitial) {
+              //   context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
+              // }
             },
             builder: (context, state) {
               if (state is NotebookInitial) {
@@ -90,17 +89,28 @@ class AllNotebooksPage extends StatelessWidget {
                     ),
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
-                        onTap: () =>
-                            // print(notebooks[index].notes?.length),
-                            Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => NoteBookPage(
-                              notebook: notebooks[index],
-                              // notebook: sampleNotebook,
-                            ),
-                          ),
-                        ),
+                        onTap: () {
+                          // print(notebooks[index].notes?.length),
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => NoteBookPage(
+                          //       // notebook: notebooks[index],
+                          //       notebookId: notebooks[index].id as int,
+
+                          //       // notebook: sampleNotebook,
+                          //     ),
+                          //   ),
+                          // );
+                          router.pushNamed(
+                            notebookScreen,
+                            params: {
+                              'notebookId': notebooks[index].id.toString(),
+                            },
+                          );
+                          // context.read<NotebookBloc>().add(
+                          //     FindNotebookEvent(notebooks[index].id as int));
+                        },
                         child: NotebookItem(notebook: notebooks[index]),
                       );
                     },
@@ -118,11 +128,6 @@ class AllNotebooksPage extends StatelessWidget {
           label: 'New Notebook',
           icon: Icons.add_to_photos,
           onPressed: () async {
-            context
-                .read<NotebookBloc>()
-                .add(CreateNotebookEvent(sampleNotebook));
-            context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
-
             // DataRepository.instance.createNotebook(NotebookModel(
             //   name: 'book name 2',
             //   cover: '',

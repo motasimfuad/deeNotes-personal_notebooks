@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
-import 'package:notebooks/core/router/app_router.dart';
 import 'package:notebooks/core/widgets/k_labels.dart';
 import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
@@ -150,11 +149,11 @@ class ViewNoteScreen extends StatelessWidget {
                   IconButton(
                     tooltip: 'Add to favorite',
                     onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        AppRouter.editNote,
-                        arguments: note,
-                      );
+                      // Navigator.pushNamed(
+                      //   context,
+                      //   AppRouter.editNote,
+                      //   arguments: note,
+                      // );
                     },
                     icon: Icon(
                       Icons.favorite_outline_rounded,
@@ -181,11 +180,11 @@ class ViewNoteScreen extends StatelessWidget {
                   IconButton(
                     tooltip: 'View in full screen',
                     onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        AppRouter.viewNoteFullScreen,
-                        arguments: note,
-                      );
+                      // Navigator.pushNamed(
+                      //   context,
+                      //   AppRouter.viewNoteFullScreen,
+                      //   arguments: note,
+                      // );
 
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -203,11 +202,11 @@ class ViewNoteScreen extends StatelessWidget {
                   IconButton(
                     tooltip: 'Edit Note',
                     onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        AppRouter.editNote,
-                        arguments: note,
-                      );
+                      // Navigator.pushNamed(
+                      //   context,
+                      //   AppRouter.editNote,
+                      //   arguments: note,
+                      // );
                     },
                     icon: Icon(
                       Icons.border_color_outlined,

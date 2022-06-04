@@ -27,7 +27,7 @@ class App extends StatelessWidget {
         minTextAdapt: true,
         designSize: const Size(392.7, 834.9),
         builder: () => AllProviders(
-          child: MaterialApp(
+          child: MaterialApp.router(
             builder: (context, widget) {
               //add this line
               ScreenUtil.setContext(context);
@@ -40,8 +40,10 @@ class App extends StatelessWidget {
             theme: AppTheme.lightTheme,
             // darkTheme: AppTheme.darkTheme,
             debugShowCheckedModeBanner: false,
-            initialRoute: AppRouter.home,
-            onGenerateRoute: AppRouter.onGenerateRoute,
+            routeInformationParser: router.routeInformationParser,
+            routerDelegate: router.routerDelegate,
+            // initialRoute: AppRouter.home,
+            // onGenerateRoute: AppRouter.onGenerateRoute,
           ),
         ),
       ),

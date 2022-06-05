@@ -97,6 +97,8 @@ class NotebookItem extends StatelessWidget {
                       children: [
                         Text(
                           notebook?.name ?? 'Notebook Name',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 18.sp,
                             fontWeight: FontWeight.w500,

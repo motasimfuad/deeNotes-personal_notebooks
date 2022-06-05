@@ -8,11 +8,12 @@ import 'package:notebooks/core/widgets/k_icon_button.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 import 'package:notebooks/features/notebook/presentation/widgets/notebook_item.dart';
 
+import '../../../../core/widgets/k_snackbar.dart';
 import '../bloc/notebook_bloc.dart';
 
-class NotebookOptionsBottomSheet extends StatelessWidget {
+class NotebookOptionsModal extends StatelessWidget {
   NotebookEntity notebook;
-  NotebookOptionsBottomSheet({
+  NotebookOptionsModal({
     Key? key,
     required this.notebook,
   }) : super(key: key);
@@ -80,6 +81,10 @@ class NotebookOptionsBottomSheet extends StatelessWidget {
                             );
                         router.pop();
                         router.pushNamed(AppRouters.homePage);
+                        KSnackBar(
+                          context: context,
+                          message: 'Notebook deleted Successfully!',
+                        );
                       },
                     );
                   },

@@ -8,7 +8,7 @@ import 'package:notebooks/core/widgets/k_icon_button.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
 import '../../../../core/constants/colors.dart';
-import 'notebook_options_bottom_sheet.dart';
+import 'notebook_options_modal.dart';
 
 class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
   final NotebookEntity notebook;
@@ -63,7 +63,7 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
                 yesBtnPressed: () {},
                 dialogType: DialogType.form,
                 formContent: [
-                  NotebookOptionsBottomSheet(
+                  NotebookOptionsModal(
                     notebook: notebook,
                   )
                 ],
@@ -92,14 +92,16 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    notebook.name,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: KColors.primary,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: Text(
+                      notebook.name,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: TextStyle(
+                        color: KColors.primary,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   //! hidden for skipping labels for now

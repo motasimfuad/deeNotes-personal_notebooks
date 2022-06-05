@@ -38,7 +38,15 @@ class _EditNotebookPageState extends State<EditNotebookPage> {
   @override
   void initState() {
     context.read<NotebookBloc>().add(FindNotebookEvent(widget.notebookId));
+    _nameController.text = selectedNotebookEntity.name;
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _nameController.clear();
+    super.dispose();
   }
 
   @override
@@ -50,23 +58,27 @@ class _EditNotebookPageState extends State<EditNotebookPage> {
       extendBody: true,
       backgroundColor: const Color(0xFFF6F8FF),
       body: BlocConsumer<NotebookBloc, NotebookState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is NotebookLoaded) {
+            _nameController.text = state.notebook.name;
+          }
+        },
         builder: (context, state) {
           if (state is NotebookLoaded) {
             selectedNotebookEntity = state.notebook;
-            _nameController.text = selectedNotebookEntity.name;
           }
           return SafeArea(
             child: Column(
               children: [
                 KAppbar(
-                  label: 'Create Notebook',
+                  label: 'Edit Notebook',
                   context: context,
                   iconBgColor: KColors.primary,
                   iconColor: Colors.white,
                   textColor: KColors.primary,
                   onPressed: () {
                     Navigator.pop(context);
+                    _nameController.clear();
                   },
                 ),
                 Expanded(
@@ -117,7 +129,6 @@ class _EditNotebookPageState extends State<EditNotebookPage> {
                             controller: _nameController,
                             onChanged: (value) {
                               setState(() {
-                                print(value);
                                 selectedNotebookEntity.name = value;
                               });
                             },
@@ -159,8 +170,10 @@ class _EditNotebookPageState extends State<EditNotebookPage> {
               selectedNotebookEntity.cover != '' &&
               selectedNotebookEntity.cover.isNotEmpty) {
             BlocProvider.of<NotebookBloc>(context).add(
-              CreateNotebookEvent(selectedNotebookEntity),
+              UpdateNotebookEvent(selectedNotebookEntity),
             );
+
+            // router.pop();
 
             router.goNamed(AppRouters.homePage);
 

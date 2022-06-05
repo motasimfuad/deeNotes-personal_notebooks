@@ -5,13 +5,25 @@ import 'package:notebooks/core/router/app_router.dart';
 import 'package:notebooks/features/notebook/presentation/widgets/notebook_item.dart';
 import 'package:notebooks/core/widgets/k_fab.dart';
 
+import '../../../../core/constants/colors.dart';
 import '../../domain/entities/notebook_entity.dart';
 import '../bloc/notebook_bloc.dart';
 
-class AllNotebooksPage extends StatelessWidget {
-  AllNotebooksPage({Key? key}) : super(key: key);
+class AllNotebooksPage extends StatefulWidget {
+  const AllNotebooksPage({Key? key}) : super(key: key);
 
+  @override
+  State<AllNotebooksPage> createState() => _AllNotebooksPageState();
+}
+
+class _AllNotebooksPageState extends State<AllNotebooksPage> {
   List<NotebookEntity> notebooks = [];
+
+  @override
+  void initState() {
+    context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +40,9 @@ class AllNotebooksPage extends StatelessWidget {
             leading: Container(),
             leadingWidth: 10.w,
             titleTextStyle: TextStyle(
-              color: Theme.of(context).primaryColor,
+              color: KColors.primary,
               fontWeight: FontWeight.bold,
-              fontSize: 20,
+              fontSize: 20.sp,
             ),
           ),
           // SliverGrid.count(crossAxisCount: 2)
@@ -88,30 +100,17 @@ class AllNotebooksPage extends StatelessWidget {
                       childAspectRatio: 0.70,
                     ),
                     itemBuilder: (BuildContext context, int index) {
+                      var reversedList = notebooks.reversed.toList();
                       return GestureDetector(
                         onTap: () {
-                          // print(notebooks[index].notes?.length),
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => NoteBookPage(
-                          //       // notebook: notebooks[index],
-                          //       notebookId: notebooks[index].id as int,
-
-                          //       // notebook: sampleNotebook,
-                          //     ),
-                          //   ),
-                          // );
                           router.pushNamed(
                             AppRouters.notebookPage,
                             params: {
-                              'notebookId': notebooks[index].id.toString(),
+                              'notebookId': reversedList[index].id.toString(),
                             },
                           );
-                          // context.read<NotebookBloc>().add(
-                          //     FindNotebookEvent(notebooks[index].id as int));
                         },
-                        child: NotebookItem(notebook: notebooks[index]),
+                        child: NotebookItem(notebook: reversedList[index]),
                       );
                     },
                   ),

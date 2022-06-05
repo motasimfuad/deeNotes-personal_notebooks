@@ -26,24 +26,25 @@ class _NoteBookPageState extends State<NoteBookPage> {
   List<NoteEntity> notes = [];
 
   @override
-  void initState() {}
+  void initState() {
+    context.read<NotebookBloc>().add(FindNotebookEvent(widget.notebookId));
+  }
 
   @override
   Widget build(BuildContext context) {
-    context.read<NotebookBloc>().add(FindNotebookEvent(widget.notebookId));
-    return BlocConsumer<NotebookBloc, NotebookState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        if (state is NotebookLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        if (state is NotebookLoaded) {
-          notebookEntity = state.notebook;
+    return Scaffold(
+      body: BlocConsumer<NotebookBloc, NotebookState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is NotebookLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is NotebookLoaded) {
+            notebookEntity = state.notebook;
 
-          return Scaffold(
-            body: CustomScrollView(
+            return CustomScrollView(
               slivers: [
                 SliverPersistentHeader(
                   delegate: NotebookPersistentHeader(
@@ -109,27 +110,26 @@ class _NoteBookPageState extends State<NoteBookPage> {
                   ),
                 )
               ],
-            ),
-            floatingActionButton: KFab(
-              label: 'New Note',
-              icon: Icons.post_add,
-              onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: ((context) =>
-                //         CreateNotePage(notebook: notebook, note: sampleNote)),
-                //   ),
-                // );
-              },
-            ),
-          );
-        } else {
+            );
+          }
           return const Center(
-            child: CircularProgressIndicator(),
+            child: Text('No notebook'),
           );
-        }
-      },
+        },
+      ),
+      floatingActionButton: KFab(
+        label: 'New Note',
+        icon: Icons.post_add,
+        onPressed: () {
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: ((context) =>
+          //         CreateNotePage(notebook: notebook, note: sampleNote)),
+          //   ),
+          // );
+        },
+      ),
     );
   }
 }

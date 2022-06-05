@@ -36,7 +36,7 @@ final router = GoRouter(
       pageBuilder: (context, state) {
         return MaterialPage(
           key: state.pageKey,
-          child: AllNotebooksPage(),
+          child: const AllNotebooksPage(),
         );
       },
       routes: [
@@ -45,6 +45,7 @@ final router = GoRouter(
           path: ':notebookId',
           pageBuilder: (context, state) {
             final notebookId = state.params['notebookId'];
+
             return MaterialPage(
               key: state.pageKey,
               child: NoteBookPage(notebookId: int.parse(notebookId.toString())),
@@ -70,54 +71,4 @@ final router = GoRouter(
 //  return notebooks
 // }
 
-  // static Route<dynamic> onGenerateRoute(RouteSettings settings) {
-  //   switch (settings.name) {
-  //     case home:
-  //       return MaterialPageRoute(
-  //         builder: (_) => const BottomNav(),
-  //       );
-  //     case notebooks:
-  //       return MaterialPageRoute(
-  //         builder: (_) => AllNotebooksPage(),
-  //       );
-
-  //     case createNotebook:
-  //       return MaterialPageRoute(
-  //         builder: (_) => const CreateNotebookPage(),
-  //       );
-  //     case favorites:
-  //       return MaterialPageRoute(
-  //         builder: (_) => const FavoriteNotesPage(),
-  //       );
-  //     // case createNote:
-  //     //   return MaterialPageRoute(
-  //     //     builder: (_) =>  CreateNote(),
-  //     //   );
-
-  //     case viewNote:
-  //       final note = settings.arguments as NoteModel;
-  //       final notebook = settings.arguments as NotebookModel;
-  //       return MaterialPageRoute(
-  //         builder: (context) => ViewNoteScreen(notebook: notebook, note: note),
-  //         settings: settings,
-  //       );
-
-  //     case viewNoteFullScreen:
-  //       final note = settings.arguments as NoteModel;
-  //       return MaterialPageRoute(
-  //         builder: (context) => ViewNoteFullScreen(note: note),
-  //         settings: settings,
-  //       );
-
-  //     case editNote:
-  //       return MaterialPageRoute(
-  //         builder: (_) => EditNotePage(
-  //           note: settings.arguments as NoteModel,
-  //         ),
-  //       );
-
-  //     default:
-  //       throw const RouteException('Route not found!');
-  //   }
-  // }
-// }
+  

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants/colors.dart';
+
 class KButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
@@ -21,7 +23,7 @@ class KButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var bgClr = Theme.of(context).primaryColor;
+    var bgClr = KColors.primary;
 
     return GestureDetector(
       onTap: onPressed,

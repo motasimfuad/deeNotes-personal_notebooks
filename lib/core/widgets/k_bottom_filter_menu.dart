@@ -6,6 +6,8 @@ import 'package:notebooks/core/widgets/k_text_field.dart';
 import 'package:notebooks/core/widgets/k_icon_button.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
+import '../constants/colors.dart';
+
 class KBottomFilterMenu extends StatelessWidget {
   NotebookEntity notebook;
   KBottomFilterMenu({
@@ -82,7 +84,7 @@ class KBottomFilterMenu extends StatelessWidget {
                           KIconButton(
                             onPressed: () {},
                             size: 46.5.h,
-                            bgColor: Theme.of(context).primaryColor,
+                            bgColor: KColors.primary,
                             iconColor: Colors.white,
                             icon: Icons.post_add_rounded,
                           ),

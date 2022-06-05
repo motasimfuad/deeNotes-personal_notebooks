@@ -11,6 +11,8 @@ import 'package:notebooks/core/widgets/k_select_color_sheet.dart';
 import 'package:notebooks/core/widgets/k_text_field.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
+import '../../../../core/constants/colors.dart';
+
 class EditNotePage extends StatefulWidget {
   NoteModel note;
   EditNotePage({
@@ -151,7 +153,7 @@ class _EditNotePageState extends State<EditNotePage> {
       ),
       bottomNavigationBar: BottomAppBar(
         elevation: 0,
-        color: Theme.of(context).primaryColor.withOpacity(0.1),
+        color: KColors.primary.withOpacity(0.1),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: Row(
@@ -174,9 +176,9 @@ class _EditNotePageState extends State<EditNotePage> {
                     ),
                   );
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.color_lens,
-                  color: Theme.of(context).primaryColor,
+                  color: KColors.primary,
                 ),
               ),
             ],

@@ -7,6 +7,7 @@ import 'package:notebooks/core/widgets/k_labels.dart';
 import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
+import '../../../../../core/constants/colors.dart';
 import '../../../../../core/widgets/k_appbar.dart';
 
 class ViewNoteScreen extends StatelessWidget {
@@ -137,9 +138,9 @@ class ViewNoteScreen extends StatelessWidget {
                   IconButton(
                     tooltip: 'Delete note',
                     onPressed: () {},
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.delete_forever_rounded,
-                      color: Theme.of(context).primaryColor,
+                      color: KColors.primary,
                     ),
                   ),
                 ],
@@ -155,9 +156,9 @@ class ViewNoteScreen extends StatelessWidget {
                       //   arguments: note,
                       // );
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.favorite_outline_rounded,
-                      color: Theme.of(context).primaryColor,
+                      color: KColors.primary,
                     ),
                   ),
                   IconButton(
@@ -165,16 +166,16 @@ class ViewNoteScreen extends StatelessWidget {
                     onPressed: () {
                       Clipboard.setData(ClipboardData(text: note.description));
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          duration: const Duration(milliseconds: 700),
-                          backgroundColor: Theme.of(context).primaryColor,
-                          content: const Text('Note copied to clipboard!'),
+                        const SnackBar(
+                          duration: Duration(milliseconds: 700),
+                          backgroundColor: KColors.primary,
+                          content: Text('Note copied to clipboard!'),
                         ),
                       );
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.copy_rounded,
-                      color: Theme.of(context).primaryColor,
+                      color: KColors.primary,
                     ),
                   ),
                   IconButton(
@@ -194,9 +195,9 @@ class ViewNoteScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.open_in_new_rounded,
-                      color: Theme.of(context).primaryColor,
+                      color: KColors.primary,
                     ),
                   ),
                   IconButton(
@@ -208,9 +209,9 @@ class ViewNoteScreen extends StatelessWidget {
                       //   arguments: note,
                       // );
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.border_color_outlined,
-                      color: Theme.of(context).primaryColor,
+                      color: KColors.primary,
                     ),
                   ),
                 ],

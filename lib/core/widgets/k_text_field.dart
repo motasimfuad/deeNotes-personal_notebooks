@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../constants/colors.dart';
+
 class KTextField extends StatefulWidget {
   final TextEditingController? controller;
   final String labelText;
@@ -94,7 +96,7 @@ class _KTextFieldState extends State<KTextField> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Theme.of(context).primaryColor,
+                    color: KColors.primary,
                     width: 2.w,
                   ),
                   borderRadius:

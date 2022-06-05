@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:notebooks/core/router/app_router.dart';
 import 'package:notebooks/features/notebook/presentation/widgets/notebook_covers_list.dart';
 import 'package:notebooks/core/widgets/k_fab.dart';
 import 'package:notebooks/core/widgets/k_text_field.dart';
 
+import '../../../../core/constants/colors.dart';
 import '../../../../core/widgets/k_appbar.dart';
 import '../../../../data/data_providers/notebook_covers_provider.dart';
 import '../../domain/entities/notebook_entity.dart';
@@ -20,8 +22,19 @@ class CreateNotebookPage extends StatefulWidget {
 
 class _CreateNotebookPageState extends State<CreateNotebookPage> {
   final TextEditingController _nameController = TextEditingController();
-  String notebookName = '';
   NotebookCover? selectedCover;
+
+  NotebookEntity selectedNotebookEntity = NotebookEntity(
+    name: '',
+    cover: '',
+    isLocked: false,
+  );
+
+  @override
+  void dispose() {
+    super.dispose();
+    selectedNotebookEntity.cover = '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +53,9 @@ class _CreateNotebookPageState extends State<CreateNotebookPage> {
                 KAppbar(
                   label: 'Create Notebook',
                   context: context,
-                  iconBgColor: Theme.of(context).primaryColor,
+                  iconBgColor: KColors.primary,
                   iconColor: Colors.white,
-                  textColor: Theme.of(context).primaryColor,
+                  textColor: KColors.primary,
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -70,26 +83,17 @@ class _CreateNotebookPageState extends State<CreateNotebookPage> {
                                   builder: (context, state) {
                                     if (state
                                         is ViewNotebookOnCreatePageState) {
-                                      // notebookName =
-                                      //     state.notebookName.toString();
                                       selectedCover = state.cover;
 
-                                      var newNotebook = NotebookEntity(
-                                        name: notebookName,
-                                        cover: selectedCover?.url ??
-                                            state.cover.url,
-                                        isLocked: false,
-                                      );
+                                      selectedNotebookEntity.cover =
+                                          selectedCover?.url ?? state.cover.url;
+
                                       return NotebookItem(
-                                        notebook: newNotebook,
+                                        notebook: selectedNotebookEntity,
                                       );
                                     } else {
                                       return NotebookItem(
-                                        notebook: NotebookEntity(
-                                          name: notebookName,
-                                          cover: selectedCover?.url ?? '',
-                                          isLocked: false,
-                                        ),
+                                        notebook: selectedNotebookEntity,
                                       );
                                     }
                                   },
@@ -105,15 +109,7 @@ class _CreateNotebookPageState extends State<CreateNotebookPage> {
                             onChanged: (value) {
                               setState(() {
                                 print(value);
-                                notebookName = value;
-                                // BlocProvider.of<NotebookBloc>(context).add(
-                                //   ViewNotebookOnCreatePageEvent(
-                                //     notebookName: notebookName,
-                                //     cover: selectedCover == null
-                                //         ? null
-                                //         : selectedCover as NotebookCover,
-                                //   ),
-                                // );
+                                selectedNotebookEntity.name = value;
                               });
                             },
                           ),
@@ -132,14 +128,7 @@ class _CreateNotebookPageState extends State<CreateNotebookPage> {
                           SizedBox(height: 8.h),
                           SizedBox(
                             height: 260.h,
-                            child: NotebookCoversList(
-                              selectedCover: (cover) {
-                                setState(() {
-                                  selectedCover = cover;
-                                  print(cover);
-                                });
-                              },
-                            ),
+                            child: const NotebookCoversList(),
                           ),
                         ],
                       ),
@@ -156,8 +145,20 @@ class _CreateNotebookPageState extends State<CreateNotebookPage> {
         label: 'Create',
         icon: Icons.add_to_photos,
         onPressed: () {
-          print(
-              'notebookName: $notebookName, selectedCover: ${selectedCover?.url}');
+          if (selectedNotebookEntity.name != '' &&
+              selectedNotebookEntity.name.isNotEmpty &&
+              selectedNotebookEntity.cover != '' &&
+              selectedNotebookEntity.cover.isNotEmpty) {
+            BlocProvider.of<NotebookBloc>(context).add(
+              CreateNotebookEvent(selectedNotebookEntity),
+            );
+
+            router.goNamed(AppRouters.homePage);
+
+            context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
+            print(
+                'notebookName: ${selectedNotebookEntity.name}, selectedCover: ${selectedNotebookEntity.cover}');
+          }
         },
       ),
     );

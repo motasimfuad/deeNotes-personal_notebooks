@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notebooks/features/note/presentation/pages/favorite_notes_page.dart';
 import 'package:notebooks/features/settings/presentation/pages/settings_screen.dart';
 
+import 'core/constants/colors.dart';
 import 'features/notebook/presentation/pages/all_notebooks_page.dart';
 
 class BottomNav extends StatefulWidget {
@@ -52,8 +53,7 @@ class _BottomNavState extends State<BottomNav> {
               backgroundColor: const Color(0xfff6f8ff),
               showSelectedLabels: false,
               showUnselectedLabels: false,
-              unselectedItemColor:
-                  Theme.of(context).primaryColor.withAlpha(130),
+              unselectedItemColor: KColors.primary.withAlpha(130),
               currentIndex: _selectedIndex,
               onTap: (value) {
                 setState(() {

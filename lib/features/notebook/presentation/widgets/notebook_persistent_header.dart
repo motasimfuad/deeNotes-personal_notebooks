@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:notebooks/core/router/app_router.dart';
 
 import 'package:notebooks/core/widgets/k_bottom_filter_menu.dart';
 import 'package:notebooks/core/widgets/k_icon_button.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
+
+import '../../../../core/constants/colors.dart';
 
 class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
   final NotebookEntity notebook;
@@ -35,7 +38,7 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
             bgColor: Colors.grey.withOpacity(0.5),
             iconColor: Colors.white,
             onPressed: () {
-              Navigator.of(context).pop();
+              router.pop();
             },
           ),
         ),
@@ -65,7 +68,7 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: TextStyle(
-                      color: Theme.of(context).primaryColor,
+                      color: KColors.primary,
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                     ),
@@ -78,25 +81,18 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
                         context: context,
                         isScrollControlled: true,
                         clipBehavior: Clip.antiAlias,
-                        shape: const RoundedRectangleBorder(
+                        shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(20),
+                            top: Radius.circular(20.r),
                           ),
                         ),
                         builder: (context) =>
                             KBottomFilterMenu(notebook: notebook),
                       );
-                      // ScaffoldMessenger.of(context).showSnackBar(
-                      //   SnackBar(
-                      //     content: Container(
-                      //       height: 100,
-                      //     ),
-                      //   ),
-                      // );
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.filter_alt_rounded,
-                      color: Theme.of(context).primaryColor,
+                      color: KColors.primary,
                     ),
                   ),
                 ],
@@ -116,6 +112,6 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return false;
+    return true;
   }
 }

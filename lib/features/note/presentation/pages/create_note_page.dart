@@ -10,6 +10,8 @@ import 'package:notebooks/core/widgets/k_select_color_sheet.dart';
 import 'package:notebooks/core/widgets/k_text_field.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
+import '../../../../core/constants/colors.dart';
+
 class CreateNotePage extends StatelessWidget {
   NotebookEntity notebook;
   NoteModel note;
@@ -146,9 +148,9 @@ class CreateNotePage extends StatelessWidget {
                     ),
                   );
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.color_lens,
-                  color: Theme.of(context).primaryColor,
+                  color: KColors.primary,
                 ),
               )
             ],

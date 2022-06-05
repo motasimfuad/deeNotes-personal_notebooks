@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notebooks/core/widgets/k_icon_button.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
+import '../constants/colors.dart';
+
 class KLabels extends StatelessWidget {
   final NotebookEntity notebook;
   final VoidCallback? onPressed;
@@ -53,7 +55,7 @@ class KLabels extends StatelessWidget {
                   margin: EdgeInsets.only(left: 5.w),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.r),
-                    color: Theme.of(context).primaryColor,
+                    color: KColors.primary,
                   ),
                   child: KIconButton(
                     onPressed: onPressed as VoidCallback,

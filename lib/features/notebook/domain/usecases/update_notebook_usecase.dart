@@ -18,7 +18,7 @@ class UpdateNotebookUsecase implements UseCase<int, Params> {
 
 class Params extends Equatable {
   final NotebookEntity notebook;
-  const Params(this.notebook);
+  const Params({required this.notebook});
   @override
   List<Object> get props => [notebook];
 }

@@ -27,6 +27,13 @@ class NotebookListError extends NotebookState {
 
 class NotebookCreated extends NotebookState {}
 
+class NotebookCreatedFailed extends NotebookState {
+  final String message;
+  const NotebookCreatedFailed({required this.message});
+  @override
+  List<Object> get props => [message];
+}
+
 class NotebookUpdated extends NotebookState {
   final NotebookEntity notebook;
   const NotebookUpdated({required this.notebook});
@@ -34,16 +41,18 @@ class NotebookUpdated extends NotebookState {
   List<Object> get props => [notebook];
 }
 
-class NotebookDeleted extends NotebookState {
-  final int notebookId;
-  const NotebookDeleted({required this.notebookId});
+class NotebookUpdateFailed extends NotebookState {
+  final String message;
+  const NotebookUpdateFailed({required this.message});
   @override
-  List<Object> get props => [notebookId];
+  List<Object> get props => [message];
 }
 
-class NotebookCreatedFailed extends NotebookState {
+class NotebookDeleted extends NotebookState {}
+
+class NotebookDeletedFailed extends NotebookState {
   final String message;
-  const NotebookCreatedFailed({required this.message});
+  const NotebookDeletedFailed({required this.message});
   @override
   List<Object> get props => [message];
 }
@@ -58,10 +67,8 @@ class NotebookLoaded extends NotebookState {
 }
 
 class ViewNotebookOnCreatePageState extends NotebookState {
-  final String? notebookName;
   final NotebookCover cover;
   const ViewNotebookOnCreatePageState({
-    this.notebookName,
     required this.cover,
   });
   @override

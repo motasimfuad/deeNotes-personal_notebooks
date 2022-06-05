@@ -6,11 +6,13 @@ import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart
 import 'package:notebooks/features/notebook/domain/usecases/create_notebook_usecase.dart'
     as create;
 import 'package:notebooks/features/notebook/domain/usecases/delete_all_notebooks_usecase.dart';
-import 'package:notebooks/features/notebook/domain/usecases/delete_notebook_usecase.dart';
+import 'package:notebooks/features/notebook/domain/usecases/delete_notebook_usecase.dart'
+    as delete;
 import 'package:notebooks/features/notebook/domain/usecases/find_notebook_usecase.dart'
     as find;
 import 'package:notebooks/features/notebook/domain/usecases/get_all_notebooks_usecase.dart';
-import 'package:notebooks/features/notebook/domain/usecases/update_notebook_usecase.dart';
+import 'package:notebooks/features/notebook/domain/usecases/update_notebook_usecase.dart'
+    as update;
 
 import '../../../../core/usecases/usecase.dart';
 
@@ -18,6 +20,7 @@ part 'notebook_event.dart';
 part 'notebook_state.dart';
 
 String errMsg = "Something went wrong!";
+String deleteErrMsg = "Deletion failed!";
 
 /// add the required usecases to the bloc
 /// receive the response from the usecase inside the bloc body as either and then use [.fold] method to handle the response as failure or success and then emit the states
@@ -26,8 +29,8 @@ class NotebookBloc extends Bloc<NotebookEvent, NotebookState> {
   GetAllNotebooksUsecase getAllNotebooks;
   create.CreateNotebookUsecase createNotebook;
   find.FindNotebookUsecase findNotebook;
-  UpdateNotebookUsecase updateNotebook;
-  DeleteNotebookUsecase deleteNotebook;
+  update.UpdateNotebookUsecase updateNotebook;
+  delete.DeleteNotebookUsecase deleteNotebook;
   DeleteAllNotebooksUsecase deleteAllNotebooks;
 
   NotebookBloc({
@@ -69,11 +72,29 @@ class NotebookBloc extends Bloc<NotebookEvent, NotebookState> {
       }
 
       if (event is ViewNotebookOnCreatePageEvent) {
-        print(event.cover?.name);
         emit(ViewNotebookOnCreatePageState(
           cover: event.cover!,
-          notebookName: event.notebookName,
         ));
+      }
+
+      if (event is DeleteNotebookEvent) {
+        emit(NotebookListLoading());
+        final params = delete.Params(id: event.notebookId);
+        final either = await deleteNotebook(params);
+        either.fold(
+          (failure) => NotebookDeletedFailed(message: deleteErrMsg),
+          (result) => NotebookDeleted(),
+        );
+      }
+
+      if (event is UpdateNotebookEvent) {
+        emit(NotebookListLoading());
+        final params = update.Params(notebook: event.notebook);
+        final either = await updateNotebook(params);
+        either.fold(
+          (failure) => emit(NotebookUpdateFailed(message: errMsg)),
+          (result) => emit(NotebookUpdated(notebook: params.notebook)),
+        );
       }
     });
   }

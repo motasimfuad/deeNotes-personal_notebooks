@@ -55,7 +55,7 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
             onPressed: () {
               KDialog(
                 context: context,
-                title: 'Details',
+                title: 'Notebook Details',
                 showFooter: false,
                 isDismissible: true,
                 hasBorder: false,

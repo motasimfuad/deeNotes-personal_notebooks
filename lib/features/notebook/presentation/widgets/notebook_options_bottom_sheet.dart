@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notebooks/core/constants/constants.dart';
+import 'package:notebooks/core/router/app_router.dart';
 import 'package:notebooks/core/widgets/k_dialog.dart';
 import 'package:notebooks/core/widgets/k_icon_button.dart';
 
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 import 'package:notebooks/features/notebook/presentation/widgets/notebook_item.dart';
+
+import '../bloc/notebook_bloc.dart';
 
 class NotebookOptionsBottomSheet extends StatelessWidget {
   NotebookEntity notebook;
@@ -65,8 +69,18 @@ class NotebookOptionsBottomSheet extends StatelessWidget {
                       context: context,
                       title: 'Delete Notebook?',
                       bodyText:
-                          'Are you sure you want to delete this notebook?\n\nThis action cannot be undone!',
-                      yesBtnPressed: () {},
+                          'Are you sure you want to delete this notebook?\nAll notes written in this notebook will also be removed. \n\nThis action cannot be undone!',
+                      yesButtonText: 'YES, DELETE',
+                      noButtonText: 'CANCEL',
+                      yesBtnPressed: () {
+                        context.read<NotebookBloc>().add(
+                              DeleteNotebookEvent(
+                                notebookId: notebook.id!,
+                              ),
+                            );
+                        router.pop();
+                        router.pushNamed(AppRouters.homePage);
+                      },
                     );
                   },
                 ),
@@ -75,7 +89,14 @@ class NotebookOptionsBottomSheet extends StatelessWidget {
                   icon: Icons.edit,
                   bgColor: KColors.primary,
                   iconColor: Colors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                    router.pushNamed(
+                      AppRouters.editNotebookPage,
+                      params: {
+                        'notebookId': notebook.id.toString(),
+                      },
+                    );
+                  },
                 ),
               ],
             ),

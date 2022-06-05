@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:notebooks/bottom_nav.dart';
 import 'package:notebooks/features/notebook/presentation/pages/all_notebooks_page.dart';
 import 'package:notebooks/features/notebook/presentation/pages/create_notebook_page.dart';
+import 'package:notebooks/features/notebook/presentation/pages/edit_notebook_page.dart';
 import 'package:notebooks/features/notebook/presentation/pages/notebook_page.dart';
 
 import '../../features/note/presentation/pages/create_note_page.dart';
@@ -13,6 +14,7 @@ class AppRouters {
   static const String notebookPage = 'notebook';
   static const String createNotebookPage = 'create-notebook';
   static const String createNotePage = 'create-note';
+  static const String editNotebookPage = 'edit-notebook';
 
   static const String favoritesPage = 'favorites';
   static const String viewNotePage = 'viewNote';
@@ -76,6 +78,18 @@ final router = GoRouter(
         return MaterialPage(
           key: state.pageKey,
           child: CreateNotePage(notebookId: int.parse(notebookId.toString())),
+        );
+      },
+    ),
+    GoRoute(
+      name: AppRouters.editNotebookPage,
+      path: '/${AppRouters.editNotebookPage}/:notebookId',
+      pageBuilder: (context, state) {
+        final notebookId = state.params['notebookId'];
+
+        return MaterialPage(
+          key: state.pageKey,
+          child: EditNotebookPage(notebookId: int.parse(notebookId.toString())),
         );
       },
     ),

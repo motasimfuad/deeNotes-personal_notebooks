@@ -34,7 +34,7 @@ class FindNotebookEvent extends NotebookEvent {
 
 class DeleteNotebookEvent extends NotebookEvent {
   final int notebookId;
-  const DeleteNotebookEvent(this.notebookId);
+  const DeleteNotebookEvent({required this.notebookId});
   @override
   List<Object> get props => [notebookId];
 }
@@ -44,10 +44,8 @@ class DeleteAllNotebooksEvent extends NotebookEvent {
 }
 
 class ViewNotebookOnCreatePageEvent extends NotebookEvent {
-  final String? notebookName;
   final NotebookCover? cover;
   const ViewNotebookOnCreatePageEvent({
-    this.notebookName,
     this.cover,
   });
 }

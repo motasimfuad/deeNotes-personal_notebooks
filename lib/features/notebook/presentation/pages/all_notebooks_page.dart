@@ -54,9 +54,12 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
                 context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
               }
               if (state is NotebookListLoading) {
-                return const SliverToBoxAdapter(
-                  child: Center(
-                    child: CircularProgressIndicator(),
+                return SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: ScreenUtil.defaultSize.height * 0.6,
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
                 );
               }

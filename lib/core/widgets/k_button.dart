@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../constants/colors.dart';
 
-class KButton extends StatelessWidget {
+abstract class KButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final Color? backgroundColor;
-  final Color textColor;
+  final Color? textColor;
   final double? btnHeight;
   final double? btnWidth;
   final double? fontSize;
@@ -15,7 +16,7 @@ class KButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.backgroundColor,
-    this.textColor = Colors.white,
+    this.textColor,
     this.btnHeight,
     this.btnWidth,
     this.fontSize,
@@ -36,11 +37,11 @@ class KButton extends StatelessWidget {
         ),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: Text(
               text,
               style: TextStyle(
-                color: textColor,
+                color: textColor ?? Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: fontSize,
               ),
@@ -53,15 +54,20 @@ class KButton extends StatelessWidget {
 }
 
 class KPrimaryButton extends KButton {
-  const KPrimaryButton({
+  KPrimaryButton({
     required String text,
     required VoidCallback onPressed,
+    Color? btnColor,
+    Color? textColor,
+    double? btnHeight,
   }) : super(
           onPressed: onPressed,
           text: text,
-          fontSize: 18,
-          btnHeight: 50,
+          fontSize: 17.sp,
+          btnHeight: btnHeight ?? 44.h,
           btnWidth: double.infinity,
+          backgroundColor: btnColor,
+          textColor: textColor,
         );
 }
 

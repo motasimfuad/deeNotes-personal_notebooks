@@ -48,11 +48,7 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
           // SliverGrid.count(crossAxisCount: 2)
 
           BlocConsumer<NotebookBloc, NotebookState>(
-            listener: (context, state) {
-              // if (state is NotebookInitial) {
-              //   context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
-              // }
-            },
+            listener: (context, state) {},
             builder: (context, state) {
               if (state is NotebookInitial) {
                 context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
@@ -70,16 +66,16 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
               if (notebooks.length < 11) {
                 return SliverToBoxAdapter(
                   child: Container(
-                    padding: EdgeInsets.all(20.w),
+                    padding: EdgeInsets.all(40.w),
                     height: MediaQuery.of(context).size.height * 0.7,
                     child: const Center(
                       child: Text(
                         '''No notebooks found!
-          You can create a new notebook by tapping the button below''',
+You can create a new notebook by tapping the button below''',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
@@ -122,7 +118,7 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: Align(
-        alignment: Alignment(1, 0.87.h),
+        alignment: Alignment(1.w, 1.h),
         child: KFab(
           label: 'New Notebook',
           icon: Icons.add_to_photos,

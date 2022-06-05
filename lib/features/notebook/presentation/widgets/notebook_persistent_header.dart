@@ -3,10 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notebooks/core/router/app_router.dart';
 
 import 'package:notebooks/core/widgets/k_bottom_filter_menu.dart';
+import 'package:notebooks/core/widgets/k_dialog.dart';
 import 'package:notebooks/core/widgets/k_icon_button.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
 import '../../../../core/constants/colors.dart';
+import 'notebook_options_bottom_sheet.dart';
 
 class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
   final NotebookEntity notebook;
@@ -31,14 +33,41 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
           height: expandedHeight,
         ),
         Positioned(
-          top: 50.h, //MediaQuery.of(context).padding.top
+          top: 20.h, //MediaQuery.of(context).padding.top,
           // right: 25,
-          left: 25.w,
+          left: 20.w,
           child: KIconButton(
-            bgColor: Colors.grey.withOpacity(0.5),
+            bgColor: Colors.grey.withOpacity(0.3),
             iconColor: Colors.white,
             onPressed: () {
               router.pop();
+            },
+          ),
+        ),
+        Positioned(
+          top: 20.h, //MediaQuery.of(context).padding.top,
+          // right: 25,
+          right: 20.w,
+          child: KIconButton(
+            icon: Icons.info_outline_rounded,
+            bgColor: Colors.grey.withOpacity(0.3),
+            iconColor: Colors.white,
+            onPressed: () {
+              KDialog(
+                context: context,
+                title: 'Details',
+                showFooter: false,
+                isDismissible: true,
+                hasBorder: false,
+                xInset: 70.w,
+                yesBtnPressed: () {},
+                dialogType: DialogType.form,
+                formContent: [
+                  NotebookOptionsBottomSheet(
+                    notebook: notebook,
+                  )
+                ],
+              );
             },
           ),
         ),
@@ -73,26 +102,33 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      debugPrint('filter');
+                  //! hidden for skipping labels for now
+                  AbsorbPointer(
+                    absorbing: true,
+                    child: Opacity(
+                      opacity: 0,
+                      child: GestureDetector(
+                        onTap: () {
+                          debugPrint('filter');
 
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        clipBehavior: Clip.antiAlias,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(20.r),
-                          ),
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            clipBehavior: Clip.antiAlias,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(20.r),
+                              ),
+                            ),
+                            builder: (context) =>
+                                KBottomFilterMenu(notebook: notebook),
+                          );
+                        },
+                        child: const Icon(
+                          Icons.filter_alt_rounded,
+                          color: KColors.primary,
                         ),
-                        builder: (context) =>
-                            KBottomFilterMenu(notebook: notebook),
-                      );
-                    },
-                    child: const Icon(
-                      Icons.filter_alt_rounded,
-                      color: KColors.primary,
+                      ),
                     ),
                   ),
                 ],

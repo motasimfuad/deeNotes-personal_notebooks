@@ -62,15 +62,15 @@ class _KTextFieldState extends State<KTextField> {
                 border: OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.all(
-                    Radius.circular(widget.smallPadding ? 10.r : 12.r),
+                    Radius.circular(widget.smallPadding ? 10.r : 15.r),
                   ),
                 ),
                 hintText: widget.labelText,
                 filled: true,
                 fillColor: Colors.grey.shade100,
                 contentPadding: EdgeInsets.symmetric(
-                  horizontal: 14.w,
-                  vertical: widget.smallPadding ? 8.w : 20.h,
+                  horizontal: 15.w,
+                  vertical: widget.smallPadding ? 8.w : 15.h,
                 ),
               )
             : InputDecoration(

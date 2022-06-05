@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notebooks/features/note/presentation/pages/favorite_notes_page.dart';
 import 'package:notebooks/features/settings/presentation/pages/settings_screen.dart';
 
@@ -17,7 +18,7 @@ class _BottomNavState extends State<BottomNav> {
 
   var screens = [
     // const MyHomePage(title: 'Hi'),
-    AllNotebooksPage(),
+    const AllNotebooksPage(),
     const FavoriteNotesPage(),
     const SettingsScreen(),
   ];
@@ -25,14 +26,13 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        extendBody: true,
+        // extendBody: true,
         body: IndexedStack(
           index: _selectedIndex,
           children: screens,
         ),
         bottomNavigationBar: Container(
-            // color: const Color(0xfff6f8ff),
-            child: Container(
+          // color: const Color(0xfff6f8ff),
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -43,9 +43,9 @@ class _BottomNavState extends State<BottomNav> {
             ],
           ),
           child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30.r),
+              topRight: Radius.circular(30.r),
             ),
             child: BottomNavigationBar(
               elevation: 10,
@@ -76,6 +76,6 @@ class _BottomNavState extends State<BottomNav> {
               ],
             ),
           ),
-        )));
+        ));
   }
 }

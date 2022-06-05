@@ -2,23 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notebooks/core/widgets/k_appbar.dart';
 
-import 'package:notebooks/features/note/data/models/note_model.dart';
-import 'package:notebooks/core/widgets/k_add_label_sheet.dart';
 import 'package:notebooks/core/widgets/k_fab.dart';
-import 'package:notebooks/core/widgets/k_labels.dart';
 import 'package:notebooks/core/widgets/k_select_color_sheet.dart';
 import 'package:notebooks/core/widgets/k_text_field.dart';
-import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
 import '../../../../core/constants/colors.dart';
 
 class CreateNotePage extends StatelessWidget {
-  NotebookEntity notebook;
-  NoteModel note;
+  int notebookId;
   CreateNotePage({
     Key? key,
-    required this.notebook,
-    required this.note,
+    required this.notebookId,
   }) : super(key: key);
 
   @override
@@ -36,26 +30,26 @@ class CreateNotePage extends StatelessWidget {
                     Navigator.pop(context);
                   },
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20.w,
-                    vertical: 10.h,
-                  ),
-                  child: KLabels(
-                    notebook: notebook,
-                    onPressed: () => showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      clipBehavior: Clip.antiAlias,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(20),
-                        ),
-                      ),
-                      builder: (context) => KAddLabelSheet(notebook: notebook),
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(
+                //     horizontal: 20.w,
+                //     vertical: 10.h,
+                //   ),
+                //   child: KLabels(
+                //     notebook: notebook,
+                //     onPressed: () => showModalBottomSheet(
+                //       context: context,
+                //       isScrollControlled: true,
+                //       clipBehavior: Clip.antiAlias,
+                //       shape: const RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.vertical(
+                //           top: Radius.circular(20),
+                //         ),
+                //       ),
+                //       builder: (context) => KAddLabelSheet(notebook: notebook),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
             Expanded(

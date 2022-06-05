@@ -10,7 +10,7 @@ class KIconButton extends StatelessWidget {
   KIconButton({
     Key? key,
     required this.onPressed,
-    this.size = 38,
+    this.size = 35,
     this.bgColor,
     this.iconColor,
     this.icon,
@@ -34,6 +34,7 @@ class KIconButton extends StatelessWidget {
         child: Icon(
           icon ?? Icons.arrow_back_ios_new_rounded,
           color: iconColor ?? clr,
+          size: 18.w,
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'package:notebooks/core/router/app_router.dart';
 
 import 'package:notebooks/core/widgets/k_fab.dart';
@@ -58,15 +59,38 @@ class _NoteBookPageState extends State<NoteBookPage> {
                   ),
                   SliverToBoxAdapter(
                     child: notes.isEmpty
-                        ? SizedBox(
-                            height: 300.h,
+                        ? Container(
+                            padding: EdgeInsets.all(40.w),
+                            // height: 300.h,
                             child: Center(
-                              child: Text(
-                                'No notes found!',
-                                style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                              child: Column(
+                                children: [
+                                  Lottie.asset(
+                                    'assets/animations/empty-notes.json',
+                                    fit: BoxFit.contain,
+                                    height: 230.h,
+                                  ),
+                                  RichText(
+                                    textAlign: TextAlign.center,
+                                    text: TextSpan(
+                                        text: 'No notes found for\n',
+                                        style: TextStyle(
+                                          fontSize: 17.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.black,
+                                        ),
+                                        children: [
+                                          TextSpan(
+                                            text: '${notebookEntity?.name}',
+                                            style: TextStyle(
+                                              fontSize: 17.sp,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ]),
+                                  ),
+                                ],
                               ),
                             ),
                           )

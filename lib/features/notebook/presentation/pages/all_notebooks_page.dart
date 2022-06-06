@@ -23,7 +23,6 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
   @override
   void initState() {
     BlocProvider.of<NotebookBloc>(context).add(const GetAllNotebooksEvent());
-    print('AllNotebooksPage initState');
     super.initState();
   }
 
@@ -78,8 +77,6 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
                         children: [
                           Lottie.asset(
                             'assets/animations/empty-notebooks.json',
-                            // height: 200.h,
-                            // width: 200.w,
                           ),
                           const Text(
                             'Create your first notebook by \ntapping the button below!',

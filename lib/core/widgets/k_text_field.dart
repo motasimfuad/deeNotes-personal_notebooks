@@ -116,9 +116,7 @@ class _KTextFieldState extends State<KTextField> {
                           color: Colors.grey.shade400,
                         ),
                       )
-                    : Container(
-                        width: 0,
-                      ),
+                    : null,
                 contentPadding: EdgeInsets.symmetric(
                   horizontal: 15.w,
                   vertical: widget.smallPadding ? 8.w : 15.h,

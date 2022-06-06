@@ -81,8 +81,10 @@ class NotebookOptionsModal extends StatelessWidget {
                             );
                         router.pop();
                         router.pushNamed(AppRouters.homePage);
+
                         KSnackBar(
                           context: context,
+                          type: AlertType.success,
                           message: 'Notebook deleted Successfully!',
                         );
                       },

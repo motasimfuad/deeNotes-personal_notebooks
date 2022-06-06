@@ -27,10 +27,11 @@ class _BottomNavState extends State<BottomNav> {
   Widget build(BuildContext context) {
     return Scaffold(
         // extendBody: true,
-        body: IndexedStack(
-          index: _selectedIndex,
-          children: screens,
-        ),
+        // body: IndexedStack(
+        //   index: _selectedIndex,
+        //   children: screens,
+        // ),
+        body: screens[_selectedIndex],
         bottomNavigationBar: Container(
           // color: const Color(0xfff6f8ff),
           decoration: BoxDecoration(

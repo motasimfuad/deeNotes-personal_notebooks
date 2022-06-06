@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'package:notebooks/core/router/app_router.dart';
 import 'package:notebooks/features/notebook/presentation/widgets/notebook_item.dart';
 import 'package:notebooks/core/widgets/k_fab.dart';
@@ -21,14 +22,15 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
 
   @override
   void initState() {
-    context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
+    BlocProvider.of<NotebookBloc>(context).add(const GetAllNotebooksEvent());
+    print('AllNotebooksPage initState');
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF6F8FF),
+      backgroundColor: notebooks.isEmpty ? null : const Color(0xFFF6F8FF),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -51,7 +53,7 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
             listener: (context, state) {},
             builder: (context, state) {
               if (state is NotebookInitial) {
-                context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
+                // context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
               }
               if (state is NotebookListLoading) {
                 return SliverToBoxAdapter(
@@ -66,20 +68,28 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
               if (state is NotebookListLoaded) {
                 notebooks = state.notebooks;
               }
-              if (notebooks.length < 11) {
+              if (notebooks.isEmpty) {
                 return SliverToBoxAdapter(
                   child: Container(
                     padding: EdgeInsets.all(40.w),
                     height: MediaQuery.of(context).size.height * 0.7,
-                    child: const Center(
-                      child: Text(
-                        '''No notebooks found!
-You can create a new notebook by tapping the button below''',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Lottie.asset(
+                            'assets/animations/empty-notebooks.json',
+                            // height: 200.h,
+                            // width: 200.w,
+                          ),
+                          const Text(
+                            'Create your first notebook by \ntapping the button below!',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -127,19 +137,6 @@ You can create a new notebook by tapping the button below''',
           icon: Icons.add_to_photos,
           onPressed: () async {
             router.pushNamed(AppRouters.createNotebookPage);
-
-            // DataRepository.instance.createNotebook(NotebookModel(
-            //   name: 'book name 2',
-            //   cover: '',
-            //   isLocked: false,
-            // ));
-
-            // DataRepository.instance.getAllNotebooks();
-            // var notebook = await DataRepository.instance.findNotebook(13);
-            // print('notebook: $notebook');
-            // DataRepository.instance.closeDatabase();
-
-            // Navigator.of(context).pushNamed('createNotebook');
           },
         ),
       ),

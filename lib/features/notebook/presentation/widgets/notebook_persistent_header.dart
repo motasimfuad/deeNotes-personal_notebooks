@@ -111,8 +111,6 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
                       opacity: 0,
                       child: GestureDetector(
                         onTap: () {
-                          debugPrint('filter');
-
                           showModalBottomSheet(
                             context: context,
                             isScrollControlled: true,

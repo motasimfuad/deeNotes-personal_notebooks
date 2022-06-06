@@ -8,6 +8,7 @@ import 'package:notebooks/core/widgets/k_text_field.dart';
 
 import '../../../../core/constants/colors.dart';
 import '../../../../core/widgets/k_appbar.dart';
+import '../../../../core/widgets/k_snackbar.dart';
 import '../../../../data/data_providers/notebook_covers_provider.dart';
 import '../../domain/entities/notebook_entity.dart';
 import '../bloc/notebook_bloc.dart';
@@ -158,6 +159,13 @@ class _CreateNotebookPageState extends State<CreateNotebookPage> {
             context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
             print(
                 'notebookName: ${selectedNotebookEntity.name}, selectedCover: ${selectedNotebookEntity.cover}');
+          } else {
+            KSnackBar(
+              context: context,
+              type: AlertType.failed,
+              position: FlashPosition.top,
+              message: 'Name and cover both are required!',
+            );
           }
         },
       ),

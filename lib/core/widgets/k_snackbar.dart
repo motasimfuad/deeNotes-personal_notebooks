@@ -1,7 +1,7 @@
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+export 'package:flash/flash.dart';
 import '../constants/colors.dart';
 
 enum AlertType { success, failed, warning, info, notImplemented }
@@ -28,7 +28,7 @@ KSnackBar({
         margin: EdgeInsets.all(20.h),
         behavior: FlashBehavior.floating,
         position: position ?? FlashPosition.bottom,
-        borderRadius: BorderRadius.circular(8.r),
+        borderRadius: BorderRadius.circular(15.r),
         boxShadows: kElevationToShadow[4],
         backgroundColor: generateBgColor(type),
 
@@ -69,8 +69,6 @@ KSnackBar({
                     child: GestureDetector(
                       onTap: () async {
                         onActionButtonTap!();
-
-                        print('2nd');
                         await controller.dismiss();
                       },
                       child: Container(

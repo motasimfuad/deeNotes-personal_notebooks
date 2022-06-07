@@ -6,14 +6,15 @@ import 'package:path/path.dart';
 const String _dbName = 'notebooks.db';
 const int _dbVersion = 1;
 
-const String _notebooksTableName = 'notebooks';
-const String _id = 'id';
+const String notebooksTableName = 'notebooks';
+const String notesTableName = 'noteTable';
+const String id = 'id';
+const String notebookId = 'notebookId';
+
 const String _name = 'name';
 const String _cover = 'cover';
 const String _locked = 'isLocked';
 
-const String _notesTableName = 'noteTable';
-const String _notebookId = 'notebookId';
 const String _title = 'title';
 const String _description = 'description';
 const String _isFavorite = 'isFavorite';
@@ -29,15 +30,13 @@ class DataRepository {
   static Database? _database;
 
   // get database or throw error
-  Future<Database> getDatabaseOrThrow() async {
+  Future<Database> getDatabaseOrCreate() async {
     final db = _database;
     if (db != null) {
       return db;
     } else {
       final newDb = await createDatabase();
       return newDb as Database;
-      // debugPrint('db is not open');
-      // throw ('Thrown error: db is not open');
     }
   }
 
@@ -50,8 +49,11 @@ class DataRepository {
       try {
         final directory = await getApplicationDocumentsDirectory();
         final path = join(directory.path, _dbName);
-        _database = await openDatabase(path,
-            version: _dbVersion, onCreate: _onCreateDb);
+        _database = await openDatabase(
+          path,
+          version: _dbVersion,
+          onCreate: _onCreateDb,
+        );
         return _database;
       } catch (e) {
         debugPrint(e.toString());
@@ -144,12 +146,12 @@ void _onCreateDb(Database db, int version) async {
 _createNotebooksTable(Database db) async {
   await db.execute(
       '''
-        CREATE TABLE IF NOT EXISTS $_notebooksTableName (
-          $_id	INTEGER NOT NULL,
+        CREATE TABLE IF NOT EXISTS $notebooksTableName (
+          $id	INTEGER NOT NULL,
           $_name	TEXT NOT NULL,
           $_cover	TEXT NOT NULL,
           $_locked	INTEGER DEFAULT 0,
-          PRIMARY KEY("$_id" AUTOINCREMENT)
+          PRIMARY KEY("$id" AUTOINCREMENT)
           );
       ''');
 }
@@ -157,19 +159,19 @@ _createNotebooksTable(Database db) async {
 _createNotesTable(Database db) async {
   await db.execute(
       '''
-      CREATE TABLE IF NOT EXISTS $_notesTableName
+      CREATE TABLE IF NOT EXISTS $notesTableName
       (
-        "$_id"	INTEGER NOT NULL,
+        "$id"	INTEGER NOT NULL,
         "$_title"	TEXT NOT NULL,
         "$_description"	TEXT,
-        "$_notebookId"	INTEGER NOT NULL,
+        "$notebookId"	INTEGER NOT NULL,
         "$_isFavorite"	INTEGER DEFAULT 0,
         "$_isLocked"	INTEGER DEFAULT 0,
         "$_color"	TEXT NOT NULL,
         "$_createdAt"	TEXT NOT NULL,
         "$_editedAt"	TEXT DEFAULT null,
-	      FOREIGN KEY("$_notebookId") REFERENCES "$_notebooksTableName"("$_id"),
-	      PRIMARY KEY("$_id" AUTOINCREMENT)
+	      FOREIGN KEY("$notebookId") REFERENCES "$notebooksTableName"("$id"),
+	      PRIMARY KEY("$id" AUTOINCREMENT)
       )
     ''');
 }

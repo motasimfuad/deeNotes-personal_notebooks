@@ -14,18 +14,15 @@ abstract class NotebookLocalDataSource {
   Future<int> deleteAllNotebooks();
 }
 
-const String _notebookTable = 'notebooks';
-const String _notebookId = 'id';
-
 class NotebookLocalDataSourceImpl implements NotebookLocalDataSource {
   final DataRepository dataRepo;
   NotebookLocalDataSourceImpl({required this.dataRepo});
 
   @override
   Future<int> createNotebook(NotebookModel notebook) async {
-    final db = await dataRepo.getDatabaseOrThrow();
+    final db = await dataRepo.getDatabaseOrCreate();
     final notebookId = db.insert(
-      _notebookTable,
+      notebooksTableName,
       notebook.toMap(),
     );
     return notebookId;
@@ -33,16 +30,16 @@ class NotebookLocalDataSourceImpl implements NotebookLocalDataSource {
 
   @override
   Future<int> deleteAllNotebooks() async {
-    final db = await dataRepo.getDatabaseOrThrow();
-    return db.delete(_notebookTable);
+    final db = await dataRepo.getDatabaseOrCreate();
+    return await db.delete(notebooksTableName);
   }
 
   @override
   Future<int> deleteNotebook(int notebookId) async {
-    final db = await dataRepo.getDatabaseOrThrow();
+    final db = await dataRepo.getDatabaseOrCreate();
     final deleteCount = await db.delete(
-      _notebookTable,
-      where: '$_notebookId = ?',
+      notebooksTableName,
+      where: '$id = ?',
       whereArgs: [notebookId],
     );
     return deleteCount;
@@ -50,11 +47,11 @@ class NotebookLocalDataSourceImpl implements NotebookLocalDataSource {
 
   @override
   Future<NotebookModel> findNotebook(int id) async {
-    final db = await dataRepo.getDatabaseOrThrow();
+    final db = await dataRepo.getDatabaseOrCreate();
     final result = await db.query(
-      _notebookTable,
+      notebooksTableName,
       limit: 1,
-      where: '$_notebookId = ?',
+      where: '$id = ?',
       whereArgs: [id],
     );
 
@@ -68,8 +65,8 @@ class NotebookLocalDataSourceImpl implements NotebookLocalDataSource {
 
   @override
   Future<List<NotebookModel>> getAllNotebooks() async {
-    final db = await dataRepo.getDatabaseOrThrow();
-    var allRows = await db.query(_notebookTable);
+    final db = await dataRepo.getDatabaseOrCreate();
+    var allRows = await db.query(notebooksTableName);
     var notebooksIterable =
         allRows.map((notebook) => NotebookModel.fromMap(notebook));
     final notebooks = notebooksIterable.toList();
@@ -78,11 +75,11 @@ class NotebookLocalDataSourceImpl implements NotebookLocalDataSource {
 
   @override
   Future<int> updateNotebook(NotebookModel notebook) async {
-    final db = await dataRepo.getDatabaseOrThrow();
+    final db = await dataRepo.getDatabaseOrCreate();
     final count = await db.update(
-      _notebookTable,
+      notebooksTableName,
       notebook.toMap(),
-      where: '$_notebookId = ?',
+      where: '$id = ?',
       whereArgs: [notebook.id],
     );
     return count;

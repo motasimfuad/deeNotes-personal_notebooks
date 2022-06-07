@@ -19,6 +19,7 @@ part 'note_event.dart';
 part 'note_state.dart';
 
 String getAllError = "Notes could not be loaded!";
+String createNoteError = "Note could not be created!";
 String deleteErrMsg = "Deletion failed!";
 
 class NoteBloc extends Bloc<NoteEvent, NoteState> {
@@ -47,6 +48,20 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
           ),
           (result) => emit(
             NotesListLoaded(notes: result),
+          ),
+        );
+      }
+
+      // create note
+      if (event is CreateNoteEvent) {
+        final params = create.Params(note: event.note);
+        final either = await createNote(params);
+        either.fold(
+          (failure) => emit(
+            NoteCreatedFailed(message: createNoteError),
+          ),
+          (result) => emit(
+            NoteCreated(),
           ),
         );
       }

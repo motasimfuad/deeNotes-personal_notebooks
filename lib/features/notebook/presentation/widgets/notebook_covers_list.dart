@@ -45,7 +45,7 @@ class NotebookCoversList extends StatelessWidget {
             },
             child: BlocBuilder<NotebookBloc, NotebookState>(
               builder: (context, state) {
-                if (state is ViewNotebookOnCreatePageState) {
+                if (state is ViewNotebookCoverState) {
                   if (state.cover == nbCoversProvider.notebookCovers[index]) {
                     return Container(
                       decoration: BoxDecoration(

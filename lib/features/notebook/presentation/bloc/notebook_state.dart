@@ -66,14 +66,11 @@ class NotebookLoaded extends NotebookState {
   List<Object> get props => [notebook];
 }
 
-class ViewNotebookOnCreatePageState extends NotebookState {
+class ViewNotebookCoverState extends NotebookState {
   final NotebookCover cover;
-  const ViewNotebookOnCreatePageState({
+  const ViewNotebookCoverState({
     required this.cover,
   });
   @override
-  List<Object> get props => [
-        cover
-        // notebookName as String,
-      ];
+  List<Object> get props => [cover];
 }

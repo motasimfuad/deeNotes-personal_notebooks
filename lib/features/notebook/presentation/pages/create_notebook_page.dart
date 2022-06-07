@@ -82,8 +82,7 @@ class _CreateNotebookPageState extends State<CreateNotebookPage> {
                                 // width: 1,
                                 child: BlocBuilder<NotebookBloc, NotebookState>(
                                   builder: (context, state) {
-                                    if (state
-                                        is ViewNotebookOnCreatePageState) {
+                                    if (state is ViewNotebookCoverState) {
                                       selectedCover = state.cover;
 
                                       selectedNotebookEntity.cover =

@@ -25,25 +25,36 @@ class CreateNotePage extends StatefulWidget {
 }
 
 class _CreateNotePageState extends State<CreateNotePage> {
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
   String noteTitle = '';
   String noteDescription = '';
   NoteColor? noteColor;
+  NoteColor? defaultNoteColor;
+
+  @override
+  void initState() {
+    context.read<NoteBloc>().add(GetAllNoteColorsEvent());
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    print("dispose");
+    noteColor = defaultNoteColor;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocConsumer<NoteBloc, NoteState>(
-        listener: (context, state) {
-          if (state is NoteColorSelectedState) {
-            noteColor = state.color;
-
-            KSnackBar(
-              context: context,
-              message: 'Note color changed to ${state.color.color.toString()}',
-            );
-          }
-        },
+        listener: (context, state) {},
         builder: (context, state) {
+          if (state is AllNoteColorsFetchedState) {
+            defaultNoteColor = state.colors.first;
+            print("defaultNoteColor: ${defaultNoteColor?.color}");
+          }
           if (state is NoteColorSelectedState) {
             noteColor = state.color;
           }
@@ -94,34 +105,34 @@ class _CreateNotePageState extends State<CreateNotePage> {
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
                             children: [
-                              const KTextField(
+                              KTextField(
                                 labelText: 'Title',
                                 isBold: true,
+                                controller: _titleController,
                               ),
                               Container(
-                                // height: 490.h,
-                                // height:
-                                //     MediaQuery.of(context).size.height * 0.6,
                                 decoration: BoxDecoration(
                                   color: Colors.grey.shade100,
                                   borderRadius: BorderRadius.all(
-                                    Radius.circular(12.r),
+                                    Radius.circular(15.r),
                                   ),
                                 ),
                                 child: TextField(
+                                  controller: _descriptionController,
                                   keyboardType: TextInputType.multiline,
                                   minLines: 26,
                                   maxLines: 30,
+                                  // expands: true,
                                   decoration: InputDecoration(
                                     hintText: 'Description',
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius: BorderRadius.all(
-                                        Radius.circular(10.r),
+                                        Radius.circular(15.r),
                                       ),
                                     ),
                                     filled: true,
@@ -133,7 +144,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
                                       bottom: 0.h,
                                     ),
                                   ),
-                                  scrollPadding: EdgeInsets.all(150.w),
+                                  scrollPadding: EdgeInsets.all(200.w),
                                 ),
                               ),
                             ],
@@ -153,20 +164,34 @@ class _CreateNotePageState extends State<CreateNotePage> {
         label: 'SAVE NOTE',
         onPressed: () async {
           NoteEntity noteEntity = NoteEntity(
-            title: 'headline6',
-            description: 'description',
+            title: _titleController.text,
+            description: _descriptionController.text,
             isFavorite: false,
-            noteColor: NoteColor(id: 1, color: Colors.blue),
+            noteColor: noteColor ?? defaultNoteColor!,
             notebookId: widget.notebookId,
             createdAt: DateTime.now(),
           );
 
           print(noteEntity.toString());
-          BlocProvider.of<NoteBloc>(context).add(
-            CreateNoteEvent(noteEntity),
-          );
-
-          router.pop();
+          print(noteColor?.color);
+          print("noteEntity.noteColor.color: ${noteEntity.noteColor.color}");
+          print(noteTitle.isEmpty ||
+              noteDescription.isEmpty ||
+              noteColor == null);
+          if (noteEntity.title.isNotEmpty ||
+              noteEntity.description.isNotEmpty) {
+            BlocProvider.of<NoteBloc>(context).add(
+              CreateNoteEvent(noteEntity),
+            );
+            router.pop();
+          } else {
+            KSnackBar(
+              context: context,
+              position: FlashPosition.top,
+              type: AlertType.warning,
+              message: 'Please fill all the fields',
+            );
+          }
         },
         icon: Icons.save_rounded,
       ),
@@ -183,6 +208,12 @@ class _CreateNotePageState extends State<CreateNotePage> {
                       height: 340.h,
                       child: KSelectColorSheet(
                         noteColor: noteColor,
+                        onSelected: (selNoteColor) {
+                          print(selNoteColor);
+                          BlocProvider.of<NoteBloc>(context).add(
+                            SelectNoteColorEvent(color: selNoteColor),
+                          );
+                        },
                       ),
                     ),
                     isDismissible: false,
@@ -199,7 +230,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
                   builder: (context, state) {
                     return Icon(
                       Icons.color_lens,
-                      color: noteColor?.color,
+                      color: noteColor?.color ?? defaultNoteColor?.color,
                     );
                   },
                 ),

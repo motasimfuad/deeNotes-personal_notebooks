@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+
+import 'package:notebooks/data/data_providers/note_colors_provider.dart';
 import 'package:notebooks/data/models/note_color.dart';
 import 'package:notebooks/features/note/domain/usecases/create_note_usecase.dart'
     as create;
@@ -29,6 +31,7 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
   final getAll.GetAllNotesUsecase getAllNotes;
   final delete.DeleteNoteUsecase deleteNote;
   final deleteAll.DeleteAllNotesUsecase deleteAllNotes;
+  final NoteColorsProvider noteColorsProvider;
   NoteBloc({
     required this.createNote,
     required this.updateNote,
@@ -36,6 +39,7 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     required this.getAllNotes,
     required this.deleteNote,
     required this.deleteAllNotes,
+    required this.noteColorsProvider,
   }) : super(NoteInitial()) {
     on<NoteEvent>((event, emit) async {
       if (event is GetAllNotesEvent) {
@@ -64,6 +68,13 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
             NoteCreated(),
           ),
         );
+      }
+
+      // get all note colors
+      if (event is GetAllNoteColorsEvent) {
+        emit(NoteColorsLoadingState());
+        var colors = noteColorsProvider.noteColors;
+        emit(AllNoteColorsFetchedState(colors: colors));
       }
 
       // select note color

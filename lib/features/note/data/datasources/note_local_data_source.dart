@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:notebooks/core/error/exceptions.dart';
 import 'package:notebooks/data/repositories/data_repository.dart';
 import 'package:notebooks/features/note/data/models/note_model.dart';
@@ -30,7 +32,7 @@ class NoteLocalDataSourceImpl implements NoteLocalDataSource {
     final db = await dataRepo.getDatabaseOrCreate();
     final deleteCount = await db.delete(
       notesTableName,
-      where: '$notebookId = ?',
+      where: '$notesTableName.notebookId = ?',
       whereArgs: [notebookId],
     );
     return deleteCount;
@@ -44,7 +46,11 @@ class NoteLocalDataSourceImpl implements NoteLocalDataSource {
       where: '$id = ?',
       whereArgs: [noteId],
     );
-    return deleteCount;
+    if (deleteCount == 0) {
+      throw LocalException();
+    } else {
+      return deleteCount;
+    }
   }
 
   @override
@@ -69,11 +75,16 @@ class NoteLocalDataSourceImpl implements NoteLocalDataSource {
     final db = await dataRepo.getDatabaseOrCreate();
     final result = await db.query(
       notesTableName,
-      where: '$notebookId = ?',
+      where: '$notesTableName.notebookId = ?',
       whereArgs: [notebookId],
     );
+
+    // final result = await db.rawQuery(
+    //   'SELECT * FROM $notesTableName WHERE $notesTableName.notebookId = $notebookId',
+    // );
     final notesIterable = result.map((e) => NoteModel.fromMap(e));
     final notes = notesIterable.toList();
+    log(notes.toString());
     return notes;
   }
 

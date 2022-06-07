@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:notebooks/core/router/app_router.dart';
 
 import 'package:notebooks/core/widgets/k_fab.dart';
+import 'package:notebooks/core/widgets/k_snackbar.dart';
 import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 import 'package:notebooks/features/notebook/presentation/bloc/notebook_bloc.dart';
@@ -33,6 +34,10 @@ class _NoteBookPageState extends State<NoteBookPage> {
   @override
   void initState() {
     context.read<NotebookBloc>().add(FindNotebookEvent(widget.notebookId));
+    print("widget.notebookId: ${widget.notebookId}");
+    context.read<NoteBloc>().add(
+          GetAllNotesEvent(notebookId: widget.notebookId),
+        );
   }
 
   @override
@@ -49,11 +54,11 @@ class _NoteBookPageState extends State<NoteBookPage> {
             }
             if (state is NotebookLoaded) {
               notebookEntity = state.notebook;
-              context.read<NoteBloc>().add(
-                    GetAllNotesEvent(
-                      notebookId: notebookEntity?.id as int,
-                    ),
-                  );
+              // context.read<NoteBloc>().add(
+              //       GetAllNotesEvent(
+              //         notebookId: notebookEntity?.id as int,
+              //       ),
+              //     );
 
               return CustomScrollView(
                 slivers: [
@@ -63,7 +68,16 @@ class _NoteBookPageState extends State<NoteBookPage> {
                       expandedHeight: 250.h,
                     ),
                   ),
-                  BlocBuilder<NoteBloc, NoteState>(
+                  BlocConsumer<NoteBloc, NoteState>(
+                    listener: (context, state) {
+                      if (state is NoteCreated) {
+                        KSnackBar(
+                          context: context,
+                          type: AlertType.success,
+                          message: 'Note created Successfully',
+                        );
+                      }
+                    },
                     builder: (context, state) {
                       if (state is NotesListLoading) {
                         return SliverToBoxAdapter(
@@ -77,6 +91,12 @@ class _NoteBookPageState extends State<NoteBookPage> {
                       }
                       if (state is NotesListLoaded) {
                         notes = state.notes;
+                      }
+                      if (state is NoteCreated) {
+                        print('Note created');
+                        context.read<NoteBloc>().add(
+                              GetAllNotesEvent(notebookId: widget.notebookId),
+                            );
                       }
                       return SliverToBoxAdapter(
                         child: notes.isEmpty

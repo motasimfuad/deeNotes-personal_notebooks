@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:notebooks/data/data_providers/note_colors_provider.dart';
 import 'package:notebooks/data/repositories/data_repository.dart';
 import 'package:notebooks/features/note/data/datasources/note_local_data_source.dart';
 import 'package:notebooks/features/note/domain/repositories/note_repository.dart';
@@ -46,6 +47,7 @@ Future<void> init() async {
       getAllNotes: getIt(),
       deleteNote: getIt(),
       deleteAllNotes: getIt(),
+      noteColorsProvider: getIt(),
     ),
   );
 
@@ -85,4 +87,5 @@ Future<void> init() async {
 
   //! data
   getIt.registerLazySingleton<DataRepository>(() => DataRepository.instance);
+  getIt.registerLazySingleton<NoteColorsProvider>(() => NoteColorsProvider());
 }

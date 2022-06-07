@@ -66,6 +66,15 @@ class NoteLoaded extends NoteState {
   List<Object> get props => [note];
 }
 
+class NoteColorsLoadingState extends NoteState {}
+
+class AllNoteColorsFetchedState extends NoteState {
+  final List<NoteColor> colors;
+  const AllNoteColorsFetchedState({required this.colors});
+  @override
+  List<Object> get props => [colors];
+}
+
 class NoteColorSelectedState extends NoteState {
   final NoteColor color;
   const NoteColorSelectedState({

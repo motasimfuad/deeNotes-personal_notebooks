@@ -38,7 +38,7 @@ class NotebookCoversList extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               BlocProvider.of<NotebookBloc>(context).add(
-                ViewNotebookOnCreatePageEvent(
+                ViewNotebookCover(
                   cover: nbCoversProvider.notebookCovers[index],
                 ),
               );

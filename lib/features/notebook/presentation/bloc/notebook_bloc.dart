@@ -71,7 +71,7 @@ class NotebookBloc extends Bloc<NotebookEvent, NotebookState> {
         );
       }
 
-      if (event is ViewNotebookOnCreatePageEvent) {
+      if (event is ViewNotebookCover) {
         emit(ViewNotebookOnCreatePageState(
           cover: event.cover!,
         ));

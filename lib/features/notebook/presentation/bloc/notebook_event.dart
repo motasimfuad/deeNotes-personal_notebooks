@@ -43,9 +43,9 @@ class DeleteAllNotebooksEvent extends NotebookEvent {
   const DeleteAllNotebooksEvent();
 }
 
-class ViewNotebookOnCreatePageEvent extends NotebookEvent {
+class ViewNotebookCover extends NotebookEvent {
   final NotebookCover? cover;
-  const ViewNotebookOnCreatePageEvent({
+  const ViewNotebookCover({
     this.cover,
   });
 }

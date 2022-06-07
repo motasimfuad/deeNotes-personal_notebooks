@@ -7,12 +7,12 @@ import '../entities/note_entity.dart';
 import '../repositories/note_repository.dart';
 
 class UpdateNoteUsecase implements UseCase<int, Params> {
-  final NoteRepository noteRepository;
+  final NoteRepository repository;
 
-  UpdateNoteUsecase(this.noteRepository);
+  UpdateNoteUsecase(this.repository);
   @override
   Future<Either<Failure, int>> call(params) async {
-    return await noteRepository.updateNote(params.note);
+    return await repository.updateNote(params.note);
   }
 }
 

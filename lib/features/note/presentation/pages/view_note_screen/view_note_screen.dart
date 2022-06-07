@@ -56,7 +56,7 @@ class ViewNoteScreen extends StatelessWidget {
                       EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: note.color.withOpacity(0.1),
+                      color: note.noteColor.color.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     height: 595.h,
@@ -105,7 +105,7 @@ class ViewNoteScreen extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.w500,
-                                  color: note.color),
+                                  color: note.noteColor.color),
                             ),
                             SizedBox(height: 15.h),
                             Text(
@@ -190,7 +190,7 @@ class ViewNoteScreen extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           duration: const Duration(milliseconds: 2000),
-                          backgroundColor: note.color,
+                          backgroundColor: note.noteColor.color,
                           content: const Text('Fullscreen mode'),
                         ),
                       );

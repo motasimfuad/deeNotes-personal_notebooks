@@ -5,6 +5,8 @@ import 'package:notebooks/features/note/data/models/note_model.dart';
 import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
+import '../../../../data/models/note_color.dart';
+
 class NotebookModel extends NotebookEntity {
   NotebookModel({
     int? id,
@@ -103,13 +105,14 @@ final sampleNotebook = NotebookEntity(
     Label(id: 1, name: 'LABEL 2'),
   ],
   isLocked: false,
-  notes: const [
+  notes: [
     NoteModel(
       id: 32,
       title: 'Note 1',
       description: 'description',
-      color: Colors.red,
+      noteColor: NoteColor(id: 1, color: Colors.red),
       notebookId: 1,
+      createdAt: DateTime.now(),
     ),
   ],
 );

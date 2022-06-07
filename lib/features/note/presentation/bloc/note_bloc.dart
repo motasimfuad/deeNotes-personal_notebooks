@@ -65,6 +65,11 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
           ),
         );
       }
+
+      // select note color
+      if (event is SelectNoteColorEvent) {
+        emit(NoteColorSelectedState(color: event.color));
+      }
     });
   }
 }

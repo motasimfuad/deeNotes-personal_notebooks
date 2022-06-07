@@ -23,16 +23,17 @@ class _ViewNoteFullScreenState extends State<ViewNoteFullScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          color:
-              isNightMode ? Colors.black : widget.note.color.withOpacity(0.1),
+          color: isNightMode
+              ? Colors.black
+              : widget.note.noteColor.color.withOpacity(0.1),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               KAppbar(
                 label: widget.note.title,
                 iconBgColor: Colors.grey.withOpacity(0.1),
-                iconColor: widget.note.color,
-                textColor: widget.note.color,
+                iconColor: widget.note.noteColor.color,
+                textColor: widget.note.noteColor.color,
                 context: context,
                 onPressed: () {
                   Navigator.pop(context);
@@ -46,7 +47,7 @@ class _ViewNoteFullScreenState extends State<ViewNoteFullScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         duration: const Duration(milliseconds: 700),
-                        backgroundColor: widget.note.color,
+                        backgroundColor: widget.note.noteColor.color,
                         content: isNightMode
                             ? const Text('Reading mode on')
                             : const Text('Reading mode off'),

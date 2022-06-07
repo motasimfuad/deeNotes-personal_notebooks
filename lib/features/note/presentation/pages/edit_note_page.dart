@@ -164,7 +164,7 @@ class _EditNotePageState extends State<EditNotePage> {
                     context: context,
                     builder: (context) => SizedBox(
                       height: MediaQuery.of(context).size.height / 2,
-                      child: const KSelectColorSheet(),
+                      child: KSelectColorSheet(),
                     ),
                     isDismissible: false,
                     isScrollControlled: false,

@@ -19,7 +19,7 @@ const String _title = 'title';
 const String _description = 'description';
 const String _isFavorite = 'isFavorite';
 const String _isLocked = 'isLocked';
-const String _color = 'color';
+const String _noteColor = 'noteColor';
 const String _createdAt = 'createdAt';
 const String _editedAt = 'editedAt';
 
@@ -65,10 +65,17 @@ class DataRepository {
   Future<void> closeDatabase() async {
     final db = _database;
     if (db != null) {
-      await db.close();
+      print('Database closed');
+      db.close();
       _database = null;
+      databaseFactory.deleteDatabase(db.path);
+      print('Database deleted');
     }
   }
+
+  // Future<void> deleteDatabase(String path) {
+  //   return databaseFactory.deleteDatabase(path);
+  // }
 
   // create notebook
   // Future createNotebook(NotebookModel notebook) async {
@@ -167,9 +174,9 @@ _createNotesTable(Database db) async {
         "$notebookId"	INTEGER NOT NULL,
         "$_isFavorite"	INTEGER DEFAULT 0,
         "$_isLocked"	INTEGER DEFAULT 0,
-        "$_color"	TEXT NOT NULL,
-        "$_createdAt"	TEXT NOT NULL,
-        "$_editedAt"	TEXT DEFAULT null,
+        "$_noteColor"	TEXT NOT NULL,
+        "$_createdAt"	INTEGER NOT NULL,
+        "$_editedAt"	INTEGER DEFAULT null,
 	      FOREIGN KEY("$notebookId") REFERENCES "$notebooksTableName"("$id"),
 	      PRIMARY KEY("$id" AUTOINCREMENT)
       )

@@ -66,9 +66,9 @@ class NoteLoaded extends NoteState {
   List<Object> get props => [note];
 }
 
-class SelectNoteColorState extends NoteState {
+class NoteColorSelectedState extends NoteState {
   final NoteColor color;
-  const SelectNoteColorState({
+  const NoteColorSelectedState({
     required this.color,
   });
   @override

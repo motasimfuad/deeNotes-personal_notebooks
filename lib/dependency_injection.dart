@@ -69,8 +69,8 @@ Future<void> init() async {
   getIt.registerLazySingleton<NotebookRepository>(
       () => NotebookRepositoryImpl(getIt()));
 
-  getIt.resetLazySingleton<NoteRepository>(
-      instance: () => NoteRepositoryImpl(getIt()));
+  getIt
+      .registerLazySingleton<NoteRepository>(() => NoteRepositoryImpl(getIt()));
 
   //data sources
   getIt.registerLazySingleton<NotebookLocalDataSource>(

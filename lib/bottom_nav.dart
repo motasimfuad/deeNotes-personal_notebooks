@@ -20,7 +20,7 @@ class _BottomNavState extends State<BottomNav> {
     // const MyHomePage(title: 'Hi'),
     const AllNotebooksPage(),
     const FavoriteNotesPage(),
-    const SettingsScreen(),
+    SettingsScreen(),
   ];
 
   @override

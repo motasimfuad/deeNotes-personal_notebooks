@@ -14,9 +14,9 @@ class NoteItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: note.color.withOpacity(0.1),
+        color: note.noteColor.color.withOpacity(0.1),
         border: Border.all(
-          color: note.color,
+          color: note.noteColor.color,
           width: 1,
         ),
         borderRadius: BorderRadius.all(
@@ -41,7 +41,7 @@ class NoteItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style: TextStyle(
-                    color: note.color,
+                    color: note.noteColor.color,
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
                   ),
@@ -78,7 +78,7 @@ class NoteItem extends StatelessWidget {
                   onTap: () {},
                   child: Icon(
                     Icons.favorite_outline,
-                    color: note.color,
+                    color: note.noteColor.color,
                     size: 20,
                   ),
                 ),

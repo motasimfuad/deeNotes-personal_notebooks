@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+import 'package:notebooks/data/models/note_color.dart';
 
 import '../../../../data/models/label.dart';
 
@@ -9,8 +9,8 @@ class NoteEntity extends Equatable {
   final String description;
   final bool? isFavorite;
   final bool? isLocked;
-  final Color color;
-  final DateTime? createdAt;
+  final NoteColor noteColor;
+  final DateTime createdAt;
   final DateTime? editedAt;
   final int notebookId;
   final List<Label>? labels;
@@ -20,8 +20,8 @@ class NoteEntity extends Equatable {
     required this.description,
     required this.isFavorite,
     this.isLocked,
-    required this.color,
-    this.createdAt,
+    required this.noteColor,
+    required this.createdAt,
     this.editedAt,
     required this.notebookId,
     this.labels,
@@ -34,7 +34,7 @@ class NoteEntity extends Equatable {
         description,
         isFavorite,
         isLocked,
-        color,
+        noteColor,
         createdAt,
         notebookId,
         labels,

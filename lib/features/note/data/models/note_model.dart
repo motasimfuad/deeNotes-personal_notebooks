@@ -1,8 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 import 'package:notebooks/data/models/label.dart';
+import 'package:notebooks/data/models/note_color.dart';
 import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 
 import '../../../../data/data_providers/note_colors_provider.dart';
@@ -14,8 +13,8 @@ class NoteModel extends NoteEntity {
     required String description,
     bool? isFavorite,
     bool? isLocked,
-    required Color color,
-    DateTime? createdAt,
+    required NoteColor noteColor,
+    required DateTime createdAt,
     DateTime? editedAt,
     required int notebookId,
     List<Label>? labels,
@@ -25,7 +24,7 @@ class NoteModel extends NoteEntity {
           description: description,
           isFavorite: isFavorite,
           isLocked: isLocked,
-          color: color,
+          noteColor: noteColor,
           createdAt: createdAt,
           editedAt: editedAt,
           notebookId: notebookId,
@@ -38,7 +37,7 @@ class NoteModel extends NoteEntity {
     String? description,
     bool? isFavorite,
     bool? isLocked,
-    Color? color,
+    NoteColor? noteColor,
     DateTime? createdAt,
     DateTime? editedAt,
     int? notebookId,
@@ -50,7 +49,7 @@ class NoteModel extends NoteEntity {
       description: description ?? this.description,
       isFavorite: isFavorite ?? this.isFavorite,
       isLocked: isLocked ?? this.isLocked,
-      color: color ?? this.color,
+      noteColor: noteColor ?? this.noteColor,
       createdAt: createdAt ?? this.createdAt,
       editedAt: editedAt ?? this.editedAt,
       labels: labels ?? this.labels,
@@ -63,13 +62,13 @@ class NoteModel extends NoteEntity {
       'id': id,
       'title': title,
       'description': description,
-      'isFavorite': isFavorite,
-      'isLocked': isLocked,
+      'isFavorite': isFavorite == true ? 1 : 0,
+      'isLocked': isLocked == true ? 1 : 0,
       'notebookId': notebookId,
-      'color': color.value,
-      'createdAt': createdAt?.millisecondsSinceEpoch,
+      'noteColor': noteColor.toJson(),
+      'createdAt': createdAt.millisecondsSinceEpoch,
       'editedAt': editedAt?.millisecondsSinceEpoch,
-      'labels': labels?.map((x) => x.toMap()).toList(),
+      // 'labels': labels?.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -81,27 +80,30 @@ class NoteModel extends NoteEntity {
       isFavorite: map['isFavorite'] == 1 ? true : false,
       isLocked: map['isLocked'] == 1 ? true : false,
       notebookId: map['notebookId'],
-      color: Color(map['color']),
-      createdAt: map['createdAt'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['createdAt'])
-          : null,
+      noteColor: NoteColor.fromJson(map['noteColor']),
+      createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt']),
       editedAt: map['editedAt'] != null
           ? DateTime.fromMillisecondsSinceEpoch(map['editedAt'])
           : null,
-      labels: map['labels'] != null
-          ? List<Label>.from(map['labels']?.map((x) => Label.fromMap(x)))
-          : null,
+      // labels: map['labels'] != null
+      //     ? List<Label>.from(map['labels']?.map((x) => Label.fromMap(x)))
+      //     : null,
     );
   }
 
-  String toJson() => json.encode(toMap());
+  String toJson() {
+    var encoded = json.encode(toMap());
+    print('encoded: $encoded');
+    return encoded;
+  }
 
-  factory NoteModel.fromJson(String source) =>
-      NoteModel.fromMap(json.decode(source));
+  factory NoteModel.fromJson(String source) {
+    return NoteModel.fromMap(json.decode(source));
+  }
 
   @override
   String toString() {
-    return 'Note(id: $id, title: $title, description: $description, isFavorite: $isFavorite, isLocked: $isLocked, color: $color, createdAt: $createdAt, editedAt: $editedAt, labels: $labels, notebookId: $notebookId)';
+    return 'Note(id: $id, title: $title, description: $description, isFavorite: $isFavorite, isLocked: $isLocked, noteColor: $noteColor, createdAt: $createdAt, editedAt: $editedAt, labels: $labels, notebookId: $notebookId)';
   }
 }
 
@@ -112,12 +114,13 @@ final sampleNote = NoteModel(
   title: 'This is the first note',
   description:
       'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-  color: noteColorsProvider.noteColors[20].color,
+  noteColor: noteColorsProvider.noteColors[20],
   notebookId: 1,
-  labels: [
-    Label(id: 01, name: 'label 1'),
-    Label(id: 02, name: 'label 2'),
-    Label(id: 03, name: 'label 3'),
-    Label(id: 04, name: 'label 4'),
-  ],
+  createdAt: DateTime.now(),
+  // labels: [
+  //   Label(id: 01, name: 'label 1'),
+  //   Label(id: 02, name: 'label 2'),
+  //   Label(id: 03, name: 'label 3'),
+  //   Label(id: 04, name: 'label 4'),
+  // ],
 );

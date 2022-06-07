@@ -5,9 +5,9 @@ import 'package:notebooks/core/usecases/usecase.dart';
 import '../../../../core/error/failures.dart';
 import '../repositories/note_repository.dart';
 
-class GetAllNotesUsecase implements UseCase<int, Params> {
+class DeleteAllNotesUsecase implements UseCase<int, Params> {
   final NoteRepository repository;
-  GetAllNotesUsecase(this.repository);
+  DeleteAllNotesUsecase(this.repository);
 
   @override
   Future<Either<Failure, int>> call(Params params) async {

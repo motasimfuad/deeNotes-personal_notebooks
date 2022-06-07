@@ -9,7 +9,7 @@ abstract class NoteState extends Equatable {
 
 class NoteInitial extends NoteState {}
 
-class NoteListLoading extends NoteState {}
+class NotesListLoading extends NoteState {}
 
 class NotesListLoaded extends NoteState {
   final List<NoteEntity> notes;

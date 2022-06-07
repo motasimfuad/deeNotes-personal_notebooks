@@ -1,16 +1,55 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:notebooks/data/models/note_color.dart';
+import 'package:notebooks/features/note/domain/usecases/create_note_usecase.dart'
+    as create;
+import 'package:notebooks/features/note/domain/usecases/delete_all_notes_usecase.dart'
+    as deleteAll;
+import 'package:notebooks/features/note/domain/usecases/delete_note_usecase.dart'
+    as delete;
+import 'package:notebooks/features/note/domain/usecases/get_all_notes_usecase.dart'
+    as getAll;
+import 'package:notebooks/features/note/domain/usecases/update_note_usecase.dart'
+    as update;
+import '../../domain/usecases/find_note_usecase.dart' as find;
 
 import '../../domain/entities/note_entity.dart';
 
 part 'note_event.dart';
 part 'note_state.dart';
 
+String getAllError = "Notes could not be loaded!";
+String deleteErrMsg = "Deletion failed!";
+
 class NoteBloc extends Bloc<NoteEvent, NoteState> {
-  NoteBloc() : super(NoteInitial()) {
-    on<NoteEvent>((event, emit) {
-      // TODO: implement event handler
+  final create.CreateNoteUsecase createNote;
+  final update.UpdateNoteUsecase updateNote;
+  final find.FindNoteUsecase findNote;
+  final getAll.GetAllNotesUsecase getAllNotes;
+  final delete.DeleteNoteUsecase deleteNote;
+  final deleteAll.DeleteAllNotesUsecase deleteAllNotes;
+  NoteBloc({
+    required this.createNote,
+    required this.updateNote,
+    required this.findNote,
+    required this.getAllNotes,
+    required this.deleteNote,
+    required this.deleteAllNotes,
+  }) : super(NoteInitial()) {
+    on<NoteEvent>((event, emit) async {
+      if (event is GetAllNotesEvent) {
+        emit(NotesListLoading());
+        final params = getAll.Params(notebookId: event.notebookId);
+        final either = await getAllNotes(params);
+        either.fold(
+          (failure) => emit(
+            NotesListError(message: getAllError),
+          ),
+          (result) => emit(
+            NotesListLoaded(notes: result),
+          ),
+        );
+      }
     });
   }
 }

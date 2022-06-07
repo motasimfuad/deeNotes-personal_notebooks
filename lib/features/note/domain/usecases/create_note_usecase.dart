@@ -6,9 +6,9 @@ import 'package:notebooks/features/note/domain/repositories/note_repository.dart
 
 import '../entities/note_entity.dart';
 
-class CreateNoteUseCase implements UseCase<int, Params> {
+class CreateNoteUsecase implements UseCase<int, Params> {
   final NoteRepository repository;
-  CreateNoteUseCase(this.repository);
+  CreateNoteUsecase(this.repository);
 
   @override
   Future<Either<Failure, int>> call(params) async {

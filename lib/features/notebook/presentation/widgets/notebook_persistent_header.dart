@@ -72,7 +72,7 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
           ),
         ),
         Positioned(
-          top: expandedHeight - 50.h - shrinkOffset,
+          top: expandedHeight - 47.h - shrinkOffset,
           child: Container(
             width: MediaQuery.of(context).size.width,
             height: 50.h,

@@ -33,8 +33,8 @@ class _BottomNavState extends State<BottomNav> {
         // ),
         body: screens[_selectedIndex],
         bottomNavigationBar: Container(
-          // color: const Color(0xfff6f8ff),
           decoration: BoxDecoration(
+            // color: const Color(0xfff6f8ff),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.2),
@@ -51,10 +51,12 @@ class _BottomNavState extends State<BottomNav> {
             child: BottomNavigationBar(
               elevation: 10,
               type: BottomNavigationBarType.fixed,
-              backgroundColor: const Color(0xfff6f8ff),
+              // backgroundColor: const Color(0xfff6f8ff),
+              backgroundColor: KColors.primary.shade700,
               showSelectedLabels: false,
               showUnselectedLabels: false,
-              unselectedItemColor: KColors.primary.withAlpha(130),
+              selectedItemColor: KColors.primary.shade200,
+              unselectedItemColor: KColors.primary.shade400,
               currentIndex: _selectedIndex,
               onTap: (value) {
                 setState(() {

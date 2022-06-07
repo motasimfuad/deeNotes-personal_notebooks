@@ -6,11 +6,11 @@ import 'package:notebooks/data/models/note_color.dart';
 import 'package:notebooks/features/note/domain/usecases/create_note_usecase.dart'
     as create;
 import 'package:notebooks/features/note/domain/usecases/delete_all_notes_usecase.dart'
-    as deleteAll;
+    as delete_all;
 import 'package:notebooks/features/note/domain/usecases/delete_note_usecase.dart'
     as delete;
 import 'package:notebooks/features/note/domain/usecases/get_all_notes_usecase.dart'
-    as getAll;
+    as get_all;
 import 'package:notebooks/features/note/domain/usecases/update_note_usecase.dart'
     as update;
 import '../../domain/usecases/find_note_usecase.dart' as find;
@@ -28,9 +28,9 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
   final create.CreateNoteUsecase createNote;
   final update.UpdateNoteUsecase updateNote;
   final find.FindNoteUsecase findNote;
-  final getAll.GetAllNotesUsecase getAllNotes;
+  final get_all.GetAllNotesUsecase getAllNotes;
   final delete.DeleteNoteUsecase deleteNote;
-  final deleteAll.DeleteAllNotesUsecase deleteAllNotes;
+  final delete_all.DeleteAllNotesUsecase deleteAllNotes;
   final NoteColorsProvider noteColorsProvider;
   NoteBloc({
     required this.createNote,
@@ -44,7 +44,7 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     on<NoteEvent>((event, emit) async {
       if (event is GetAllNotesEvent) {
         emit(NotesListLoading());
-        final params = getAll.Params(notebookId: event.notebookId);
+        final params = get_all.Params(notebookId: event.notebookId);
         final either = await getAllNotes(params);
         either.fold(
           (failure) => emit(

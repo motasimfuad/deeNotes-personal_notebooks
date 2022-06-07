@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:notebooks/core/constants/constants.dart';
 import 'package:notebooks/core/router/app_router.dart';
 import 'package:notebooks/core/widgets/k_dialog.dart';
 import 'package:notebooks/core/widgets/k_icon_button.dart';
-
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 import 'package:notebooks/features/notebook/presentation/widgets/notebook_item.dart';
 
@@ -12,10 +12,12 @@ import '../../../../core/widgets/k_snackbar.dart';
 import '../bloc/notebook_bloc.dart';
 
 class NotebookOptionsModal extends StatelessWidget {
-  NotebookEntity notebook;
-  NotebookOptionsModal({
+  final NotebookEntity notebook;
+  final int totalNotes;
+  const NotebookOptionsModal({
     Key? key,
     required this.notebook,
+    required this.totalNotes,
   }) : super(key: key);
 
   @override
@@ -33,10 +35,10 @@ class NotebookOptionsModal extends StatelessWidget {
               children: [
                 NotebookItem(
                   notebook: notebook,
-                  notebookHeight: 180.h,
+                  notebookHeight: 200.h,
                   isDetailsHidden: true,
                 ),
-                SizedBox(height: 8.h),
+                SizedBox(height: 10.h),
                 Text(
                   notebook.name,
                   style: TextStyle(
@@ -47,9 +49,9 @@ class NotebookOptionsModal extends StatelessWidget {
                 ),
                 SizedBox(height: 3.h),
                 Text(
-                  1.totalNotes(),
+                  '(${totalNotes.totalNotes()})',
                   style: TextStyle(
-                    fontSize: 14.sp,
+                    fontSize: 13.sp,
                     fontWeight: FontWeight.w400,
                     color: KColors.primary,
                   ),

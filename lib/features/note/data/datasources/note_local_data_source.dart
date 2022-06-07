@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:notebooks/core/error/exceptions.dart';
 import 'package:notebooks/data/repositories/data_repository.dart';
 import 'package:notebooks/features/note/data/models/note_model.dart';
@@ -78,13 +76,8 @@ class NoteLocalDataSourceImpl implements NoteLocalDataSource {
       where: '$notesTableName.notebookId = ?',
       whereArgs: [notebookId],
     );
-
-    // final result = await db.rawQuery(
-    //   'SELECT * FROM $notesTableName WHERE $notesTableName.notebookId = $notebookId',
-    // );
     final notesIterable = result.map((e) => NoteModel.fromMap(e));
     final notes = notesIterable.toList();
-    log(notes.toString());
     return notes;
   }
 

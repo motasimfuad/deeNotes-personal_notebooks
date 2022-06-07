@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:notebooks/core/constants/constants.dart';
 
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
 class NotebookItem extends StatelessWidget {
-  NotebookEntity? notebook;
+  final NotebookEntity? notebook;
+  final int? totalNotes;
   double? notebookHeight;
-  bool? isDetailsHidden;
+  final bool? isDetailsHidden;
   NotebookItem({
     Key? key,
     this.notebook,
+    this.totalNotes,
     this.notebookHeight,
     this.isDetailsHidden = false,
   }) : super(key: key);
@@ -108,9 +110,7 @@ class NotebookItem extends StatelessWidget {
                         SizedBox(height: 2.h),
                         Text(
                           // '${notebook?.notes?.length.toString()} notes',
-                          notebook?.notes?.length != null
-                              ? totalNotes(notebook?.notes?.length as int)
-                              : 'No notes yet!',
+                          totalNotes.totalNotes(),
                           style: TextStyle(
                             fontSize: 13.sp,
                             fontWeight: FontWeight.w400,

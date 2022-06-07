@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:notebooks/core/router/app_router.dart';
 
+import 'package:notebooks/core/router/app_router.dart';
 import 'package:notebooks/core/widgets/k_bottom_filter_menu.dart';
 import 'package:notebooks/core/widgets/k_dialog.dart';
 import 'package:notebooks/core/widgets/k_icon_button.dart';
@@ -12,9 +12,11 @@ import 'notebook_options_modal.dart';
 
 class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
   final NotebookEntity notebook;
+  final int totalNotes;
   final double expandedHeight;
   NotebookPersistentHeader({
     required this.notebook,
+    required this.totalNotes,
     required this.expandedHeight,
   });
 
@@ -65,6 +67,7 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
                 formContent: [
                   NotebookOptionsModal(
                     notebook: notebook,
+                    totalNotes: totalNotes,
                   )
                 ],
               );

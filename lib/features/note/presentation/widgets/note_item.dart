@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:notebooks/core/constants/constants.dart';
 
 import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 
@@ -20,7 +20,7 @@ class NoteItem extends StatelessWidget {
           width: 1,
         ),
         borderRadius: BorderRadius.all(
-          Radius.circular(10.r),
+          Radius.circular(12.r),
         ),
       ),
       child: Padding(
@@ -63,15 +63,17 @@ class NoteItem extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Created at: 5.2.2022',
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  style: TextStyle(
-                    color: Colors.grey.shade900,
-                    fontSize: 10.sp,
-                    fontWeight: FontWeight.w500,
-                    fontStyle: FontStyle.italic,
+                Expanded(
+                  child: Text(
+                    'Created at: ${note.createdAt.onlyDate}',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: TextStyle(
+                      color: Colors.grey.shade900,
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w500,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
                 ),
                 GestureDetector(

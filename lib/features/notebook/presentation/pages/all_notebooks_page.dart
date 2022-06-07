@@ -117,6 +117,7 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
                     ),
                     itemBuilder: (BuildContext context, int index) {
                       var reversedList = notebooks.reversed.toList();
+
                       return GestureDetector(
                         onTap: () {
                           router.pushNamed(
@@ -126,7 +127,9 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
                             },
                           );
                         },
-                        child: NotebookItem(notebook: reversedList[index]),
+                        child: NotebookItem(
+                          notebook: reversedList[index],
+                        ),
                       );
                     },
                   ),

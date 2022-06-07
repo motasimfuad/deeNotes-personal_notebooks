@@ -33,17 +33,16 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            title: const Text(
-              'Notebooks',
-            ),
+            title: const Text('Notebooks'),
             elevation: 0,
+            centerTitle: true,
             backgroundColor: Colors.transparent,
-            leading: Container(),
-            leadingWidth: 10.w,
+            // leading: Container(),
+            // leadingWidth: 10.w,
             titleTextStyle: TextStyle(
               color: KColors.primary,
               fontWeight: FontWeight.bold,
-              fontSize: 20.sp,
+              fontSize: 23.sp,
             ),
           ),
           // SliverGrid.count(crossAxisCount: 2)
@@ -70,19 +69,26 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
               if (notebooks.isEmpty) {
                 return SliverToBoxAdapter(
                   child: Container(
-                    padding: EdgeInsets.all(40.w),
+                    padding: EdgeInsets.all(80.w),
                     height: MediaQuery.of(context).size.height * 0.7,
                     child: Center(
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
                         children: [
-                          Lottie.asset(
-                            'assets/animations/empty-notebooks.json',
+                          GestureDetector(
+                            onTap: () {
+                              router.pushNamed(AppRouters.createNotebookPage);
+                            },
+                            child: Lottie.asset(
+                              'assets/animations/empty-notebooks.json',
+                            ),
                           ),
-                          const Text(
-                            'Create your first notebook by \ntapping the button below!',
+                          Text(
+                            'Create your first notebook by \ntapping the button!',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 17,
+                              fontSize: 17.sp,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -97,7 +103,11 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
                     shrinkWrap: true,
                     primary: false,
                     padding: EdgeInsets.only(
-                        left: 20.w, right: 20.w, bottom: 70.h, top: 5.h),
+                      left: 20.w,
+                      right: 20.w,
+                      bottom: 70.h,
+                      top: 5.h,
+                    ),
                     itemCount: notebooks.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,

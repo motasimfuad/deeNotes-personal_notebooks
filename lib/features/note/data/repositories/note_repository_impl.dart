@@ -43,26 +43,79 @@ class NoteRepositoryImpl implements NoteRepository {
   }
 
   @override
-  Future<Either<Failure, int>> deleteNote(int noteId) {
-    // TODO: implement deleteNote
-    throw UnimplementedError();
+  Future<Either<Failure, int>> deleteNote(int noteId) async {
+    try {
+      final count = await _localDataSource.deleteNote(noteId);
+      return Right(count);
+    } on LocalException {
+      return Left(LocalFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, NoteEntity>> findNote(int id) {
-    // TODO: implement findNote
-    throw UnimplementedError();
+  Future<Either<Failure, NoteEntity>> findNote(int id) async {
+    try {
+      final noteModel = await _localDataSource.findNote(id);
+      final noteEntity = NoteEntity(
+        id: noteModel.id,
+        notebookId: noteModel.notebookId,
+        title: noteModel.title,
+        description: noteModel.description,
+        color: noteModel.color,
+        isFavorite: noteModel.isFavorite,
+        isLocked: noteModel.isLocked,
+        createdAt: noteModel.createdAt,
+        editedAt: noteModel.editedAt,
+      );
+      return Right(noteEntity);
+    } on LocalException {
+      return Left(LocalFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, List<NoteEntity>>> getAllNotes(int notebookId) {
-    // TODO: implement getAllNotes
-    throw UnimplementedError();
+  Future<Either<Failure, List<NoteEntity>>> getAllNotes(int notebookId) async {
+    try {
+      final noteModels = await _localDataSource.getAllNotes(notebookId);
+      final noteEntities = noteModels
+          .map(
+            (noteModel) => NoteEntity(
+              id: noteModel.id,
+              notebookId: noteModel.notebookId,
+              title: noteModel.title,
+              description: noteModel.description,
+              color: noteModel.color,
+              isFavorite: noteModel.isFavorite,
+              isLocked: noteModel.isLocked,
+              createdAt: noteModel.createdAt,
+              editedAt: noteModel.editedAt,
+            ),
+          )
+          .toList();
+      return Right(noteEntities);
+    } on LocalException {
+      return Left(LocalFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, int>> updateNote(NoteEntity note) {
-    // TODO: implement updateNote
-    throw UnimplementedError();
+  Future<Either<Failure, int>> updateNote(NoteEntity note) async {
+    try {
+      NoteModel noteModel = NoteModel(
+        id: note.id,
+        notebookId: note.notebookId,
+        title: note.title,
+        description: note.description,
+        color: note.color,
+        isFavorite: note.isFavorite,
+        isLocked: note.isLocked,
+        createdAt: note.createdAt,
+        editedAt: note.editedAt,
+      );
+      final count = await _localDataSource.updateNote(noteModel);
+      return Right(count);
+    } on LocalException {
+      return Left(LocalFailure());
+    }
   }
 }

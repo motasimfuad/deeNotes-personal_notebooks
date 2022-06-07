@@ -6,11 +6,21 @@ import 'package:path/path.dart';
 const String _dbName = 'notebooks.db';
 const int _dbVersion = 1;
 
-const String _notebookTable = 'notebooks';
-const String _notebookId = 'id';
-const String _notebookName = 'name';
-const String _notebookCover = 'cover';
-const String _notebookLocked = 'isLocked';
+const String _notebooksTableName = 'notebooks';
+const String _id = 'id';
+const String _name = 'name';
+const String _cover = 'cover';
+const String _locked = 'isLocked';
+
+const String _notesTableName = 'noteTable';
+const String _notebookId = 'notebookId';
+const String _title = 'title';
+const String _description = 'description';
+const String _isFavorite = 'isFavorite';
+const String _isLocked = 'isLocked';
+const String _color = 'color';
+const String _createdAt = 'createdAt';
+const String _editedAt = 'editedAt';
 
 class DataRepository {
   DataRepository._private();
@@ -128,20 +138,38 @@ class DataRepository {
 
 void _onCreateDb(Database db, int version) async {
   await _createNotebooksTable(db);
-  // await _createNotesTable(db);
+  await _createNotesTable(db);
 }
 
 _createNotebooksTable(Database db) async {
   await db.execute(
       '''
-        CREATE TABLE IF NOT EXISTS $_notebookTable (
-          $_notebookId	INTEGER NOT NULL,
-          $_notebookName	TEXT NOT NULL,
-          $_notebookCover	TEXT NOT NULL,
-          $_notebookLocked	INTEGER DEFAULT 0,
-          PRIMARY KEY("$_notebookId" AUTOINCREMENT)
+        CREATE TABLE IF NOT EXISTS $_notebooksTableName (
+          $_id	INTEGER NOT NULL,
+          $_name	TEXT NOT NULL,
+          $_cover	TEXT NOT NULL,
+          $_locked	INTEGER DEFAULT 0,
+          PRIMARY KEY("$_id" AUTOINCREMENT)
           );
       ''');
 }
 
-_createNotesTable(Database db) {}
+_createNotesTable(Database db) async {
+  await db.execute(
+      '''
+      CREATE TABLE IF NOT EXISTS $_notesTableName
+      (
+        "$_id"	INTEGER NOT NULL,
+        "$_title"	TEXT NOT NULL,
+        "$_description"	TEXT,
+        "$_notebookId"	INTEGER NOT NULL,
+        "$_isFavorite"	INTEGER DEFAULT 0,
+        "$_isLocked"	INTEGER DEFAULT 0,
+        "$_color"	TEXT NOT NULL,
+        "$_createdAt"	TEXT NOT NULL,
+        "$_editedAt"	TEXT DEFAULT null,
+	      FOREIGN KEY("$_notebookId") REFERENCES "$_notebooksTableName"("$_id"),
+	      PRIMARY KEY("$_id" AUTOINCREMENT)
+      )
+    ''');
+}

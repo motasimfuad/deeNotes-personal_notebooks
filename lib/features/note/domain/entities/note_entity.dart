@@ -11,6 +11,7 @@ class NoteEntity extends Equatable {
   final bool? isLocked;
   final Color color;
   final DateTime? createdAt;
+  final DateTime? editedAt;
   final int notebookId;
   final List<Label>? labels;
   const NoteEntity({
@@ -21,6 +22,7 @@ class NoteEntity extends Equatable {
     this.isLocked,
     required this.color,
     this.createdAt,
+    this.editedAt,
     required this.notebookId,
     this.labels,
   });

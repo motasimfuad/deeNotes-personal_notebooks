@@ -16,6 +16,7 @@ class NoteModel extends NoteEntity {
     bool? isLocked,
     required Color color,
     DateTime? createdAt,
+    DateTime? editedAt,
     required int notebookId,
     List<Label>? labels,
   }) : super(
@@ -26,6 +27,7 @@ class NoteModel extends NoteEntity {
           isLocked: isLocked,
           color: color,
           createdAt: createdAt,
+          editedAt: editedAt,
           notebookId: notebookId,
           labels: labels,
         );
@@ -38,6 +40,7 @@ class NoteModel extends NoteEntity {
     bool? isLocked,
     Color? color,
     DateTime? createdAt,
+    DateTime? editedAt,
     int? notebookId,
     List<Label>? labels,
   }) {
@@ -49,6 +52,7 @@ class NoteModel extends NoteEntity {
       isLocked: isLocked ?? this.isLocked,
       color: color ?? this.color,
       createdAt: createdAt ?? this.createdAt,
+      editedAt: editedAt ?? this.editedAt,
       labels: labels ?? this.labels,
       notebookId: notebookId ?? this.notebookId,
     );
@@ -64,6 +68,7 @@ class NoteModel extends NoteEntity {
       'notebookId': notebookId,
       'color': color.value,
       'createdAt': createdAt?.millisecondsSinceEpoch,
+      'editedAt': editedAt?.millisecondsSinceEpoch,
       'labels': labels?.map((x) => x.toMap()).toList(),
     };
   }
@@ -80,6 +85,9 @@ class NoteModel extends NoteEntity {
       createdAt: map['createdAt'] != null
           ? DateTime.fromMillisecondsSinceEpoch(map['createdAt'])
           : null,
+      editedAt: map['editedAt'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['editedAt'])
+          : null,
       labels: map['labels'] != null
           ? List<Label>.from(map['labels']?.map((x) => Label.fromMap(x)))
           : null,
@@ -93,7 +101,7 @@ class NoteModel extends NoteEntity {
 
   @override
   String toString() {
-    return 'Note(id: $id, title: $title, description: $description, isFavorite: $isFavorite, isLocked: $isLocked, color: $color, createdAt: $createdAt, labels: $labels, notebookId: $notebookId)';
+    return 'Note(id: $id, title: $title, description: $description, isFavorite: $isFavorite, isLocked: $isLocked, color: $color, createdAt: $createdAt, editedAt: $editedAt, labels: $labels, notebookId: $notebookId)';
   }
 }
 

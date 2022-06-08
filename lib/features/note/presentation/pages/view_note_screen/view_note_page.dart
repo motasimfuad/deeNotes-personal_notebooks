@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notebooks/core/constants/constants.dart';
+import 'package:notebooks/core/router/app_router.dart';
+import 'package:notebooks/core/widgets/k_dialog.dart';
+import 'package:notebooks/core/widgets/k_snackbar.dart';
 
 import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 
@@ -180,7 +183,32 @@ class _ViewNotePageState extends State<ViewNotePage> {
                           iconType: IconType.bottomBar,
                           tooltip: 'Delete note',
                           iconColor: note?.noteColor.color,
-                          onPressed: () {},
+                          onPressed: () {
+                            KDialog(
+                              context: context,
+                              title: 'Delete note?',
+                              bodyText:
+                                  'Are you sure you want to delete this note?',
+                              yesBtnPressed: () {
+                                context.read<NoteBloc>().add(
+                                      DeleteNoteEvent(noteId: note?.id as int),
+                                    );
+                                Navigator.pop(context);
+                                KSnackBar(
+                                  context: context,
+                                  type: AlertType.success,
+                                  message: 'Note Deleted!',
+                                );
+                                // router.pop();
+                                router.pushNamed(
+                                  AppRouters.notebookPage,
+                                  params: {
+                                    'notebookId': note!.notebookId.toString(),
+                                  },
+                                );
+                              },
+                            );
+                          },
                         ),
                       ],
                     ),

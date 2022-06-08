@@ -182,14 +182,18 @@ KDialog({
           ),
           child: getWidget(dialogType),
         ),
+        buttonPadding: EdgeInsets.symmetric(
+          horizontal: 5.w,
+          vertical: 0.h,
+        ),
         actions: showFooter == true
             ? <Widget>[
-                k_dialog_button(
+                kDialogButton(
                   buttonText: noButtonText ?? getNoButtonText(dialogType),
                   bgColor: noButtonColor ?? getNoButtonColor(dialogType),
                   fontSize: dialogType == DialogType.form ? 15.5.sp : 14.sp,
                 ),
-                k_dialog_button(
+                kDialogButton(
                   buttonText: yesButtonText ?? getYesButtonText(dialogType),
                   bgColor: yesButtonColor ?? getYesButtonColor(dialogType),
                   fontSize: dialogType == DialogType.form ? 15.5.sp : 14.sp,
@@ -202,12 +206,12 @@ KDialog({
   );
 }
 
-class k_dialog_button extends StatelessWidget {
+class kDialogButton extends StatelessWidget {
   String buttonText;
   Color bgColor;
   Function()? onPressed;
   double? fontSize;
-  k_dialog_button({
+  kDialogButton({
     Key? key,
     required this.buttonText,
     required this.bgColor,
@@ -228,7 +232,7 @@ class k_dialog_button extends StatelessWidget {
       ),
       style: TextButton.styleFrom(
         padding: EdgeInsets.symmetric(
-          horizontal: 11.w,
+          horizontal: 5.w,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.r),

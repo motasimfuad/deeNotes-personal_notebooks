@@ -9,12 +9,14 @@ class NotebookItem extends StatelessWidget {
   int? totalNotes;
   double? notebookHeight;
   bool? isDetailsHidden;
+  bool? isTotalNotesHidden;
   NotebookItem({
     Key? key,
     this.notebook,
     this.totalNotes,
     this.notebookHeight,
     this.isDetailsHidden = false,
+    this.isTotalNotesHidden = false,
   }) : super(key: key);
 
   @override
@@ -102,21 +104,26 @@ class NotebookItem extends StatelessWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            fontSize: 18.sp,
+                            fontSize:
+                                isTotalNotesHidden == true ? 20.sp : 18.sp,
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 2.h),
-                        Text(
-                          // '${notebook?.notes?.length.toString()} notes',
-                          totalNotes.totalNotes(),
-                          style: TextStyle(
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white60,
-                          ),
-                        ),
+                        isTotalNotesHidden == true
+                            ? const SizedBox()
+                            : SizedBox(height: 2.h),
+                        isTotalNotesHidden == true
+                            ? const SizedBox()
+                            : Text(
+                                // '${notebook?.notes?.length.toString()} notes',
+                                totalNotes.totalNotes(),
+                                style: TextStyle(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white60,
+                                ),
+                              ),
                       ],
                     ),
             ),

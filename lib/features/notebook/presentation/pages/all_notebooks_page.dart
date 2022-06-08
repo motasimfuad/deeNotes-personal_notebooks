@@ -126,7 +126,10 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
                             },
                           );
                         },
-                        child: NotebookItem(notebook: reversedList[index]),
+                        child: NotebookItem(
+                          notebook: reversedList[index],
+                          isTotalNotesHidden: true,
+                        ),
                       );
                     },
                   ),

@@ -54,31 +54,29 @@ class _NoteBookPageState extends State<NoteBookPage> {
             }
             if (state is NotebookLoaded) {
               notebookEntity = state.notebook;
-              // context.read<NoteBloc>().add(
-              //       GetAllNotesEvent(
-              //         notebookId: notebookEntity?.id as int,
-              //       ),
-              //     );
 
               return BlocConsumer<NoteBloc, NoteState>(
-                listener: (context, state) {
-                  if (state is NoteCreated) {
-                    KSnackBar(
-                      context: context,
-                      type: AlertType.success,
-                      message: 'Note created Successfully',
-                    );
-                  }
-                },
+                listener: (context, state) {},
                 builder: (context, state) {
                   if (state is NoteCreated) {
                     context.read<NoteBloc>().add(
                           GetAllNotesEvent(notebookId: widget.notebookId),
                         );
                   }
+                  if (state is NotesListLoading) {
+                    return SliverToBoxAdapter(
+                      child: SizedBox(
+                        height: ScreenUtil.defaultSize.height * 0.6,
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    );
+                  }
                   if (state is NotesListLoaded) {
                     notes = state.notes;
                   }
+
                   return CustomScrollView(
                     slivers: [
                       SliverPersistentHeader(
@@ -88,19 +86,17 @@ class _NoteBookPageState extends State<NoteBookPage> {
                           expandedHeight: 250.h,
                         ),
                       ),
-                      BlocBuilder<NoteBloc, NoteState>(
-                        builder: (context, state) {
-                          if (state is NotesListLoading) {
-                            return SliverToBoxAdapter(
-                              child: SizedBox(
-                                height: ScreenUtil.defaultSize.height * 0.6,
-                                child: const Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              ),
+                      BlocConsumer<NoteBloc, NoteState>(
+                        listener: (context, state) {
+                          if (state is NoteCreated) {
+                            KSnackBar(
+                              context: context,
+                              type: AlertType.success,
+                              message: 'Note created Successfully',
                             );
                           }
-
+                        },
+                        builder: (context, state) {
                           return SliverToBoxAdapter(
                             child: notes.isEmpty
                                 ? Container(

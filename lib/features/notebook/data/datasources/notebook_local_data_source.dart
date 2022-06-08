@@ -39,7 +39,7 @@ class NotebookLocalDataSourceImpl implements NotebookLocalDataSource {
     final db = await dataRepo.getDatabaseOrCreate();
     final deleteCount = await db.delete(
       notebooksTableName,
-      where: '$id = ?',
+      where: '$idField = ?',
       whereArgs: [notebookId],
     );
     return deleteCount;
@@ -51,9 +51,11 @@ class NotebookLocalDataSourceImpl implements NotebookLocalDataSource {
     final result = await db.query(
       notebooksTableName,
       limit: 1,
-      where: '$id = ?',
+      where: '$idField = ?',
       whereArgs: [id],
     );
+
+    print(idField);
 
     if (result.isNotEmpty) {
       return NotebookModel.fromMap(result.first);
@@ -79,7 +81,7 @@ class NotebookLocalDataSourceImpl implements NotebookLocalDataSource {
     final count = await db.update(
       notebooksTableName,
       notebook.toMap(),
-      where: '$id = ?',
+      where: '$idField = ?',
       whereArgs: [notebook.id],
     );
     return count;

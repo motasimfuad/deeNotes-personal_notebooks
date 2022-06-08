@@ -8,8 +8,8 @@ const int _dbVersion = 1;
 
 const String notebooksTableName = 'notebooks';
 const String notesTableName = 'noteTable';
-const String id = 'id';
-const String notebookId = 'notebookId';
+const String idField = 'id';
+const String notebookIdField = 'notebookId';
 
 const String _name = 'name';
 const String _cover = 'cover';
@@ -154,11 +154,11 @@ _createNotebooksTable(Database db) async {
   await db.execute(
       '''
         CREATE TABLE IF NOT EXISTS $notebooksTableName (
-          $id	INTEGER NOT NULL,
+          $idField	INTEGER NOT NULL,
           $_name	TEXT NOT NULL,
           $_cover	TEXT NOT NULL,
           $_locked	INTEGER DEFAULT 0,
-          PRIMARY KEY("$id" AUTOINCREMENT)
+          PRIMARY KEY("$idField" AUTOINCREMENT)
           );
       ''');
 }
@@ -168,17 +168,17 @@ _createNotesTable(Database db) async {
       '''
       CREATE TABLE IF NOT EXISTS $notesTableName
       (
-        "$id"	INTEGER NOT NULL,
+        "$idField"	INTEGER NOT NULL,
         "$_title"	TEXT NOT NULL,
         "$_description"	TEXT,
-        "$notebookId"	INTEGER NOT NULL,
+        "$notebookIdField"	INTEGER NOT NULL,
         "$_isFavorite"	INTEGER DEFAULT 0,
         "$_isLocked"	INTEGER DEFAULT 0,
         "$_noteColor"	TEXT NOT NULL,
         "$_createdAt"	INTEGER NOT NULL,
         "$_editedAt"	INTEGER DEFAULT null,
-	      FOREIGN KEY("$notebookId") REFERENCES "$notebooksTableName"("$id"),
-	      PRIMARY KEY("$id" AUTOINCREMENT)
+	      FOREIGN KEY("$notebookIdField") REFERENCES "$notebooksTableName"("$idField"),
+	      PRIMARY KEY("$idField" AUTOINCREMENT)
       )
     ''');
 }

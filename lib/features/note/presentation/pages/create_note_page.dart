@@ -14,8 +14,8 @@ import 'package:notebooks/features/note/presentation/bloc/note_bloc.dart';
 import '../../../../core/router/app_router.dart';
 
 class CreateNotePage extends StatefulWidget {
-  int notebookId;
-  CreateNotePage({
+  final int notebookId;
+  const CreateNotePage({
     Key? key,
     required this.notebookId,
   }) : super(key: key);
@@ -40,7 +40,6 @@ class _CreateNotePageState extends State<CreateNotePage> {
 
   @override
   void dispose() {
-    print("dispose");
     noteColor = defaultNoteColor;
     super.dispose();
   }
@@ -53,7 +52,6 @@ class _CreateNotePageState extends State<CreateNotePage> {
         builder: (context, state) {
           if (state is AllNoteColorsFetchedState) {
             defaultNoteColor = state.colors.first;
-            print("defaultNoteColor: ${defaultNoteColor?.color}");
           }
           if (state is NoteColorSelectedState) {
             noteColor = state.color;
@@ -105,7 +103,6 @@ class _CreateNotePageState extends State<CreateNotePage> {
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
                             children: [
@@ -172,12 +169,6 @@ class _CreateNotePageState extends State<CreateNotePage> {
             createdAt: DateTime.now(),
           );
 
-          print(noteEntity.toString());
-          print(noteColor?.color);
-          print("noteEntity.noteColor.color: ${noteEntity.noteColor.color}");
-          print(noteTitle.isEmpty ||
-              noteDescription.isEmpty ||
-              noteColor == null);
           if (noteEntity.title.isNotEmpty ||
               noteEntity.description.isNotEmpty) {
             BlocProvider.of<NoteBloc>(context).add(

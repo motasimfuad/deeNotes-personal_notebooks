@@ -11,8 +11,8 @@ import '../../../../core/constants/colors.dart';
 import 'notebook_options_modal.dart';
 
 class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
-  final NotebookEntity notebook;
-  final int totalNotes;
+  NotebookEntity notebook;
+  int totalNotes;
   final double expandedHeight;
   NotebookPersistentHeader({
     required this.notebook,

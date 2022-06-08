@@ -41,7 +41,7 @@ class NoteLocalDataSourceImpl implements NoteLocalDataSource {
     final db = await dataRepo.getDatabaseOrCreate();
     final deleteCount = await db.delete(
       notesTableName,
-      where: '$id = ?',
+      where: '$idField = ?',
       whereArgs: [noteId],
     );
     if (deleteCount == 0) {
@@ -57,7 +57,7 @@ class NoteLocalDataSourceImpl implements NoteLocalDataSource {
     final result = await db.query(
       notesTableName,
       limit: 1,
-      where: '$id = ?',
+      where: '$idField = ?',
       whereArgs: [id],
     );
     if (result.isNotEmpty) {
@@ -87,7 +87,7 @@ class NoteLocalDataSourceImpl implements NoteLocalDataSource {
     final count = await db.update(
       notesTableName,
       note.toMap(),
-      where: '$id = ?',
+      where: '$idField = ?',
       whereArgs: [note.id],
     );
     return count;

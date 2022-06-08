@@ -64,7 +64,6 @@ class NotebookBloc extends Bloc<NotebookEvent, NotebookState> {
         emit(NotebookLoading());
         final params = find.Params(id: event.id);
         final either = await findNotebook(params);
-        print('called find notebook with id: ${event.id}');
         either.fold(
           (failure) => emit(NotebookListError(message: errMsg)),
           (result) => emit(NotebookLoaded(notebook: result)),

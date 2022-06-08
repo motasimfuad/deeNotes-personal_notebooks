@@ -5,10 +5,10 @@ import 'package:notebooks/core/constants/constants.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
 class NotebookItem extends StatelessWidget {
-  final NotebookEntity? notebook;
-  final int? totalNotes;
+  NotebookEntity? notebook;
+  int? totalNotes;
   double? notebookHeight;
-  final bool? isDetailsHidden;
+  bool? isDetailsHidden;
   NotebookItem({
     Key? key,
     this.notebook,

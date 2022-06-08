@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notebooks/core/widgets/k_appbar.dart';
 
-import 'package:notebooks/features/note/data/models/note_model.dart';
+import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 import 'package:notebooks/features/notebook/data/models/notebook_model.dart';
 import 'package:notebooks/core/widgets/k_add_label_sheet.dart';
 import 'package:notebooks/core/widgets/k_fab.dart';
@@ -14,10 +14,10 @@ import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart
 import '../../../../core/constants/colors.dart';
 
 class EditNotePage extends StatefulWidget {
-  NoteModel note;
+  int noteId;
   EditNotePage({
     Key? key,
-    required this.note,
+    required this.noteId,
   }) : super(key: key);
 
   @override
@@ -25,13 +25,15 @@ class EditNotePage extends StatefulWidget {
 }
 
 class _EditNotePageState extends State<EditNotePage> {
+  NoteEntity? note;
+
   var titleController = TextEditingController();
   var descriptionController = TextEditingController();
 
   @override
   void initState() {
-    titleController.text = widget.note.title;
-    descriptionController.text = widget.note.description;
+    titleController.text = note?.title ?? '';
+    descriptionController.text = note?.description ?? '';
     super.initState();
   }
 

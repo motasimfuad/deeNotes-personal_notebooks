@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notebooks/bottom_nav.dart';
+import 'package:notebooks/features/note/presentation/pages/edit_note_page.dart';
 import 'package:notebooks/features/note/presentation/pages/view_note_screen/view_note_page.dart';
 import 'package:notebooks/features/notebook/presentation/pages/all_notebooks_page.dart';
 import 'package:notebooks/features/notebook/presentation/pages/create_notebook_page.dart';
@@ -22,7 +23,7 @@ class AppRouters {
   static const String allNotes = 'notes';
   static const String notePage = 'note';
   static const String viewNoteFullScreenPage = 'fullscreen';
-  static const String editNotePage = 'editNote';
+  static const String editNotePage = 'edit-note';
 }
 
 class RouterParams {
@@ -78,11 +79,21 @@ final router = GoRouter(
       },
     ),
     GoRoute(
+      name: AppRouters.editNotePage,
+      path:
+          '/${AppRouters.allNotes}/:${RouterParams.noteId}/${AppRouters.editNotePage}',
+      pageBuilder: (context, state) {
+        final noteId = state.params[RouterParams.noteId];
+        return MaterialPage(
+          child: EditNotePage(noteId: int.parse(noteId.toString())),
+        );
+      },
+    ),
+    GoRoute(
       name: AppRouters.viewNoteFullScreenPage,
       path:
           '/${AppRouters.allNotes}/:${RouterParams.noteId}/${AppRouters.viewNoteFullScreenPage}',
       pageBuilder: (context, state) {
-        print(state.fullpath);
         final noteId = state.params[RouterParams.noteId];
         return MaterialPage(
           child: ViewNoteFullScreen(noteId: int.parse(noteId.toString())),

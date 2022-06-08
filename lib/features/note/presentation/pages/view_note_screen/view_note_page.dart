@@ -6,6 +6,7 @@ import 'package:notebooks/core/constants/constants.dart';
 import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 
 import '../../../../../core/widgets/k_appbar.dart';
+import '../../../../../core/widgets/k_icon_button.dart';
 import '../../bloc/note_bloc.dart';
 
 class ViewNotePage extends StatefulWidget {
@@ -159,94 +160,91 @@ class _ViewNotePageState extends State<ViewNotePage> {
       ),
       bottomNavigationBar: BottomAppBar(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  IconButton(
-                    tooltip: 'Delete note',
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.delete_forever_rounded,
-                      color: KColors.primary,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  IconButton(
-                    tooltip: 'Add to favorite',
-                    onPressed: () {
-                      // Navigator.pushNamed(
-                      //   context,
-                      //   AppRouter.editNote,
-                      //   arguments: note,
-                      // );
-                    },
-                    icon: const Icon(
-                      Icons.favorite_outline_rounded,
-                      color: KColors.primary,
-                    ),
-                  ),
-                  IconButton(
-                    tooltip: 'Copy Note',
-                    onPressed: () {
-                      Clipboard.setData(ClipboardData(text: note?.description));
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          duration: Duration(milliseconds: 700),
-                          backgroundColor: KColors.primary,
-                          content: Text('Note copied to clipboard!'),
+          padding: EdgeInsets.symmetric(
+            horizontal: 20.w,
+            vertical: 8.h,
+          ),
+          child: BlocBuilder<NoteBloc, NoteState>(
+            builder: (context, state) {
+              if (state is NoteLoading) {
+                return const SizedBox();
+              }
+              if (state is NoteLoaded) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        KIconButton(
+                          icon: Icons.delete_forever_rounded,
+                          iconType: IconType.bottomBar,
+                          tooltip: 'Delete note',
+                          iconColor: note?.noteColor.color,
+                          onPressed: () {},
                         ),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.copy_rounded,
-                      color: KColors.primary,
+                      ],
                     ),
-                  ),
-                  IconButton(
-                    tooltip: 'View in full screen',
-                    onPressed: () {
-                      // Navigator.pushNamed(
-                      //   context,
-                      //   AppRouter.viewNoteFullScreen,
-                      //   arguments: note,
-                      // );
-
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          duration: const Duration(milliseconds: 2000),
-                          backgroundColor: note?.noteColor.color,
-                          content: const Text('Full Screen mode'),
+                    Row(
+                      children: [
+                        KIconButton(
+                          icon: Icons.favorite_outline_rounded,
+                          iconType: IconType.bottomBar,
+                          tooltip: 'Add to favorite',
+                          iconColor: note?.noteColor.color,
+                          onPressed: () {},
                         ),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.open_in_new_rounded,
-                      color: KColors.primary,
-                    ),
-                  ),
-                  IconButton(
-                    tooltip: 'Edit Note',
-                    onPressed: () {
-                      // Navigator.pushNamed(
-                      //   context,
-                      //   AppRouter.editNote,
-                      //   arguments: note,
-                      // );
-                    },
-                    icon: const Icon(
-                      Icons.border_color_outlined,
-                      color: KColors.primary,
-                    ),
-                  ),
-                ],
-              )
-            ],
+                        SizedBox(width: 12.w),
+                        KIconButton(
+                          icon: Icons.copy_rounded,
+                          iconType: IconType.bottomBar,
+                          tooltip: 'Copy Note',
+                          iconColor: note?.noteColor.color,
+                          onPressed: () {
+                            Clipboard.setData(
+                                ClipboardData(text: note?.description));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                duration: const Duration(milliseconds: 700),
+                                backgroundColor:
+                                    note?.noteColor.color ?? KColors.primary,
+                                content:
+                                    const Text('Note copied to clipboard!'),
+                              ),
+                            );
+                          },
+                        ),
+                        SizedBox(width: 12.w),
+                        KIconButton(
+                          icon: Icons.open_in_new_rounded,
+                          iconType: IconType.bottomBar,
+                          tooltip: 'View in full screen',
+                          iconColor: note?.noteColor.color,
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                duration: const Duration(milliseconds: 2000),
+                                backgroundColor: note?.noteColor.color,
+                                content: const Text('Full Screen mode'),
+                              ),
+                            );
+                          },
+                        ),
+                        SizedBox(width: 12.w),
+                        KIconButton(
+                          icon: Icons.border_color_outlined,
+                          iconType: IconType.bottomBar,
+                          tooltip: 'Edit Note',
+                          iconColor: note?.noteColor.color,
+                          onPressed: () {},
+                        ),
+                      ],
+                    )
+                  ],
+                );
+              } else {
+                return Container();
+              }
+            },
           ),
         ),
       ),

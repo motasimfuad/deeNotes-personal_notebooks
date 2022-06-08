@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:notebooks/core/constants/constants.dart';
 
+import 'package:notebooks/core/constants/constants.dart';
 import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 
 class NoteItem extends StatelessWidget {
   NoteEntity note;
+  Function()? onTapFavorite;
   NoteItem({
     Key? key,
     required this.note,
+    this.onTapFavorite,
   }) : super(key: key);
 
   @override
@@ -62,6 +64,7 @@ class NoteItem extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
                   child: Text(
@@ -77,7 +80,7 @@ class NoteItem extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: onTapFavorite,
                   child: Icon(
                     note.isFavorite == true
                         ? Icons.favorite_rounded

@@ -66,7 +66,6 @@ class _NoteBookPageState extends State<NoteBookPage> {
                     }
                     if (state is NotesListLoaded) {
                       notes = state.notes;
-                      print("notes: $notes");
                     }
 
                     return CustomScrollView(
@@ -191,8 +190,62 @@ class _NoteBookPageState extends State<NoteBookPage> {
                                                         },
                                                       );
                                                     },
-                                                    child: NoteItem(
-                                                      note: selectedNote,
+                                                    child: BlocBuilder<NoteBloc,
+                                                        NoteState>(
+                                                      builder:
+                                                          (context, state) {
+                                                        if (state
+                                                            is NoteFavoriteToggledState) {
+                                                          context
+                                                              .read<NoteBloc>()
+                                                              .add(
+                                                                GetAllNotesEvent(
+                                                                    notebookId:
+                                                                        selectedNote
+                                                                            .notebookId),
+                                                              );
+                                                        }
+                                                        return NoteItem(
+                                                          note: selectedNote,
+                                                          onTapFavorite: () {
+                                                            NoteEntity newNote =
+                                                                NoteEntity(
+                                                              id: selectedNote
+                                                                  .id,
+                                                              title:
+                                                                  selectedNote
+                                                                      .title,
+                                                              description:
+                                                                  selectedNote
+                                                                      .description,
+                                                              isFavorite:
+                                                                  selectedNote.isFavorite ==
+                                                                          true
+                                                                      ? false
+                                                                      : true,
+                                                              noteColor:
+                                                                  selectedNote
+                                                                      .noteColor,
+                                                              createdAt:
+                                                                  selectedNote
+                                                                      .createdAt,
+                                                              notebookId:
+                                                                  selectedNote
+                                                                      .notebookId,
+                                                            );
+
+                                                            context
+                                                                .read<
+                                                                    NoteBloc>()
+                                                                .add(
+                                                                  ToggleNoteFavoriteEvent(
+                                                                    note:
+                                                                        newNote,
+                                                                  ),
+                                                                );
+                                                          },
+                                                        );
+                                                      },
                                                     ),
                                                   );
                                                 }),

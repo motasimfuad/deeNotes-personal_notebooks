@@ -137,7 +137,7 @@ class _ViewNotePageState extends State<ViewNotePage> {
                                     fontWeight: FontWeight.w500,
                                     color: note?.noteColor.color),
                               ),
-                              SizedBox(height: 15.h),
+                              SizedBox(height: 10.h),
                               Text(
                                 note?.description ?? '',
                                 style: TextStyle(
@@ -176,7 +176,7 @@ class _ViewNotePageState extends State<ViewNotePage> {
                     Row(
                       children: [
                         KIconButton(
-                          icon: Icons.delete_forever_rounded,
+                          icon: Icons.delete_outline_rounded,
                           iconType: IconType.bottomBar,
                           tooltip: 'Delete note',
                           iconColor: note?.noteColor.color,

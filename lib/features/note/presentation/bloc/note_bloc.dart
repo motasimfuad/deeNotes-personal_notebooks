@@ -83,6 +83,16 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
         );
       }
 
+      // delete note
+      if (event is DeleteNoteEvent) {
+        final params = delete.Params(id: event.noteId);
+        final either = await deleteNote(params);
+        either.fold(
+          (failure) => emit(NoteDeletedFailed(message: deleteErrMsg)),
+          (result) => emit(NoteDeleted()),
+        );
+      }
+
       // get all note colors
       if (event is GetAllNoteColorsEvent) {
         emit(NoteColorsLoadingState());

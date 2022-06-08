@@ -82,8 +82,8 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20.r),
-                topRight: Radius.circular(20.r),
+                topLeft: Radius.circular(25.r),
+                topRight: Radius.circular(25.r),
               ),
             ),
             alignment: Alignment.center,

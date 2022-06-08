@@ -79,7 +79,9 @@ class NoteItem extends StatelessWidget {
                 GestureDetector(
                   onTap: () {},
                   child: Icon(
-                    Icons.favorite_outline,
+                    note.isFavorite == true
+                        ? Icons.favorite_rounded
+                        : Icons.favorite_outline_rounded,
                     color: note.noteColor.color,
                     size: 20,
                   ),

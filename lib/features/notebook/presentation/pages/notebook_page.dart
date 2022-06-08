@@ -42,6 +42,17 @@ class _NoteBookPageState extends State<NoteBookPage> {
   }
 
   @override
+  void didChangeDependencies() {
+    print("didChangeDependencies");
+    super.didChangeDependencies();
+  }
+
+  @override
+  void didUpdateWidget(covariant NoteBookPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -66,6 +77,7 @@ class _NoteBookPageState extends State<NoteBookPage> {
                     }
                     if (state is NotesListLoaded) {
                       notes = state.notes;
+                      print("notes: $notes");
                     }
 
                     return CustomScrollView(
@@ -191,7 +203,8 @@ class _NoteBookPageState extends State<NoteBookPage> {
                                                       );
                                                     },
                                                     child: NoteItem(
-                                                        note: selectedNote),
+                                                      note: selectedNote,
+                                                    ),
                                                   );
                                                 }),
                                           ),

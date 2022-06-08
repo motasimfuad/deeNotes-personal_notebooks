@@ -36,6 +36,18 @@ class _ViewNotePageState extends State<ViewNotePage> {
   }
 
   @override
+  void didUpdateWidget(covariant ViewNotePage oldWidget) {
+    print('note page - didUpdateWidget');
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void didChangeDependencies() {
+    print('note page - didChangeDependencies');
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -49,8 +61,6 @@ class _ViewNotePageState extends State<ViewNotePage> {
             }
             if (state is NoteLoaded) {
               note = state.note;
-
-              print("note?.isFavorite: ${note?.isFavorite}");
             }
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -131,7 +141,11 @@ class _ViewNotePageState extends State<ViewNotePage> {
                           builder: (context, state) {
                             if (state is NoteFavoriteToggledState) {
                               note = state.note;
-                              print("State Note is - ${note?.isFavorite}");
+
+                              context.read<NoteBloc>().add(
+                                    GetAllNotesEvent(
+                                        notebookId: note!.notebookId),
+                                  );
                             }
                             return KIconButton(
                               icon: note?.isFavorite == true
@@ -157,8 +171,6 @@ class _ViewNotePageState extends State<ViewNotePage> {
                                         note: newNote,
                                       ),
                                     );
-                                print(
-                                    "favorite button tapped: Note is - ${note?.isFavorite}");
                               },
                             );
                           },

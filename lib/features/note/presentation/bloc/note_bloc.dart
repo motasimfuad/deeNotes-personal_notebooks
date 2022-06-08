@@ -25,6 +25,7 @@ String getAllError = "Notes could not be loaded!";
 String createNoteError = "Note could not be created!";
 String findNoteError = "Note could not be loaded!";
 String deleteErrMsg = "Deletion failed!";
+String updateErrMsg = "Updating note failed!";
 
 class NoteBloc extends Bloc<NoteEvent, NoteState> {
   final create.CreateNoteUsecase createNote;
@@ -93,6 +94,18 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
           (result) => emit(NoteDeleted()),
         );
       }
+
+      // add note to favorite
+      if (event is ToggleNoteFavoriteEvent) {
+        final params = update.Params(note: event.note);
+        final either = await updateNote(params);
+        either.fold(
+          (failure) => emit(NoteUpdateFailed(message: updateErrMsg)),
+          (result) => emit(NoteFavoriteToggledState(note: event.note)),
+        );
+      }
+
+      //----------------------
 
       // get all note colors
       if (event is GetAllNoteColorsEvent) {

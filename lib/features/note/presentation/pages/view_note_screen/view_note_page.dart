@@ -49,6 +49,8 @@ class _ViewNotePageState extends State<ViewNotePage> {
             }
             if (state is NoteLoaded) {
               note = state.note;
+
+              print("note?.isFavorite: ${note?.isFavorite}");
             }
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -113,12 +115,53 @@ class _ViewNotePageState extends State<ViewNotePage> {
                     ),
                     Row(
                       children: [
-                        KIconButton(
-                          icon: Icons.favorite_outline_rounded,
-                          iconType: IconType.bottomBar,
-                          tooltip: 'Add to favorite',
-                          iconColor: note?.noteColor.color,
-                          onPressed: () {},
+                        BlocConsumer<NoteBloc, NoteState>(
+                          listener: (context, state) {
+                            if (state is NoteFavoriteToggledState) {
+                              String favStatus = state.note.isFavorite == true
+                                  ? 'Note Added to Favorite'
+                                  : 'Note Removed from Favorite';
+
+                              KSnackbarFlat(
+                                context: context,
+                                message: favStatus,
+                              );
+                            }
+                          },
+                          builder: (context, state) {
+                            if (state is NoteFavoriteToggledState) {
+                              note = state.note;
+                              print("State Note is - ${note?.isFavorite}");
+                            }
+                            return KIconButton(
+                              icon: note?.isFavorite == true
+                                  ? Icons.favorite_rounded
+                                  : Icons.favorite_outline_rounded,
+                              iconType: IconType.bottomBar,
+                              tooltip: 'Add to favorite',
+                              iconColor: note?.noteColor.color,
+                              onPressed: () {
+                                NoteEntity newNote = NoteEntity(
+                                  id: note!.id,
+                                  title: note!.title,
+                                  description: note!.description,
+                                  isFavorite:
+                                      note!.isFavorite == true ? false : true,
+                                  noteColor: note!.noteColor,
+                                  createdAt: note!.createdAt,
+                                  notebookId: note!.notebookId,
+                                );
+
+                                context.read<NoteBloc>().add(
+                                      ToggleNoteFavoriteEvent(
+                                        note: newNote,
+                                      ),
+                                    );
+                                print(
+                                    "favorite button tapped: Note is - ${note?.isFavorite}");
+                              },
+                            );
+                          },
                         ),
                         SizedBox(width: 12.w),
                         KIconButton(
@@ -134,7 +177,6 @@ class _ViewNotePageState extends State<ViewNotePage> {
                                     noteText: noteText,
                                   ),
                                 );
-
                             KSnackbarFlat(
                               context: context,
                               message: 'Note copied to clipboard',
@@ -149,12 +191,10 @@ class _ViewNotePageState extends State<ViewNotePage> {
                           tooltip: 'View in full screen',
                           iconColor: note?.noteColor.color,
                           onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                duration: const Duration(milliseconds: 2000),
-                                backgroundColor: note?.noteColor.color,
-                                content: const Text('Full Screen mode'),
-                              ),
+                            KSnackbarFlat(
+                              context: context,
+                              message: 'Full Screen mode',
+                              bgColor: note?.noteColor.color,
                             );
                           },
                         ),

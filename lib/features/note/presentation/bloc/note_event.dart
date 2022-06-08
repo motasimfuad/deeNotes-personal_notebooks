@@ -45,6 +45,13 @@ class DeleteAllNotesEvent extends NoteEvent {
   const DeleteAllNotesEvent(this.notebookId);
 }
 
+class ToggleNoteFavoriteEvent extends NoteEvent {
+  final NoteEntity note;
+  const ToggleNoteFavoriteEvent({required this.note});
+  @override
+  List<Object> get props => [note];
+}
+
 // note colors
 class GetAllNoteColorsEvent extends NoteEvent {}
 

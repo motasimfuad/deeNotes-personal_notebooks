@@ -73,6 +73,14 @@ class NoteLoadingFailed extends NoteState {
   List<Object> get props => [message];
 }
 
+class NoteFavoriteToggledState extends NoteState {
+  final NoteEntity note;
+  const NoteFavoriteToggledState({required this.note});
+  @override
+  List<Object> get props => [note];
+}
+
+// note color states
 class NoteColorsLoadingState extends NoteState {}
 
 class AllNoteColorsFetchedState extends NoteState {

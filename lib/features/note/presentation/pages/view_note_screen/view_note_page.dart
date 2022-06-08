@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notebooks/core/constants/constants.dart';
 
 import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 
 import '../../../../../core/widgets/k_appbar.dart';
+import '../../bloc/note_bloc.dart';
 
 class ViewNotePage extends StatefulWidget {
   // NotebookEntity notebook;
@@ -24,114 +26,135 @@ class _ViewNotePageState extends State<ViewNotePage> {
   NoteEntity? note;
 
   @override
+  void initState() {
+    context.read<NoteBloc>().add(FindNoteEvent(id: widget.noteId));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Column(
+        child: BlocConsumer<NoteBloc, NoteState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            if (state is NoteLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state is NoteLoaded) {
+              note = state.note;
+            }
+            return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                KAppbar(
-                  label: '',
-                  context: context,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                // Padding(
-                //   padding: EdgeInsets.symmetric(
-                //     horizontal: 20.w,
-                //     vertical: 10.h,
-                //   ),
-                //   child: KLabels(
-                //     showAddButton: false,
-                //     notebook: notebook,
-                //   ),
-                // ),
-              ],
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                clipBehavior: Clip.antiAlias,
-                child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: note?.noteColor.color.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    KAppbar(
+                      label: '',
+                      context: context,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                     ),
-                    height: 595.h,
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          left: 15.w,
-                          right: 15.w,
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(
+                    //     horizontal: 20.w,
+                    //     vertical: 10.h,
+                    //   ),
+                    //   child: KLabels(
+                    //     showAddButton: false,
+                    //     notebook: notebook,
+                    //   ),
+                    // ),
+                  ],
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                    left: 22.w,
+                    right: 22.w,
+                    bottom: 10.h,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Created at: ${note?.createdAt.formatted}',
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(
+                          color: Colors.grey.shade600,
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.italic,
                         ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            SizedBox(height: 15.h),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Created',
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    color: Colors.grey.shade600,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                                ),
-                                Text(
-                                  note?.description
-                                          .split(' ')
-                                          .length
-                                          .totalWords() ??
-                                      '',
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    color: Colors.grey.shade600,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 15.h),
-                            Text(
-                              note?.title ?? '',
-                              style: TextStyle(
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: note?.noteColor.color),
-                            ),
-                            SizedBox(height: 15.h),
-                            Text(
-                              note?.description ?? '',
-                              style: TextStyle(
-                                fontSize: 17.sp,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black54,
+                      ),
+                      Text(
+                        note?.description.split(' ').length.totalWords ?? '',
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(
+                          color: Colors.grey.shade600,
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: 22.w,
+                      right: 22.w,
+                      bottom: 20.h,
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: note?.noteColor.color.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            left: 15.w,
+                            right: 15.w,
+                            top: 15.h,
+                            bottom: 15.h,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Text(
+                                note?.title ?? '',
+                                style: TextStyle(
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: note?.noteColor.color),
                               ),
-                            ),
-                          ],
+                              SizedBox(height: 15.h),
+                              Text(
+                                note?.description ?? '',
+                                style: TextStyle(
+                                  fontSize: 17.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ),
-          ],
+              ],
+            );
+          },
         ),
       ),
       bottomNavigationBar: BottomAppBar(
@@ -198,7 +221,7 @@ class _ViewNotePageState extends State<ViewNotePage> {
                         SnackBar(
                           duration: const Duration(milliseconds: 2000),
                           backgroundColor: note?.noteColor.color,
-                          content: const Text('Fullscreen mode'),
+                          content: const Text('Full Screen mode'),
                         ),
                       );
                     },

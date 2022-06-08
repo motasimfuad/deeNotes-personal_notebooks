@@ -117,7 +117,7 @@ class NotebookItem extends StatelessWidget {
                             ? const SizedBox()
                             : Text(
                                 // '${notebook?.notes?.length.toString()} notes',
-                                totalNotes.totalNotes(),
+                                totalNotes.totalNotes,
                                 style: TextStyle(
                                   fontSize: 13.sp,
                                   fontWeight: FontWeight.w400,

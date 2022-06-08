@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
 extension OutputStrings on int? {
-  String totalNotes() {
+  String get totalNotes {
     return Intl.plural(
       this ?? 0,
       zero: '0 notes',
@@ -14,7 +14,7 @@ extension OutputStrings on int? {
     );
   }
 
-  String totalWords() {
+  String get totalWords {
     return Intl.plural(
       this ?? 0,
       zero: '0 words',
@@ -28,8 +28,12 @@ extension OutputStrings on int? {
   }
 }
 
-extension easyDate on DateTime {
+extension FormattedDate on DateTime {
   String get onlyDate {
     return DateFormat('dd MMM yyyy').format(this);
+  }
+
+  String get formatted {
+    return DateFormat('dd MMM yyyy, hh:mm a').format(this);
   }
 }

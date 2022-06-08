@@ -28,7 +28,7 @@ class UpdateNoteEvent extends NoteEvent {
 
 class FindNoteEvent extends NoteEvent {
   final int id;
-  const FindNoteEvent(this.id);
+  const FindNoteEvent({required this.id});
   @override
   List<Object> get props => [id];
 }

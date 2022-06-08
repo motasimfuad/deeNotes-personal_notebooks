@@ -22,6 +22,7 @@ part 'note_state.dart';
 
 String getAllError = "Notes could not be loaded!";
 String createNoteError = "Note could not be created!";
+String findNoteError = "Note could not be loaded!";
 String deleteErrMsg = "Deletion failed!";
 
 class NoteBloc extends Bloc<NoteEvent, NoteState> {
@@ -72,6 +73,15 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
       }
 
       // find specific note
+      if (event is FindNoteEvent) {
+        emit(NoteLoading());
+        final params = find.Params(id: event.id);
+        final either = await findNote(params);
+        either.fold(
+          (failure) => emit(NoteLoadingFailed(message: findNoteError)),
+          (result) => emit(NoteLoaded(note: result)),
+        );
+      }
 
       // get all note colors
       if (event is GetAllNoteColorsEvent) {

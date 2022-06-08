@@ -66,6 +66,13 @@ class NoteLoaded extends NoteState {
   List<Object> get props => [note];
 }
 
+class NoteLoadingFailed extends NoteState {
+  final String message;
+  const NoteLoadingFailed({required this.message});
+  @override
+  List<Object> get props => [message];
+}
+
 class NoteColorsLoadingState extends NoteState {}
 
 class AllNoteColorsFetchedState extends NoteState {

@@ -49,7 +49,7 @@ class NotebookOptionsModal extends StatelessWidget {
                 ),
                 SizedBox(height: 3.h),
                 Text(
-                  '(${totalNotes.totalNotes()})',
+                  '(${totalNotes.totalNotes})',
                   style: TextStyle(
                     fontSize: 13.sp,
                     fontWeight: FontWeight.w400,

@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
+import 'package:notebooks/core/constants/constants.dart';
 
-import 'package:notebooks/core/widgets/k_labels.dart';
 import 'package:notebooks/features/note/domain/entities/note_entity.dart';
-import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
-import '../../../../../core/constants/colors.dart';
 import '../../../../../core/widgets/k_appbar.dart';
 
-class ViewNoteScreen extends StatelessWidget {
-  NotebookEntity notebook;
-  NoteEntity note;
-  ViewNoteScreen({
+class ViewNotePage extends StatefulWidget {
+  // NotebookEntity notebook;
+  // NoteEntity note;
+  int noteId;
+  ViewNotePage({
     Key? key,
-    required this.notebook,
-    required this.note,
+    // required this.notebook,
+    required this.noteId,
   }) : super(key: key);
+
+  @override
+  State<ViewNotePage> createState() => _ViewNotePageState();
+}
+
+class _ViewNotePageState extends State<ViewNotePage> {
+  NoteEntity? note;
 
   @override
   Widget build(BuildContext context) {
@@ -36,16 +40,16 @@ class ViewNoteScreen extends StatelessWidget {
                     Navigator.pop(context);
                   },
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20.w,
-                    vertical: 10.h,
-                  ),
-                  child: KLabels(
-                    showAddButton: false,
-                    notebook: notebook,
-                  ),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(
+                //     horizontal: 20.w,
+                //     vertical: 10.h,
+                //   ),
+                //   child: KLabels(
+                //     showAddButton: false,
+                //     notebook: notebook,
+                //   ),
+                // ),
               ],
             ),
             Expanded(
@@ -56,7 +60,7 @@ class ViewNoteScreen extends StatelessWidget {
                       EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: note.noteColor.color.withOpacity(0.1),
+                      color: note?.noteColor.color.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     height: 595.h,
@@ -86,8 +90,11 @@ class ViewNoteScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  totalWords(
-                                      note.description.split(' ').length),
+                                  note?.description
+                                          .split(' ')
+                                          .length
+                                          .totalWords() ??
+                                      '',
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                   style: TextStyle(
@@ -101,15 +108,15 @@ class ViewNoteScreen extends StatelessWidget {
                             ),
                             SizedBox(height: 15.h),
                             Text(
-                              note.title,
+                              note?.title ?? '',
                               style: TextStyle(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.w500,
-                                  color: note.noteColor.color),
+                                  color: note?.noteColor.color),
                             ),
                             SizedBox(height: 15.h),
                             Text(
-                              note.description,
+                              note?.description ?? '',
                               style: TextStyle(
                                 fontSize: 17.sp,
                                 fontWeight: FontWeight.w400,
@@ -164,7 +171,7 @@ class ViewNoteScreen extends StatelessWidget {
                   IconButton(
                     tooltip: 'Copy Note',
                     onPressed: () {
-                      Clipboard.setData(ClipboardData(text: note.description));
+                      Clipboard.setData(ClipboardData(text: note?.description));
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           duration: Duration(milliseconds: 700),
@@ -190,7 +197,7 @@ class ViewNoteScreen extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           duration: const Duration(milliseconds: 2000),
-                          backgroundColor: note.noteColor.color,
+                          backgroundColor: note?.noteColor.color,
                           content: const Text('Fullscreen mode'),
                         ),
                       );
@@ -222,17 +229,4 @@ class ViewNoteScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-String totalWords(int quantity) {
-  return Intl.plural(
-    quantity,
-    zero: '0 words',
-    one: '$quantity word',
-    other: '$quantity words',
-    name: "word",
-    args: [quantity],
-    examples: const {'quantity': 4},
-    desc: "Total number of words in the note",
-  );
 }

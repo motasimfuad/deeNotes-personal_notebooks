@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notebooks/bottom_nav.dart';
+import 'package:notebooks/features/note/presentation/pages/view_note_screen/view_note_page.dart';
 import 'package:notebooks/features/notebook/presentation/pages/all_notebooks_page.dart';
 import 'package:notebooks/features/notebook/presentation/pages/create_notebook_page.dart';
 import 'package:notebooks/features/notebook/presentation/pages/edit_notebook_page.dart';
@@ -17,9 +18,15 @@ class AppRouters {
   static const String editNotebookPage = 'edit-notebook';
 
   static const String favoritesPage = 'favorites';
-  static const String viewNotePage = 'viewNote';
+  static const String allNotes = 'notes';
+  static const String notePage = 'note';
   static const String viewNoteFullScreenPage = 'viewNoteFullScreen';
   static const String editNotePage = 'editNote';
+}
+
+class RouterParams {
+  static const String notebookId = 'notebookId';
+  static const String noteId = 'noteId';
 }
 // AppRouter._();
 
@@ -58,6 +65,16 @@ final router = GoRouter(
           },
         ),
       ],
+    ),
+    GoRoute(
+      name: AppRouters.notePage,
+      path: '/${AppRouters.allNotes}/:${RouterParams.noteId}',
+      pageBuilder: (context, state) {
+        final noteId = state.params[RouterParams.noteId];
+        return MaterialPage(
+          child: ViewNotePage(noteId: int.parse(noteId.toString())),
+        );
+      },
     ),
     GoRoute(
       name: AppRouters.createNotebookPage,
@@ -99,5 +116,3 @@ final router = GoRouter(
 // NotebookEntity _notebook(String? param) {
 //  return notebooks
 // }
-
-  

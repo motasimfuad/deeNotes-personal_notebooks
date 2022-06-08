@@ -42,6 +42,7 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     required this.noteColorsProvider,
   }) : super(NoteInitial()) {
     on<NoteEvent>((event, emit) async {
+      // get all notes of a notebook
       if (event is GetAllNotesEvent) {
         emit(NotesListLoading());
         final params = get_all.Params(notebookId: event.notebookId);
@@ -69,6 +70,8 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
           ),
         );
       }
+
+      // find specific note
 
       // get all note colors
       if (event is GetAllNoteColorsEvent) {

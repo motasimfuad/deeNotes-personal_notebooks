@@ -45,6 +45,7 @@ class DeleteAllNotesEvent extends NoteEvent {
   const DeleteAllNotesEvent(this.notebookId);
 }
 
+// note colors
 class GetAllNoteColorsEvent extends NoteEvent {}
 
 class SelectNoteColorEvent extends NoteEvent {

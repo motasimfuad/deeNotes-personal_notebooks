@@ -168,16 +168,26 @@ class _NoteBookPageState extends State<NoteBookPage> {
                                                       int index) {
                                                 var selectedNote = notes[index];
                                                 return GestureDetector(
-                                                  // onTap: () => Navigator.push(
-                                                  //   context,
-                                                  //   MaterialPageRoute(
-                                                  //     builder: (context) =>
-                                                  //         ViewNoteScreen(
-                                                  //       notebook: notebook,
-                                                  //       note: selectedNote,
-                                                  //     ),
-                                                  //   ),
-                                                  // ),
+                                                  onTap: () {
+                                                    // Navigator.push(
+                                                    //   context,
+                                                    //   MaterialPageRoute(
+                                                    //     builder: (context) =>
+                                                    //         ViewNoteScreen(
+                                                    //       notebook: notebook,
+                                                    //       note: selectedNote,
+                                                    //     ),
+                                                    //   ),
+                                                    // );
+                                                    router.pushNamed(
+                                                      AppRouters.notePage,
+                                                      params: {
+                                                        RouterParams.noteId:
+                                                            selectedNote.id
+                                                                .toString()
+                                                      },
+                                                    );
+                                                  },
                                                   child: NoteItem(
                                                       note: selectedNote),
                                                 );

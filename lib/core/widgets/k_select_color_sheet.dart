@@ -6,8 +6,6 @@ import 'package:notebooks/core/widgets/k_appbar.dart';
 import 'package:notebooks/data/models/note_color.dart';
 import 'package:notebooks/features/note/presentation/bloc/note_bloc.dart';
 
-import '../../data/data_providers/note_colors_provider.dart';
-
 class KSelectColorSheet extends StatefulWidget {
   NoteColor? noteColor;
   Function(NoteColor)? onSelected;
@@ -26,18 +24,21 @@ class _KSelectColorSheetState extends State<KSelectColorSheet> {
   NoteColor? selectedNoteColor;
   List<NoteColor> noteColors = [];
 
-  var noteColorsProvider = NoteColorsProvider();
+  // var noteColorsProvider = NoteColorsProvider();
 
   @override
   void initState() {
+    context.read<NoteBloc>().add(GetAllNoteColorsEvent());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      // padding:
+      //     EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      // padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(100.h)),
+      padding: const EdgeInsets.only(bottom: 0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -50,11 +51,11 @@ class _KSelectColorSheetState extends State<KSelectColorSheet> {
             },
             actionIcon: Icons.check_rounded,
             actionOnPressed: () {
-              BlocProvider.of<NoteBloc>(context).add(
-                SelectNoteColorEvent(
-                  color: noteColorsProvider.noteColors[isSelected],
-                ),
-              );
+              // BlocProvider.of<NoteBloc>(context).add(
+              //   SelectNoteColorEvent(
+              //     color: noteColors[isSelected],
+              //   ),
+              // );
 
               Navigator.pop(context);
             },
@@ -75,18 +76,36 @@ class _KSelectColorSheetState extends State<KSelectColorSheet> {
                     );
                   }
                   if (state is AllNoteColorsFetchedState) {
+                    print('AllNoteColorsFetchedState');
                     noteColors = state.colors;
+                    // if (widget.noteColor != null) {
+                    //   selectedNoteColor = widget.noteColor;
+                    //   isSelected = noteColors.indexOf(widget.noteColor!);
+                    // }
+
+                    if (selectedNoteColor == null) {
+                      isSelected = 0;
+                    } else {
+                      isSelected = noteColors.indexWhere(
+                          (element) => element.id == selectedNoteColor?.id);
+                    }
+
+                    print("isSelected: $isSelected");
+                    print("noteColors >> fetched : ${noteColors.length}");
                   }
                   if (state is NoteColorSelectedState) {
+                    print('NoteColorSelectedState');
                     selectedNoteColor = state.color;
                     isSelected = noteColors
                         .indexWhere((element) => element.id == state.color.id);
+                    print("isSelected: $isSelected");
+                    print("noteColors >> selected: ${noteColors.length}");
                   }
-                  if (state is! NoteColorSelectedState) {
-                    selectedNoteColor = noteColors.first;
-                    isSelected = 0;
-                    widget.onSelected?.call(selectedNoteColor!);
-                  }
+                  // if (state is! NoteColorSelectedState) {
+                  //   selectedNoteColor = noteColors.first;
+                  //   // isSelected = 0;
+                  //   widget.onSelected?.call(selectedNoteColor!);
+                  // }
                   return GridView.builder(
                     padding: EdgeInsets.only(bottom: 20.h),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

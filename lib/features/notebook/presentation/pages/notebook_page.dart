@@ -38,6 +38,7 @@ class _NoteBookPageState extends State<NoteBookPage> {
     context.read<NoteBloc>().add(
           GetAllNotesEvent(notebookId: widget.notebookId),
         );
+    super.initState();
   }
 
   @override

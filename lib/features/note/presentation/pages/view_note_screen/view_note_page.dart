@@ -200,7 +200,7 @@ class _ViewNotePageState extends State<ViewNotePage> {
                                   message: 'Note Deleted!',
                                 );
                                 // router.pop();
-                                router.pushNamed(
+                                router.goNamed(
                                   AppRouters.notebookPage,
                                   params: {
                                     'notebookId': note!.notebookId.toString(),

@@ -199,12 +199,12 @@ class _CreateNotePageState extends State<CreateNotePage> {
                       height: 340.h,
                       child: KSelectColorSheet(
                         noteColor: noteColor,
-                        onSelected: (selNoteColor) {
-                          print(selNoteColor);
-                          BlocProvider.of<NoteBloc>(context).add(
-                            SelectNoteColorEvent(color: selNoteColor),
-                          );
-                        },
+                        // onSelected: (selNoteColor) {
+                        //   print(selNoteColor);
+                        //   BlocProvider.of<NoteBloc>(context).add(
+                        //     SelectNoteColorEvent(color: selNoteColor),
+                        //   );
+                        // },
                       ),
                     ),
                     isDismissible: false,

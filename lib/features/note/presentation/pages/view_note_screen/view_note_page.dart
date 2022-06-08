@@ -36,18 +36,6 @@ class _ViewNotePageState extends State<ViewNotePage> {
   }
 
   @override
-  void didUpdateWidget(covariant ViewNotePage oldWidget) {
-    print('note page - didUpdateWidget');
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
-  void didChangeDependencies() {
-    print('note page - didChangeDependencies');
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -211,7 +199,7 @@ class _ViewNotePageState extends State<ViewNotePage> {
 
                             KSnackbarFlat(
                               context: context,
-                              message: 'Full Screen mode',
+                              message: 'Full Screen Mode',
                               bgColor: note?.noteColor.color,
                             );
                           },

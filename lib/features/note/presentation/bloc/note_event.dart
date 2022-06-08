@@ -67,3 +67,11 @@ class CopyNoteToClipboardEvent extends NoteEvent {
   @override
   List<Object> get props => [noteText];
 }
+
+// note fullscreen reading mode
+class ToggleNightModeEvent extends NoteEvent {
+  final bool toggle;
+  const ToggleNightModeEvent({required this.toggle});
+  @override
+  List<Object> get props => [toggle];
+}

@@ -124,6 +124,13 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
         await Clipboard.setData(ClipboardData(text: event.noteText));
         emit(NoteCopiedToClipboardState(noteText: event.noteText));
       }
+
+      // note reading mode
+      if (event is ToggleNightModeEvent) {
+        bool? isNight = event.toggle;
+        isNight = !isNight;
+        emit(NoteNightModeState(isNightMode: isNight));
+      }
     });
   }
 }

@@ -106,3 +106,11 @@ class NoteCopiedToClipboardState extends NoteState {
   @override
   List<Object> get props => [noteText];
 }
+
+// note fullscreen reading mode state
+class NoteNightModeState extends NoteState {
+  final bool isNightMode;
+  const NoteNightModeState({required this.isNightMode});
+  @override
+  List<Object> get props => [isNightMode];
+}

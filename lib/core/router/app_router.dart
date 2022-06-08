@@ -8,7 +8,7 @@ import 'package:notebooks/features/notebook/presentation/pages/edit_notebook_pag
 import 'package:notebooks/features/notebook/presentation/pages/notebook_page.dart';
 
 import '../../features/note/presentation/pages/create_note_page.dart';
-import '../../features/note/presentation/pages/view_note_screen/view_note_full_page.dart';
+import '../../features/note/presentation/pages/view_note_screen/view_note_full_screen.dart';
 
 class AppRouters {
   static const String homePage = '/';

@@ -90,3 +90,11 @@ class NoteColorSelectedState extends NoteState {
   @override
   List<Object> get props => [color];
 }
+
+// copy note to clipboard state
+class NoteCopiedToClipboardState extends NoteState {
+  final String noteText;
+  const NoteCopiedToClipboardState({required this.noteText});
+  @override
+  List<Object> get props => [noteText];
+}

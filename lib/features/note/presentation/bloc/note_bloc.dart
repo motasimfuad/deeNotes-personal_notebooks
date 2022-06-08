@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/services.dart';
 
 import 'package:notebooks/data/data_providers/note_colors_provider.dart';
 import 'package:notebooks/data/models/note_color.dart';
@@ -103,6 +104,16 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
       // select note color
       if (event is SelectNoteColorEvent) {
         emit(NoteColorSelectedState(color: event.color));
+      }
+
+      // note copy event
+      if (event is CopyNoteToClipboardEvent) {
+        await Clipboard.setData(ClipboardData(text: event.noteText));
+        var copied = await Clipboard.getData("text/plain").then((data) {
+          print(data?.text);
+        });
+        print("copied: $copied");
+        emit(NoteCopiedToClipboardState(noteText: event.noteText));
       }
     });
   }

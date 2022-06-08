@@ -57,23 +57,12 @@ class _NoteBookPageState extends State<NoteBookPage> {
               notebookEntity = state.notebook;
 
               return SizedBox(
-                child: BlocConsumer<NoteBloc, NoteState>(
-                  listener: (context, state) {},
+                child: BlocBuilder<NoteBloc, NoteState>(
                   builder: (context, state) {
                     if (state is NoteCreated) {
                       context.read<NoteBloc>().add(
                             GetAllNotesEvent(notebookId: widget.notebookId),
                           );
-                    }
-                    if (state is NotesListLoading) {
-                      return SliverToBoxAdapter(
-                        child: SizedBox(
-                          height: ScreenUtil.defaultSize.height * 0.6,
-                          child: const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        ),
-                      );
                     }
                     if (state is NotesListLoaded) {
                       notes = state.notes;
@@ -99,6 +88,16 @@ class _NoteBookPageState extends State<NoteBookPage> {
                             }
                           },
                           builder: (context, state) {
+                            if (state is NotesListLoading) {
+                              return SliverToBoxAdapter(
+                                child: SizedBox(
+                                  height: ScreenUtil.defaultSize.height * 0.6,
+                                  child: const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                ),
+                              );
+                            }
                             return SliverToBoxAdapter(
                               child: notes.isEmpty
                                   ? Container(

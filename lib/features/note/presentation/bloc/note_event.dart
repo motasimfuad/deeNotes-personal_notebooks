@@ -52,3 +52,11 @@ class SelectNoteColorEvent extends NoteEvent {
   final NoteColor color;
   const SelectNoteColorEvent({required this.color});
 }
+
+// copy note to clipboard
+class CopyNoteToClipboardEvent extends NoteEvent {
+  final String noteText;
+  const CopyNoteToClipboardEvent({required this.noteText});
+  @override
+  List<Object> get props => [noteText];
+}

@@ -135,6 +135,7 @@ class _ViewNotePageState extends State<ViewNotePage> {
                               KSnackbarFlat(
                                 context: context,
                                 message: favStatus,
+                                bgColor: note!.noteColor.color,
                               );
                             }
                           },
@@ -203,6 +204,11 @@ class _ViewNotePageState extends State<ViewNotePage> {
                           tooltip: 'View in full screen',
                           iconColor: note?.noteColor.color,
                           onPressed: () {
+                            router.pushNamed(AppRouters.viewNoteFullScreenPage,
+                                params: {
+                                  RouterParams.noteId: note!.id.toString(),
+                                });
+
                             KSnackbarFlat(
                               context: context,
                               message: 'Full Screen mode',

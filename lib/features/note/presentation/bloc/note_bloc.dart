@@ -122,10 +122,6 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
       // note copy event
       if (event is CopyNoteToClipboardEvent) {
         await Clipboard.setData(ClipboardData(text: event.noteText));
-        var copied = await Clipboard.getData("text/plain").then((data) {
-          print(data?.text);
-        });
-        print("copied: $copied");
         emit(NoteCopiedToClipboardState(noteText: event.noteText));
       }
     });

@@ -33,24 +33,30 @@ class KAppbar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                KIconButton(
-                  onPressed: onPressed,
-                  bgColor: iconBgColor,
-                  iconColor: iconColor,
-                ),
-                SizedBox(width: 15.w),
-                Text(
-                  label,
-                  style: TextStyle(
-                    color: textColor ??
-                        Theme.of(context).textTheme.bodyText1?.color,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500,
+            Expanded(
+              child: Row(
+                children: [
+                  KIconButton(
+                    onPressed: onPressed,
+                    bgColor: iconBgColor,
+                    iconColor: iconColor,
                   ),
-                ),
-              ],
+                  SizedBox(width: 15.w),
+                  Expanded(
+                    child: Text(
+                      label,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: textColor ??
+                            Theme.of(context).textTheme.bodyText1?.color,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
             actionIcon != null
                 ? KIconButton(

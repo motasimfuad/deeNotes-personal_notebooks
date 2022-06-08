@@ -8,6 +8,7 @@ import 'package:notebooks/features/notebook/presentation/pages/edit_notebook_pag
 import 'package:notebooks/features/notebook/presentation/pages/notebook_page.dart';
 
 import '../../features/note/presentation/pages/create_note_page.dart';
+import '../../features/note/presentation/pages/view_note_screen/view_note_full_page.dart';
 
 class AppRouters {
   static const String homePage = '/';
@@ -20,7 +21,7 @@ class AppRouters {
   static const String favoritesPage = 'favorites';
   static const String allNotes = 'notes';
   static const String notePage = 'note';
-  static const String viewNoteFullScreenPage = 'viewNoteFullScreen';
+  static const String viewNoteFullScreenPage = 'fullscreen';
   static const String editNotePage = 'editNote';
 }
 
@@ -73,6 +74,18 @@ final router = GoRouter(
         final noteId = state.params[RouterParams.noteId];
         return MaterialPage(
           child: ViewNotePage(noteId: int.parse(noteId.toString())),
+        );
+      },
+    ),
+    GoRoute(
+      name: AppRouters.viewNoteFullScreenPage,
+      path:
+          '/${AppRouters.allNotes}/:${RouterParams.noteId}/${AppRouters.viewNoteFullScreenPage}',
+      pageBuilder: (context, state) {
+        print(state.fullpath);
+        final noteId = state.params[RouterParams.noteId];
+        return MaterialPage(
+          child: ViewNoteFullScreen(noteId: int.parse(noteId.toString())),
         );
       },
     ),

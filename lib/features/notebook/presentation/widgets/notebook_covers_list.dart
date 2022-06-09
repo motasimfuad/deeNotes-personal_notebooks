@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:notebooks/core/constants/colors.dart';
 
 import '../../../../data/data_providers/notebook_covers_provider.dart';
 import '../bloc/notebook_bloc.dart';
@@ -50,22 +49,24 @@ class NotebookCoversList extends StatelessWidget {
                     return Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                        border: Border.all(
-                          color: KColors.primary,
-                          width: 2.w,
-                        ),
                         color: Colors.grey.shade300.withOpacity(0.5),
                         image: DecorationImage(
                           image: AssetImage(
                               nbCoversProvider.notebookCovers[index].url),
                           fit: BoxFit.cover,
+                          // opacity: 0.8,
+                          colorFilter: ColorFilter.mode(
+                            Colors.black.withOpacity(0.3),
+                            BlendMode.multiply,
+                          ),
+                          filterQuality: FilterQuality.low,
                         ),
                       ),
                       child: Center(
                         child: Icon(
-                          Icons.check,
-                          color: KColors.primary,
-                          size: 25.w,
+                          Icons.check_rounded,
+                          color: Colors.white,
+                          size: 28.w,
                         ),
                       ),
                     );

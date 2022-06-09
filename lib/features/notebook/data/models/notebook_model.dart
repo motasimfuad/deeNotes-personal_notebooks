@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
-
 import 'package:notebooks/data/models/label.dart';
 import 'package:notebooks/features/note/data/models/note_model.dart';
 import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
-
-import '../../../../data/models/note_color.dart';
 
 class NotebookModel extends NotebookEntity {
   NotebookModel({
@@ -89,30 +85,3 @@ class NotebookModel extends NotebookEntity {
   @override
   int get hashCode => id.hashCode;
 }
-
-// delete later
-final sampleNotebook = NotebookEntity(
-  id: 1,
-  name: 'Travel',
-  cover: 'assets/images/notebooks/bg-1.jpg',
-  labels: [
-    Label(id: 1, name: 'Label 1'),
-    Label(id: 1, name: 'LABEL 2'),
-    Label(id: 1, name: 'LABEL 2'),
-    Label(id: 1, name: 'LABEL 2'),
-    Label(id: 1, name: 'LABEL 2'),
-    Label(id: 1, name: 'LABEL 2'),
-    Label(id: 1, name: 'LABEL 2'),
-  ],
-  isLocked: false,
-  notes: [
-    NoteModel(
-      id: 32,
-      title: 'Note 1',
-      description: 'description',
-      noteColor: NoteColor(id: 1, color: Colors.red),
-      notebookId: 1,
-      createdAt: DateTime.now(),
-    ),
-  ],
-);

@@ -35,7 +35,6 @@ class _NoteBookPageState extends State<NoteBookPage> {
   @override
   void initState() {
     context.read<NotebookBloc>().add(FindNotebookEvent(widget.notebookId));
-    print("widget.notebookId: ${widget.notebookId}");
     context.read<NoteBloc>().add(
           GetAllNotesEvent(notebookId: widget.notebookId),
         );
@@ -71,9 +70,6 @@ class _NoteBookPageState extends State<NoteBookPage> {
                           .where((element) => element.isFavorite == true)
                           .toList()
                           .length;
-                      print("totalFavorites: $totalFavorites");
-
-                      print(notes.map((e) => e.createdAt));
                     }
 
                     return CustomScrollView(
@@ -123,7 +119,7 @@ class _NoteBookPageState extends State<NoteBookPage> {
                                             RichText(
                                               textAlign: TextAlign.center,
                                               text: TextSpan(
-                                                  text: 'No notes found for\n',
+                                                  text: 'No notes found in\n',
                                                   style: TextStyle(
                                                     fontSize: 17.sp,
                                                     fontWeight: FontWeight.w400,
@@ -159,7 +155,6 @@ class _NoteBookPageState extends State<NoteBookPage> {
                                                       .height *
                                                   0.1,
                                               top: 0.h,
-                                              // top: 10.h,
                                             ),
                                             child: GridView.builder(
                                                 shrinkWrap: true,
@@ -180,16 +175,6 @@ class _NoteBookPageState extends State<NoteBookPage> {
                                                       notes[index];
                                                   return GestureDetector(
                                                     onTap: () {
-                                                      // Navigator.push(
-                                                      //   context,
-                                                      //   MaterialPageRoute(
-                                                      //     builder: (context) =>
-                                                      //         ViewNoteScreen(
-                                                      //       notebook: notebook,
-                                                      //       note: selectedNote,
-                                                      //     ),
-                                                      //   ),
-                                                      // );
                                                       router.pushNamed(
                                                         AppRouters.notePage,
                                                         params: {

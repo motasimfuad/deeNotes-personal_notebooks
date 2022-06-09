@@ -38,7 +38,6 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
         ),
         Positioned(
           top: 20.h, //MediaQuery.of(context).padding.top,
-          // right: 25,
           left: 20.w,
           child: KIconButton(
             bgColor: Colors.grey.withOpacity(0.3),

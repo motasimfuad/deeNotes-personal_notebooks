@@ -108,7 +108,6 @@ class _CreateNotebookPageState extends State<CreateNotebookPage> {
                             controller: _nameController,
                             onChanged: (value) {
                               setState(() {
-                                print(value);
                                 selectedNotebookEntity.name = value;
                               });
                             },
@@ -127,7 +126,7 @@ class _CreateNotebookPageState extends State<CreateNotebookPage> {
                           ),
                           SizedBox(height: 8.h),
                           SizedBox(
-                            height: 260.h,
+                            height: 280.h,
                             child: const NotebookCoversList(),
                           ),
                         ],
@@ -156,8 +155,6 @@ class _CreateNotebookPageState extends State<CreateNotebookPage> {
             router.goNamed(AppRouters.homePage);
 
             context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
-            print(
-                'notebookName: ${selectedNotebookEntity.name}, selectedCover: ${selectedNotebookEntity.cover}');
           } else {
             KSnackBar(
               context: context,

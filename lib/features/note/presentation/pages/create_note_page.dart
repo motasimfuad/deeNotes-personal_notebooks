@@ -42,7 +42,6 @@ class _CreateNotePageState extends State<CreateNotePage> {
   @override
   void dispose() {
     noteColor = null;
-    print('dispose');
     super.dispose();
   }
 
@@ -170,6 +169,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
             noteColor: noteColor ?? defaultNoteColor!,
             notebookId: widget.notebookId,
             createdAt: DateTime.now(),
+            editedAt: null,
           );
 
           if (noteEntity.title.isNotEmpty ||
@@ -196,23 +196,6 @@ class _CreateNotePageState extends State<CreateNotePage> {
             children: [
               IconButton(
                 onPressed: () {
-                  // showModalBottomSheet(
-                  //   context: context,
-                  //   builder: (context) => SizedBox(
-                  //     height: 340.h,
-                  //     child: KSelectColorSheet(
-                  //       noteColor: noteColor,
-                  //     ),
-                  //   ),
-                  //   isDismissible: false,
-                  //   isScrollControlled: false,
-                  //   clipBehavior: Clip.antiAlias,
-                  //   shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.vertical(
-                  //       top: Radius.circular(20.r),
-                  //     ),
-                  //   ),
-                  // );
                   KBottomSheet(
                     context: context,
                     child: KSelectColorSheet(

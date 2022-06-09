@@ -29,7 +29,6 @@ class NotebookOptionsModal extends StatelessWidget {
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Container(
         color: Colors.white,
-        // height: 250.h,
         child: Column(
           children: [
             // add label button

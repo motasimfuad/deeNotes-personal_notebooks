@@ -30,6 +30,10 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: notebooks.isEmpty ? null : const Color(0xFFF6F8FF),
+      endDrawer: Container(
+        color: const Color(0xFFF6F8FF),
+        width: 200,
+      ),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(

@@ -54,14 +54,10 @@ class NotebookLocalDataSourceImpl implements NotebookLocalDataSource {
       where: '$idField = ?',
       whereArgs: [id],
     );
-
-    print(idField);
-
     if (result.isNotEmpty) {
       return NotebookModel.fromMap(result.first);
     } else {
       throw LocalException;
-      // throw Exception('ID $id not found!');
     }
   }
 

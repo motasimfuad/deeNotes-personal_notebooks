@@ -29,7 +29,6 @@ class App extends StatelessWidget {
         builder: () => AllProviders(
           child: MaterialApp.router(
             builder: (context, widget) {
-              //add this line
               ScreenUtil.setContext(context);
               return MediaQuery(
                 data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
@@ -38,12 +37,9 @@ class App extends StatelessWidget {
             },
             title: Strings.appTitle,
             theme: AppTheme.lightTheme,
-            // darkTheme: AppTheme.darkTheme,
             debugShowCheckedModeBanner: false,
             routeInformationParser: router.routeInformationParser,
             routerDelegate: router.routerDelegate,
-            // initialRoute: AppRouter.home,
-            // onGenerateRoute: AppRouter.onGenerateRoute,
           ),
         ),
       ),

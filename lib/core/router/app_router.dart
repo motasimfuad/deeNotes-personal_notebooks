@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:notebooks/bottom_nav.dart';
 import 'package:notebooks/features/note/presentation/pages/edit_note_page.dart';
 import 'package:notebooks/features/note/presentation/pages/view_note_screen/view_note_page.dart';
 import 'package:notebooks/features/notebook/presentation/pages/all_notebooks_page.dart';
@@ -41,7 +40,7 @@ final router = GoRouter(
       path: AppRouters.homePage,
       pageBuilder: (context, state) => MaterialPage(
         key: state.pageKey,
-        child: const BottomNav(),
+        child: const AllNotebooksPage(),
       ),
     ),
     GoRoute(

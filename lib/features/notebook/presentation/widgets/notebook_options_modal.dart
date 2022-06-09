@@ -14,10 +14,12 @@ import '../bloc/notebook_bloc.dart';
 class NotebookOptionsModal extends StatelessWidget {
   final NotebookEntity notebook;
   final int totalNotes;
+  final int totalFavorites;
   const NotebookOptionsModal({
     Key? key,
     required this.notebook,
     required this.totalNotes,
+    required this.totalFavorites,
   }) : super(key: key);
 
   @override
@@ -47,11 +49,20 @@ class NotebookOptionsModal extends StatelessWidget {
                     color: KColors.primary,
                   ),
                 ),
-                SizedBox(height: 3.h),
+                SizedBox(height: 8.h),
                 Text(
-                  '(${totalNotes.totalNotes})',
+                  totalNotes.totalNotes,
+                  style: TextStyle(
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.w500,
+                    color: KColors.primary,
+                  ),
+                ),
+                Text(
+                  '(${totalFavorites.totalFavs})',
                   style: TextStyle(
                     fontSize: 13.sp,
+                    fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.w400,
                     color: KColors.primary,
                   ),

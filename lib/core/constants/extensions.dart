@@ -14,6 +14,19 @@ extension OutputStrings on int? {
     );
   }
 
+  String get totalFavs {
+    return Intl.plural(
+      this ?? 0,
+      zero: '0 Favorites',
+      one: '$this Favorite',
+      other: '$this Favorites',
+      name: "Favorite",
+      args: [this ?? 0],
+      examples: const {'quantity': 4},
+      desc: "Total number of favorite notes in the notebook",
+    );
+  }
+
   String get totalWords {
     return Intl.plural(
       this ?? 0,

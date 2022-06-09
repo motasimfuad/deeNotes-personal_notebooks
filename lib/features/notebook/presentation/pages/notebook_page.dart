@@ -30,6 +30,7 @@ class NoteBookPage extends StatefulWidget {
 class _NoteBookPageState extends State<NoteBookPage> {
   NotebookEntity? notebookEntity;
   List<NoteEntity> notes = [];
+  int totalFavorites = 0;
 
   @override
   void initState() {
@@ -66,6 +67,11 @@ class _NoteBookPageState extends State<NoteBookPage> {
                     }
                     if (state is NotesListLoaded) {
                       notes = state.notes;
+                      totalFavorites = notes
+                          .where((element) => element.isFavorite == true)
+                          .toList()
+                          .length;
+                      print("totalFavorites: $totalFavorites");
                     }
 
                     return CustomScrollView(
@@ -74,6 +80,7 @@ class _NoteBookPageState extends State<NoteBookPage> {
                           delegate: NotebookPersistentHeader(
                             notebook: notebookEntity as NotebookEntity,
                             totalNotes: notes.length,
+                            totalFavorites: totalFavorites,
                             expandedHeight: 230.h,
                           ),
                         ),

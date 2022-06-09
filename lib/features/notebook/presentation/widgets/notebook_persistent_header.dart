@@ -13,10 +13,12 @@ import 'notebook_options_modal.dart';
 class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
   NotebookEntity notebook;
   int totalNotes;
+  int totalFavorites;
   final double expandedHeight;
   NotebookPersistentHeader({
     required this.notebook,
     required this.totalNotes,
+    required this.totalFavorites,
     required this.expandedHeight,
   });
 
@@ -68,6 +70,7 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
                   NotebookOptionsModal(
                     notebook: notebook,
                     totalNotes: totalNotes,
+                    totalFavorites: totalFavorites,
                   )
                 ],
               );

@@ -41,7 +41,8 @@ class _CreateNotePageState extends State<CreateNotePage> {
 
   @override
   void dispose() {
-    noteColor = defaultNoteColor;
+    noteColor = null;
+    print('dispose');
     super.dispose();
   }
 

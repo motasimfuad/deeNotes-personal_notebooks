@@ -76,9 +76,12 @@ class _KSelectColorSheetState extends State<KSelectColorSheet> {
                     print('AllNoteColorsFetchedState');
                     noteColors = state.colors;
 
-                    if (selectedNoteColor == null) {
+                    if (selectedNoteColor == null && widget.noteColor != null) {
                       isSelected = noteColors.indexWhere(
                           (element) => element.id == widget.noteColor?.id);
+                    } else if (selectedNoteColor == null &&
+                        widget.noteColor == null) {
+                      isSelected = 0;
                     } else {
                       isSelected = noteColors.indexWhere(
                           (element) => element.id == selectedNoteColor?.id);

@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
-class FavoriteNotesPage extends StatelessWidget {
+import '../../../notebook/presentation/bloc/notebook_bloc.dart';
+
+class FavoriteNotesPage extends StatefulWidget {
   const FavoriteNotesPage({Key? key}) : super(key: key);
+
+  @override
+  State<FavoriteNotesPage> createState() => _FavoriteNotesPageState();
+}
+
+class _FavoriteNotesPageState extends State<FavoriteNotesPage> {
+  List<NotebookEntity> _notebooks = [];
 
   @override
   Widget build(BuildContext context) {
@@ -11,15 +22,16 @@ class FavoriteNotesPage extends StatelessWidget {
         title: const Text('Favorite Notes'),
         elevation: 0,
       ),
-      body: ListView.builder(
-        itemCount: 20,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Container(
-              height: 78,
-              color: Colors.blue,
-            ),
+      body: BlocConsumer<NotebookBloc, NotebookState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is NotebookListLoaded) {
+            _notebooks = state.notebooks;
+          }
+          return Column(
+            children: [
+              Container(),
+            ],
           );
         },
       ),

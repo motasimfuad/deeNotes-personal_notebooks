@@ -72,6 +72,8 @@ class _NoteBookPageState extends State<NoteBookPage> {
                           .toList()
                           .length;
                       print("totalFavorites: $totalFavorites");
+
+                      print(notes.map((e) => e.createdAt));
                     }
 
                     return CustomScrollView(

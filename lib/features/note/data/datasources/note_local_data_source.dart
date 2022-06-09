@@ -75,6 +75,7 @@ class NoteLocalDataSourceImpl implements NoteLocalDataSource {
       notesTableName,
       where: '$notesTableName.notebookId = ?',
       whereArgs: [notebookId],
+      orderBy: 'createdAt DESC',
     );
     final notesIterable = result.map((e) => NoteModel.fromMap(e));
     final notes = notesIterable.toList();

@@ -68,7 +68,9 @@ class NoteItem extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    'Created at: ${note.createdAt.onlyDate}',
+                    note.editedAt == null
+                        ? 'Created at: ${note.createdAt.onlyDate}'
+                        : 'Last Edited: ${note.editedAt?.onlyDate}',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: TextStyle(

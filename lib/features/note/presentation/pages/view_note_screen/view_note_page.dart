@@ -58,9 +58,9 @@ class _ViewNotePageState extends State<ViewNotePage> {
             }
             if (state is NoteLoaded) {
               note = state.note;
+              print("note?.editedAt: ${note?.editedAt}");
             }
             if (state is NoteUpdated) {
-              // context.read<NoteBloc>().add(FindNoteEvent(id: widget.noteId));
               context.read<NoteBloc>().add(
                     GetAllNotesEvent(notebookId: note!.notebookId),
                   );
@@ -250,6 +250,70 @@ class _ViewNotePageState extends State<ViewNotePage> {
     );
   }
 
+  Column _buildAppBarSection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        KAppbar(
+          label: '',
+          context: context,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        // Padding(
+        //   padding: EdgeInsets.symmetric(
+        //     horizontal: 20.w,
+        //     vertical: 10.h,
+        //   ),
+        //   child: KLabels(
+        //     showAddButton: false,
+        //     notebook: notebook,
+        //   ),
+        // ),
+      ],
+    );
+  }
+
+  Container _buildDateSection() {
+    return Container(
+      padding: EdgeInsets.only(
+        left: 22.w,
+        right: 22.w,
+        bottom: 10.h,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            note?.editedAt == null
+                ? 'Created at: ${note?.createdAt.formatted}'
+                : 'Last Edited: ${note?.editedAt?.formatted}',
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: TextStyle(
+              color: Colors.grey.shade600,
+              fontSize: 15.sp,
+              fontWeight: FontWeight.w400,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+          Text(
+            note?.description.split(' ').length.totalWords ?? '',
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: TextStyle(
+              color: Colors.grey.shade600,
+              fontSize: 15.sp,
+              fontWeight: FontWeight.w400,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Expanded _buildNoteBodySection() {
     return Expanded(
       child: Padding(
@@ -297,68 +361,6 @@ class _ViewNotePageState extends State<ViewNotePage> {
           ),
         ),
       ),
-    );
-  }
-
-  Container _buildDateSection() {
-    return Container(
-      padding: EdgeInsets.only(
-        left: 22.w,
-        right: 22.w,
-        bottom: 10.h,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Created at: ${note?.createdAt.formatted}',
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            style: TextStyle(
-              color: Colors.grey.shade600,
-              fontSize: 15.sp,
-              fontWeight: FontWeight.w400,
-              fontStyle: FontStyle.italic,
-            ),
-          ),
-          Text(
-            note?.description.split(' ').length.totalWords ?? '',
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            style: TextStyle(
-              color: Colors.grey.shade600,
-              fontSize: 15.sp,
-              fontWeight: FontWeight.w400,
-              fontStyle: FontStyle.italic,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Column _buildAppBarSection(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        KAppbar(
-          label: '',
-          context: context,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        // Padding(
-        //   padding: EdgeInsets.symmetric(
-        //     horizontal: 20.w,
-        //     vertical: 10.h,
-        //   ),
-        //   child: KLabels(
-        //     showAddButton: false,
-        //     notebook: notebook,
-        //   ),
-        // ),
-      ],
     );
   }
 }

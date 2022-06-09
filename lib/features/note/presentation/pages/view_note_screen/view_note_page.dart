@@ -40,7 +40,16 @@ class _ViewNotePageState extends State<ViewNotePage> {
     return Scaffold(
       body: SafeArea(
         child: BlocConsumer<NoteBloc, NoteState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is NoteUpdated) {
+              KSnackBar(
+                context: context,
+                position: FlashPosition.bottom,
+                type: AlertType.success,
+                message: 'Note updated',
+              );
+            }
+          },
           builder: (context, state) {
             if (state is NoteLoading) {
               return const Center(
@@ -48,6 +57,13 @@ class _ViewNotePageState extends State<ViewNotePage> {
               );
             }
             if (state is NoteLoaded) {
+              note = state.note;
+            }
+            if (state is NoteUpdated) {
+              // context.read<NoteBloc>().add(FindNoteEvent(id: widget.noteId));
+              context.read<NoteBloc>().add(
+                    GetAllNotesEvent(notebookId: note!.notebookId),
+                  );
               note = state.note;
             }
             return Column(

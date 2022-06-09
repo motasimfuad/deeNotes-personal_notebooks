@@ -52,7 +52,7 @@ class NoteItem extends StatelessWidget {
                 Text(
                   note.description,
                   overflow: TextOverflow.ellipsis,
-                  maxLines: 5,
+                  maxLines: 4,
                   style: TextStyle(
                     color: Colors.grey.shade900,
                     fontSize: 13.sp,

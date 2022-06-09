@@ -165,6 +165,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
             title: _titleController.text,
             description: _descriptionController.text,
             isFavorite: false,
+            isLocked: false,
             noteColor: noteColor ?? defaultNoteColor!,
             notebookId: widget.notebookId,
             createdAt: DateTime.now(),

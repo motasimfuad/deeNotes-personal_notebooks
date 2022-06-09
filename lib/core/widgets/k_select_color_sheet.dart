@@ -35,9 +35,6 @@ class _KSelectColorSheetState extends State<KSelectColorSheet> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      // padding:
-      //     EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      // padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(100.h)),
       padding: const EdgeInsets.only(bottom: 0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -78,13 +75,10 @@ class _KSelectColorSheetState extends State<KSelectColorSheet> {
                   if (state is AllNoteColorsFetchedState) {
                     print('AllNoteColorsFetchedState');
                     noteColors = state.colors;
-                    // if (widget.noteColor != null) {
-                    //   selectedNoteColor = widget.noteColor;
-                    //   isSelected = noteColors.indexOf(widget.noteColor!);
-                    // }
 
                     if (selectedNoteColor == null) {
-                      isSelected = 0;
+                      isSelected = noteColors.indexWhere(
+                          (element) => element.id == widget.noteColor?.id);
                     } else {
                       isSelected = noteColors.indexWhere(
                           (element) => element.id == selectedNoteColor?.id);

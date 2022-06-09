@@ -10,6 +10,8 @@ import 'package:notebooks/core/widgets/k_select_color_sheet.dart';
 import 'package:notebooks/core/widgets/k_text_field.dart';
 import 'package:notebooks/features/note/presentation/bloc/note_bloc.dart';
 
+import '../../../../core/router/app_router.dart';
+import '../../../../core/widgets/k_snackbar.dart';
 import '../../../../data/models/note_color.dart';
 
 class EditNotePage extends StatefulWidget {
@@ -28,8 +30,8 @@ class _EditNotePageState extends State<EditNotePage> {
   TextEditingController descriptionController = TextEditingController();
 
   NoteEntity? note;
-  NoteColor? noteColor;
-  NoteColor? defaultNoteColor;
+  // NoteColor? noteColor;
+  NoteColor? updatedNoteColor;
 
   @override
   void initState() {
@@ -54,11 +56,12 @@ class _EditNotePageState extends State<EditNotePage> {
           }
 
           if (state is AllNoteColorsFetchedState) {
-            defaultNoteColor = state.colors.first;
+            // updatedNoteColor = state.colors.first;
+            // updatedNoteColor = note?.noteColor;
           }
 
           if (state is NoteColorSelectedState) {
-            noteColor = state.color;
+            updatedNoteColor = state.color;
           }
         },
         builder: (context, state) {
@@ -120,7 +123,8 @@ class _EditNotePageState extends State<EditNotePage> {
                                 labelText: 'Title',
                                 isBold: true,
                                 fillColor:
-                                    note?.noteColor.color.withOpacity(0.1),
+                                    updatedNoteColor?.color.withOpacity(0.1) ??
+                                        note?.noteColor.color.withOpacity(0.1),
                               ),
                               Container(
                                 decoration: BoxDecoration(
@@ -145,7 +149,9 @@ class _EditNotePageState extends State<EditNotePage> {
                                       ),
                                     ),
                                     filled: true,
-                                    fillColor: note?.noteColor.color
+                                    fillColor: updatedNoteColor?.color
+                                            .withOpacity(0.1) ??
+                                        note?.noteColor.color
                                             .withOpacity(0.1) ??
                                         Colors.grey.shade100,
                                     contentPadding: EdgeInsets.only(
@@ -173,7 +179,34 @@ class _EditNotePageState extends State<EditNotePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: KFab(
         label: 'UPDATE',
-        onPressed: () {},
+        onPressed: () {
+          NoteEntity noteEntity = NoteEntity(
+            id: note!.id,
+            title: titleController.text,
+            description: descriptionController.text,
+            isFavorite: note?.isFavorite,
+            noteColor: updatedNoteColor ?? note!.noteColor,
+            notebookId: note!.notebookId,
+            createdAt: note!.createdAt,
+            editedAt: DateTime.now(),
+            isLocked: note!.isLocked,
+          );
+
+          if (noteEntity.title.isNotEmpty ||
+              noteEntity.description.isNotEmpty) {
+            BlocProvider.of<NoteBloc>(context).add(
+              UpdateNoteEvent(noteEntity),
+            );
+            router.pop();
+          } else {
+            KSnackBar(
+              context: context,
+              position: FlashPosition.top,
+              type: AlertType.warning,
+              message: 'Please fill all the fields',
+            );
+          }
+        },
         icon: Icons.save_rounded,
       ),
       bottomNavigationBar: BottomAppBar(
@@ -202,7 +235,7 @@ class _EditNotePageState extends State<EditNotePage> {
                   KBottomSheet(
                     context: context,
                     child: KSelectColorSheet(
-                      noteColor: noteColor,
+                      noteColor: updatedNoteColor ?? note!.noteColor,
                     ),
                   );
                 },
@@ -210,7 +243,7 @@ class _EditNotePageState extends State<EditNotePage> {
                   builder: (context, state) {
                     return Icon(
                       Icons.color_lens,
-                      color: note?.noteColor.color ?? defaultNoteColor?.color,
+                      color: updatedNoteColor?.color ?? note?.noteColor.color,
                     );
                   },
                 ),

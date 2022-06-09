@@ -95,6 +95,16 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
         );
       }
 
+      // update note
+      if (event is UpdateNoteEvent) {
+        final params = update.Params(note: event.note);
+        final either = await updateNote(params);
+        either.fold(
+          (failure) => emit(NoteUpdateFailed(message: updateErrMsg)),
+          (result) => emit(NoteUpdated(note: event.note)),
+        );
+      }
+
       // add note to favorite
       if (event is ToggleNoteFavoriteEvent) {
         final params = update.Params(note: event.note);

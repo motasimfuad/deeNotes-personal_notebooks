@@ -13,6 +13,7 @@ class KTextField extends StatefulWidget {
   final bool hasBorder;
   final bool hasBottomMargin;
   final bool smallPadding;
+  final Color? fillColor;
   final Function(String)? onChanged;
 
   const KTextField({
@@ -26,6 +27,7 @@ class KTextField extends StatefulWidget {
     this.hasBorder = false,
     this.hasBottomMargin = true,
     this.smallPadding = false,
+    this.fillColor,
     this.onChanged,
   }) : super(key: key);
 
@@ -67,7 +69,7 @@ class _KTextFieldState extends State<KTextField> {
                 ),
                 hintText: widget.labelText,
                 filled: true,
-                fillColor: Colors.grey.shade100,
+                fillColor: widget.fillColor ?? Colors.grey.shade100,
                 contentPadding: EdgeInsets.symmetric(
                   horizontal: 15.w,
                   vertical: widget.smallPadding ? 8.w : 15.h,

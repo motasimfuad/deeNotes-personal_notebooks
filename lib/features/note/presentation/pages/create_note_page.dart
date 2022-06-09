@@ -12,6 +12,7 @@ import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 import 'package:notebooks/features/note/presentation/bloc/note_bloc.dart';
 
 import '../../../../core/router/app_router.dart';
+import '../../../../core/widgets/k_bottom_sheet.dart';
 
 class CreateNotePage extends StatefulWidget {
   final int notebookId;
@@ -193,27 +194,27 @@ class _CreateNotePageState extends State<CreateNotePage> {
             children: [
               IconButton(
                 onPressed: () {
-                  showModalBottomSheet(
+                  // showModalBottomSheet(
+                  //   context: context,
+                  //   builder: (context) => SizedBox(
+                  //     height: 340.h,
+                  //     child: KSelectColorSheet(
+                  //       noteColor: noteColor,
+                  //     ),
+                  //   ),
+                  //   isDismissible: false,
+                  //   isScrollControlled: false,
+                  //   clipBehavior: Clip.antiAlias,
+                  //   shape: RoundedRectangleBorder(
+                  //     borderRadius: BorderRadius.vertical(
+                  //       top: Radius.circular(20.r),
+                  //     ),
+                  //   ),
+                  // );
+                  KBottomSheet(
                     context: context,
-                    builder: (context) => SizedBox(
-                      height: 340.h,
-                      child: KSelectColorSheet(
-                        noteColor: noteColor,
-                        // onSelected: (selNoteColor) {
-                        //   print(selNoteColor);
-                        //   BlocProvider.of<NoteBloc>(context).add(
-                        //     SelectNoteColorEvent(color: selNoteColor),
-                        //   );
-                        // },
-                      ),
-                    ),
-                    isDismissible: false,
-                    isScrollControlled: false,
-                    clipBehavior: Clip.antiAlias,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(20.r),
-                      ),
+                    child: KSelectColorSheet(
+                      noteColor: noteColor,
                     ),
                   );
                 },

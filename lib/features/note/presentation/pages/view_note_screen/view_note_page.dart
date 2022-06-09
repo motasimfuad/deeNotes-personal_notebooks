@@ -210,7 +210,14 @@ class _ViewNotePageState extends State<ViewNotePage> {
                           iconType: IconType.bottomBar,
                           tooltip: 'Edit Note',
                           iconColor: note?.noteColor.color,
-                          onPressed: () {},
+                          onPressed: () {
+                            router.pushNamed(
+                              AppRouters.editNotePage,
+                              params: {
+                                RouterParams.noteId: note!.id.toString(),
+                              },
+                            );
+                          },
                         ),
                       ],
                     )

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:notebooks/features/note/presentation/pages/favorite_notes_page.dart';
 import 'package:notebooks/features/settings/presentation/pages/settings_screen.dart';
 
 import 'core/constants/colors.dart';
@@ -17,9 +16,8 @@ class _BottomNavState extends State<BottomNav> {
   int _selectedIndex = 0;
 
   var screens = [
-    // const MyHomePage(title: 'Hi'),
     const AllNotebooksPage(),
-    const FavoriteNotesPage(),
+    // const FavoriteNotesPage(),
     SettingsScreen(),
   ];
 
@@ -35,11 +33,20 @@ class _BottomNavState extends State<BottomNav> {
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
             // color: const Color(0xfff6f8ff),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30.r),
+              topRight: Radius.circular(30.r),
+            ),
+            // border: Border.all(
+            //   color: KColors.primary,
+            //   width: .5,
+            // ),
+
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                blurRadius: 10,
-                spreadRadius: 5,
+                color: KColors.primary.withOpacity(0.2),
+                blurRadius: 8,
+                spreadRadius: 3.5,
               ),
             ],
           ),
@@ -52,11 +59,12 @@ class _BottomNavState extends State<BottomNav> {
               elevation: 10,
               type: BottomNavigationBarType.fixed,
               // backgroundColor: const Color(0xfff6f8ff),
-              backgroundColor: KColors.primary.shade700,
+              backgroundColor: KColors.primary.shade50,
+
               showSelectedLabels: false,
               showUnselectedLabels: false,
-              selectedItemColor: KColors.primary.shade200,
-              unselectedItemColor: KColors.primary.shade400,
+              selectedItemColor: KColors.primary,
+              unselectedItemColor: KColors.primary.shade200,
               currentIndex: _selectedIndex,
               onTap: (value) {
                 setState(() {
@@ -68,10 +76,10 @@ class _BottomNavState extends State<BottomNav> {
                   icon: Icon(Icons.library_books_outlined),
                   label: 'Notebooks',
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.bookmark_added_outlined),
-                  label: 'Favorite notes',
-                ),
+                // BottomNavigationBarItem(
+                //   icon: Icon(Icons.bookmark_added_outlined),
+                //   label: 'Favorite notes',
+                // ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.tune_outlined),
                   label: 'Settings',

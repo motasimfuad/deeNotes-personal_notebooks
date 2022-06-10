@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:notebooks/core/router/app_router.dart';
 
@@ -11,6 +10,7 @@ import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart
 import 'package:notebooks/features/notebook/presentation/bloc/notebook_bloc.dart';
 import 'package:notebooks/features/notebook/presentation/widgets/notebook_persistent_header.dart';
 
+import '../../../../core/constants/constants.dart';
 import '../../../note/presentation/bloc/note_bloc.dart';
 import '../../../note/presentation/widgets/note_item.dart';
 
@@ -31,9 +31,14 @@ class _NoteBookPageState extends State<NoteBookPage> {
   NotebookEntity? notebookEntity;
   List<NoteEntity> notes = [];
   int totalFavorites = 0;
+  NoteViewType gridView = NoteViewType.grid;
+  NoteViewType listView = NoteViewType.list;
+  NoteViewType? noteViewType;
+  bool showNoteContent = true;
 
   @override
   void initState() {
+    noteViewType = listView;
     context.read<NotebookBloc>().add(FindNotebookEvent(widget.notebookId));
     context.read<NoteBloc>().add(
           GetAllNotesEvent(notebookId: widget.notebookId),
@@ -156,93 +161,7 @@ class _NoteBookPageState extends State<NoteBookPage> {
                                                   0.1,
                                               top: 0.h,
                                             ),
-                                            child: GridView.builder(
-                                                shrinkWrap: true,
-                                                primary: false,
-                                                gridDelegate:
-                                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                                  childAspectRatio: 1,
-                                                  crossAxisCount: 2,
-                                                  crossAxisSpacing: 15.w,
-                                                  mainAxisSpacing: 15.h,
-                                                ),
-                                                // itemCount: notebook.notes?.length,
-                                                itemCount: notes.length,
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  var selectedNote =
-                                                      notes[index];
-                                                  return GestureDetector(
-                                                    onTap: () {
-                                                      router.pushNamed(
-                                                        AppRouters.notePage,
-                                                        params: {
-                                                          RouterParams.noteId:
-                                                              selectedNote.id
-                                                                  .toString()
-                                                        },
-                                                      );
-                                                    },
-                                                    child: BlocBuilder<NoteBloc,
-                                                        NoteState>(
-                                                      builder:
-                                                          (context, state) {
-                                                        if (state
-                                                            is NoteFavoriteToggledState) {
-                                                          context
-                                                              .read<NoteBloc>()
-                                                              .add(
-                                                                GetAllNotesEvent(
-                                                                    notebookId:
-                                                                        selectedNote
-                                                                            .notebookId),
-                                                              );
-                                                        }
-                                                        return NoteItem(
-                                                          note: selectedNote,
-                                                          onTapFavorite: () {
-                                                            NoteEntity newNote =
-                                                                NoteEntity(
-                                                              id: selectedNote
-                                                                  .id,
-                                                              title:
-                                                                  selectedNote
-                                                                      .title,
-                                                              description:
-                                                                  selectedNote
-                                                                      .description,
-                                                              isFavorite:
-                                                                  selectedNote.isFavorite ==
-                                                                          true
-                                                                      ? false
-                                                                      : true,
-                                                              noteColor:
-                                                                  selectedNote
-                                                                      .noteColor,
-                                                              createdAt:
-                                                                  selectedNote
-                                                                      .createdAt,
-                                                              notebookId:
-                                                                  selectedNote
-                                                                      .notebookId,
-                                                            );
-
-                                                            context
-                                                                .read<
-                                                                    NoteBloc>()
-                                                                .add(
-                                                                  ToggleNoteFavoriteEvent(
-                                                                    note:
-                                                                        newNote,
-                                                                  ),
-                                                                );
-                                                          },
-                                                        );
-                                                      },
-                                                    ),
-                                                  );
-                                                }),
+                                            child: _buildNotesGrid(),
                                           ),
                                         ),
                                       ],
@@ -275,5 +194,74 @@ class _NoteBookPageState extends State<NoteBookPage> {
         ),
       ),
     );
+  }
+
+  GridView _buildNotesGrid() {
+    return GridView.builder(
+        shrinkWrap: true,
+        primary: false,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          childAspectRatio: _getChildAspectRatio(),
+          crossAxisCount: noteViewType == gridView ? 2 : 1,
+          crossAxisSpacing: 15.w,
+          mainAxisSpacing: 15.h,
+        ),
+        // itemCount: notebook.notes?.length,
+        itemCount: notes.length,
+        itemBuilder: (BuildContext context, int index) {
+          var selectedNote = notes[index];
+          return GestureDetector(
+            onTap: () {
+              router.pushNamed(
+                AppRouters.notePage,
+                params: {RouterParams.noteId: selectedNote.id.toString()},
+              );
+            },
+            child: BlocBuilder<NoteBloc, NoteState>(
+              builder: (context, state) {
+                if (state is NoteFavoriteToggledState) {
+                  context.read<NoteBloc>().add(
+                        GetAllNotesEvent(notebookId: selectedNote.notebookId),
+                      );
+                }
+                return NoteItem(
+                  note: selectedNote,
+                  viewType: noteViewType,
+                  showNoteContent: showNoteContent,
+                  onTapFavorite: () {
+                    NoteEntity newNote = NoteEntity(
+                      id: selectedNote.id,
+                      title: selectedNote.title,
+                      description: selectedNote.description,
+                      isFavorite:
+                          selectedNote.isFavorite == true ? false : true,
+                      noteColor: selectedNote.noteColor,
+                      createdAt: selectedNote.createdAt,
+                      notebookId: selectedNote.notebookId,
+                    );
+
+                    context.read<NoteBloc>().add(
+                          ToggleNoteFavoriteEvent(
+                            note: newNote,
+                          ),
+                        );
+                  },
+                );
+              },
+            ),
+          );
+        });
+  }
+
+  double _getChildAspectRatio() {
+    if (showNoteContent && noteViewType == gridView) {
+      return 1;
+    } else if (!showNoteContent && noteViewType == gridView) {
+      return 2;
+    } else if (showNoteContent && noteViewType == listView) {
+      return 3.5;
+    } else {
+      return 5;
+    }
   }
 }

@@ -5,3 +5,8 @@ class Strings {
   // HomeScreen
   static const homeScreenTitle = 'Home Screen';
 }
+
+enum NoteViewType {
+  list,
+  grid,
+}

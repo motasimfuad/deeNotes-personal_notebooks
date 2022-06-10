@@ -6,6 +6,7 @@ import 'package:notebooks/features/notebook/presentation/pages/all_notebooks_pag
 import 'package:notebooks/features/notebook/presentation/pages/create_notebook_page.dart';
 import 'package:notebooks/features/notebook/presentation/pages/edit_notebook_page.dart';
 import 'package:notebooks/features/notebook/presentation/pages/notebook_page.dart';
+import 'package:notebooks/features/settings/presentation/pages/note_settings_page.dart';
 import 'package:notebooks/features/settings/presentation/pages/settings_page.dart';
 
 import '../../features/note/presentation/pages/create_note_page.dart';
@@ -25,6 +26,7 @@ class AppRouters {
   static const String viewNoteFullScreenPage = 'fullscreen';
   static const String editNotePage = 'edit-note';
   static const String settingsPage = 'settings';
+  static const String noteSettingsPage = 'note-settings';
 }
 
 class RouterParams {
@@ -142,6 +144,16 @@ final router = GoRouter(
         return MaterialPage(
           key: state.pageKey,
           child: SettingsPage(),
+        );
+      },
+    ),
+    GoRoute(
+      name: AppRouters.noteSettingsPage,
+      path: '/${AppRouters.settingsPage}/${AppRouters.noteSettingsPage}',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const NoteSettingsPage(),
         );
       },
     ),

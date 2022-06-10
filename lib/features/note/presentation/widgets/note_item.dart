@@ -6,10 +6,14 @@ import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 class NoteItem extends StatelessWidget {
   NoteEntity note;
   Function()? onTapFavorite;
+  NoteViewType? viewType;
+  bool showNoteContent;
   NoteItem({
     Key? key,
     required this.note,
     this.onTapFavorite,
+    this.viewType,
+    this.showNoteContent = true,
   }) : super(key: key);
 
   @override
@@ -48,17 +52,19 @@ class NoteItem extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(height: 5.h),
-                Text(
-                  note.description,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 4,
-                  style: TextStyle(
-                    color: Colors.grey.shade900,
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
+                SizedBox(height: showNoteContent ? 5.h : 0),
+                showNoteContent
+                    ? Text(
+                        note.description,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: viewType == NoteViewType.grid ? 4 : 2,
+                        style: TextStyle(
+                          color: Colors.grey.shade900,
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      )
+                    : const SizedBox(),
               ],
             ),
             Row(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:notebooks/features/settings/presentation/pages/settings_screen.dart';
+import 'package:notebooks/features/settings/presentation/pages/settings_page.dart';
 
 import 'core/constants/colors.dart';
 import 'features/notebook/presentation/pages/all_notebooks_page.dart';
@@ -18,7 +18,7 @@ class _BottomNavState extends State<BottomNav> {
   var screens = [
     const AllNotebooksPage(),
     // const FavoriteNotesPage(),
-    SettingsScreen(),
+    SettingsPage(),
   ];
 
   @override

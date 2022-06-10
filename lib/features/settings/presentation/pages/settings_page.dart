@@ -3,8 +3,8 @@ import 'package:notebooks/core/widgets/k_button.dart';
 
 import '../../../../data/repositories/data_repository.dart';
 
-class SettingsScreen extends StatelessWidget {
-  SettingsScreen({Key? key}) : super(key: key);
+class SettingsPage extends StatelessWidget {
+  SettingsPage({Key? key}) : super(key: key);
 
   final dbClose = DataRepository.instance;
   @override

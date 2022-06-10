@@ -6,7 +6,7 @@ class KRadioTile extends StatelessWidget {
   final String? subtitle;
   final IconData icon;
   final Object? groupValue;
-  Function(Object?)? onChanged;
+  dynamic Function(Object?)? onChanged;
   KRadioTile({
     Key? key,
     required this.value,

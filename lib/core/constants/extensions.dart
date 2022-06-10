@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:notebooks/core/constants/constants.dart';
 
 extension OutputStrings on int? {
   String get totalNotes {
@@ -48,5 +49,42 @@ extension FormattedDate on DateTime {
 
   String get formatted {
     return DateFormat('dd MMM yyyy, hh:mm a').format(this);
+  }
+}
+
+extension StringName on NoteViewType {
+  String get name {
+    switch (this) {
+      case NoteViewType.list:
+        return 'List View';
+      case NoteViewType.grid:
+        return 'Grid View';
+      default:
+        return 'Grid View';
+    }
+  }
+
+  String get getValue {
+    switch (this) {
+      case NoteViewType.list:
+        return 'NoteViewTypeList';
+      case NoteViewType.grid:
+        return 'NoteViewTypeGrid';
+      default:
+        return 'NoteViewTypeGrid';
+    }
+  }
+}
+
+extension GetNoteViewType on String {
+  NoteViewType get getNoteViewType {
+    switch (this) {
+      case 'NoteViewTypeList':
+        return NoteViewType.list;
+      case 'NoteViewTypeGrid':
+        return NoteViewType.grid;
+      default:
+        return NoteViewType.grid;
+    }
   }
 }

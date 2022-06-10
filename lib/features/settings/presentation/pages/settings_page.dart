@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notebooks/core/constants/colors.dart';
 import 'package:notebooks/core/router/app_router.dart';
+import 'package:notebooks/features/settings/presentation/bloc/settings_bloc.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../../../core/widgets/k_appbar.dart';
 import '../../../../core/widgets/k_snackbar.dart';
 import '../../../../data/repositories/data_repository.dart';
 
-class SettingsPage extends StatelessWidget {
-  SettingsPage({Key? key}) : super(key: key);
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({Key? key}) : super(key: key);
 
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
   final dbClose = DataRepository.instance;
+  var displayName = '';
+  var isNoteContentHidden = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,76 +35,148 @@ class SettingsPage extends StatelessWidget {
                 router.pop();
               },
             ),
-            Expanded(
-              child: SettingsList(
-                lightTheme: const SettingsThemeData(
-                  settingsListBackground: Colors.white,
-                  leadingIconsColor: KColors.primary,
-                  dividerColor: KColors.primary,
-                ),
-                sections: [
-                  SettingsSection(
-                    title: const Text('General'),
-                    tiles: <SettingsTile>[
-                      SettingsTile.navigation(
-                        leading: const Icon(Icons.language),
-                        title: const Text('Language'),
-                        value: const Text('English'),
-                        onPressed: (context) {
-                          KSnackBar(
-                            context: context,
-                            message: 'More languages coming soon!',
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                  SettingsSection(
-                    title: const Text('Notes'),
-                    tiles: <SettingsTile>[
-                      SettingsTile.navigation(
-                        leading: const Icon(Icons.grid_view_outlined),
-                        title: const Text('Display'),
-                        value: const Text('Grid view'),
-                        onPressed: (context) {
-                          router.pushNamed(AppRouters.noteSettingsPage);
-                        },
-                      ),
-                      SettingsTile.switchTile(
-                        leading: const Icon(Icons.border_horizontal_rounded),
-                        initialValue: false,
-                        title: const Text('Hide note body in list page'),
-                        onToggle: (val) {},
-                      ),
-                    ],
-                  ),
-                  SettingsSection(
-                    title: const Text('Account'),
-                    tiles: <SettingsTile>[
-                      SettingsTile.navigation(
-                        leading: const Icon(Icons.playlist_remove_rounded),
-                        title: const Text(
-                          'Delete Database',
-                          style: TextStyle(
-                            color: KColors.danger,
-                          ),
-                        ),
-                        // value: const Text('Grid view'),
-                        onPressed: (context) {
-                          KSnackBar(
-                            context: context,
-                            message: 'More languages coming soon!',
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            BlocBuilder<SettingsBloc, SettingsState>(
+              builder: (context, state) {
+                if (state is AllSettingsFetchedState) {
+                  displayName = state.selectedView!.name;
+                  isNoteContentHidden = state.isNoteContentHidden!;
+                  print(
+                      "AllSettings >> noteViewType: $displayName, isNoteContentHidden: $isNoteContentHidden");
+                }
+
+                if (state is NoteViewSettingsChangedState) {
+                  displayName = state.selectedView.name;
+                  print(
+                      "NoteViewSettingsChanged >> noteViewType: $displayName, isNoteContentHidden: $isNoteContentHidden");
+                }
+
+                if (state is NoteContentViewToggledState) {
+                  isNoteContentHidden = state.isNoteContentHidden;
+                  print(
+                      "NoteContent >> noteViewType: $displayName, isNoteContentHidden: $isNoteContentHidden");
+                }
+
+                return Expanded(
+                  child: _buildSettingsList(context),
+                  // child: _buildCustomPage(context),
+                );
+              },
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Column _buildCustomPage(BuildContext context) {
+    return Column(
+      children: [
+        SwitchListTile(
+          value: isNoteContentHidden,
+          onChanged: (val) {
+            setState(() {
+              context.read<SettingsBloc>().add(
+                    ToggleNoteContentViewEvent(toggleView: val),
+                  );
+              isNoteContentHidden = val;
+            });
+            print(isNoteContentHidden);
+          },
+        ),
+        StatefulBuilder(
+          builder: (context, setState) => SwitchListTile(
+            value: isNoteContentHidden,
+            onChanged: (val) {
+              setState(() {
+                context.read<SettingsBloc>().add(
+                      ToggleNoteContentViewEvent(toggleView: val),
+                    );
+                isNoteContentHidden = val;
+              });
+              print(isNoteContentHidden);
+            },
+          ),
+        )
+      ],
+    );
+  }
+
+  SettingsList _buildSettingsList(BuildContext context) {
+    return SettingsList(
+      lightTheme: const SettingsThemeData(
+        settingsListBackground: Colors.white,
+        leadingIconsColor: KColors.primary,
+        dividerColor: KColors.primary,
+      ),
+      sections: [
+        SettingsSection(
+          title: const Text('General'),
+          tiles: <SettingsTile>[
+            SettingsTile.navigation(
+              leading: const Icon(Icons.language),
+              title: const Text('Language'),
+              value: const Text('English'),
+              onPressed: (context) {
+                KSnackBar(
+                  context: context,
+                  message: 'More languages coming soon!',
+                );
+              },
+            ),
+          ],
+        ),
+        SettingsSection(
+          title: const Text('UI'),
+          tiles: [
+            SettingsTile.navigation(
+              leading: const Icon(Icons.grid_view_outlined),
+              title: const Text('Notes View'),
+              value: Text(displayName),
+              onPressed: (context) {
+                router.pushNamed(AppRouters.noteSettingsPage);
+              },
+            ),
+            SettingsTile.switchTile(
+              onPressed: (context) {
+                context.read<SettingsBloc>().add(
+                      ToggleNoteContentViewEvent(
+                          toggleView:
+                              isNoteContentHidden == true ? false : true),
+                    );
+              },
+              leading: const Icon(Icons.border_horizontal_rounded),
+              initialValue: isNoteContentHidden,
+              title: const Text('Hide note content'),
+              description: const Text('Hide note content in list page'),
+              onToggle: (val) {
+                context.read<SettingsBloc>().add(
+                      ToggleNoteContentViewEvent(toggleView: val),
+                    );
+              },
+            ),
+          ],
+        ),
+        SettingsSection(
+          title: const Text('Account'),
+          tiles: <SettingsTile>[
+            SettingsTile.navigation(
+              leading: const Icon(Icons.playlist_remove_rounded),
+              title: const Text(
+                'Delete Database',
+                style: TextStyle(
+                  color: KColors.danger,
+                ),
+              ),
+              onPressed: (context) {
+                KSnackBar(
+                  context: context,
+                  message: 'More languages coming soon!',
+                );
+              },
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

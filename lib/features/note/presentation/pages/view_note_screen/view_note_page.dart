@@ -169,6 +169,8 @@ class _ViewNotePageState extends State<ViewNotePage> {
                                   noteColor: note!.noteColor,
                                   createdAt: note!.createdAt,
                                   notebookId: note!.notebookId,
+                                  editedAt: note!.editedAt,
+                                  isLocked: note!.isLocked,
                                 );
 
                                 context.read<NoteBloc>().add(

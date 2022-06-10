@@ -7,13 +7,13 @@ class NoteItem extends StatelessWidget {
   NoteEntity note;
   Function()? onTapFavorite;
   NoteViewType? viewType;
-  bool showNoteContent;
+  bool noteContentIsHidden;
   NoteItem({
     Key? key,
     required this.note,
     this.onTapFavorite,
     this.viewType,
-    this.showNoteContent = true,
+    this.noteContentIsHidden = false,
   }) : super(key: key);
 
   @override
@@ -52,9 +52,10 @@ class NoteItem extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(height: showNoteContent ? 5.h : 0),
-                showNoteContent
-                    ? Text(
+                SizedBox(height: noteContentIsHidden ? 0 : 5.h),
+                noteContentIsHidden
+                    ? const SizedBox()
+                    : Text(
                         note.description,
                         overflow: TextOverflow.ellipsis,
                         maxLines: viewType == NoteViewType.grid ? 4 : 2,
@@ -64,7 +65,6 @@ class NoteItem extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                         ),
                       )
-                    : const SizedBox(),
               ],
             ),
             Row(

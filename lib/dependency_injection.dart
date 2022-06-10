@@ -18,6 +18,8 @@ import 'package:notebooks/features/notebook/domain/usecases/find_notebook_usecas
 import 'package:notebooks/features/notebook/domain/usecases/get_all_notebooks_usecase.dart';
 import 'package:notebooks/features/notebook/domain/usecases/update_notebook_usecase.dart';
 import 'package:notebooks/features/notebook/presentation/bloc/notebook_bloc.dart';
+import 'package:notebooks/features/settings/presentation/bloc/settings_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'features/note/data/repositories/note_repository_impl.dart';
 import 'features/note/domain/usecases/create_note_usecase.dart';
@@ -50,6 +52,8 @@ Future<void> init() async {
       noteColorsProvider: getIt(),
     ),
   );
+
+  getIt.registerFactory(() => SettingsBloc(pref: getIt()));
 
   // UseCases
   // notebook usecases
@@ -88,4 +92,8 @@ Future<void> init() async {
   //! data
   getIt.registerLazySingleton<DataRepository>(() => DataRepository.instance);
   getIt.registerLazySingleton<NoteColorsProvider>(() => NoteColorsProvider());
+
+  var sharedPref = await SharedPreferences.getInstance();
+  // getIt.registerLazySingleton<SharedPreferences>(() => sharedPref);
+  getIt.registerSingleton<SharedPreferences>(sharedPref);
 }

@@ -13,6 +13,7 @@ import 'package:notebooks/features/notebook/presentation/widgets/notebook_persis
 import '../../../../core/constants/constants.dart';
 import '../../../note/presentation/bloc/note_bloc.dart';
 import '../../../note/presentation/widgets/note_item.dart';
+import '../../../settings/presentation/bloc/settings_bloc.dart';
 
 class NoteBookPage extends StatefulWidget {
   NotebookEntity? notebook;
@@ -33,12 +34,12 @@ class _NoteBookPageState extends State<NoteBookPage> {
   int totalFavorites = 0;
   NoteViewType gridView = NoteViewType.grid;
   NoteViewType listView = NoteViewType.list;
-  NoteViewType? noteViewType;
-  bool showNoteContent = true;
+  NoteViewType noteViewType = NoteViewType.grid;
+  bool noteContentIsHidden = false;
 
   @override
   void initState() {
-    noteViewType = listView;
+    // noteViewType = listView;
     context.read<NotebookBloc>().add(FindNotebookEvent(widget.notebookId));
     context.read<NoteBloc>().add(
           GetAllNotesEvent(notebookId: widget.notebookId),
@@ -110,43 +111,7 @@ class _NoteBookPageState extends State<NoteBookPage> {
                             }
                             return SliverToBoxAdapter(
                               child: notes.isEmpty
-                                  ? Container(
-                                      padding: EdgeInsets.all(40.w),
-                                      // height: 300.h,
-                                      child: Center(
-                                        child: Column(
-                                          children: [
-                                            Lottie.asset(
-                                              'assets/animations/empty-notes.json',
-                                              fit: BoxFit.contain,
-                                              height: 230.h,
-                                            ),
-                                            RichText(
-                                              textAlign: TextAlign.center,
-                                              text: TextSpan(
-                                                  text: 'No notes found in\n',
-                                                  style: TextStyle(
-                                                    fontSize: 17.sp,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: Colors.black,
-                                                  ),
-                                                  children: [
-                                                    TextSpan(
-                                                      text:
-                                                          '${notebookEntity?.name}',
-                                                      style: TextStyle(
-                                                        fontSize: 17.sp,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Colors.black,
-                                                      ),
-                                                    ),
-                                                  ]),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    )
+                                  ? _buildEmptyNotesUi()
                                   : Stack(
                                       children: [
                                         Align(
@@ -196,72 +161,132 @@ class _NoteBookPageState extends State<NoteBookPage> {
     );
   }
 
-  GridView _buildNotesGrid() {
-    return GridView.builder(
-        shrinkWrap: true,
-        primary: false,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: _getChildAspectRatio(),
-          crossAxisCount: noteViewType == gridView ? 2 : 1,
-          crossAxisSpacing: 15.w,
-          mainAxisSpacing: 15.h,
-        ),
-        // itemCount: notebook.notes?.length,
-        itemCount: notes.length,
-        itemBuilder: (BuildContext context, int index) {
-          var selectedNote = notes[index];
-          return GestureDetector(
-            onTap: () {
-              router.pushNamed(
-                AppRouters.notePage,
-                params: {RouterParams.noteId: selectedNote.id.toString()},
-              );
-            },
-            child: BlocBuilder<NoteBloc, NoteState>(
-              builder: (context, state) {
-                if (state is NoteFavoriteToggledState) {
-                  context.read<NoteBloc>().add(
-                        GetAllNotesEvent(notebookId: selectedNote.notebookId),
-                      );
-                }
-                return NoteItem(
-                  note: selectedNote,
-                  viewType: noteViewType,
-                  showNoteContent: showNoteContent,
-                  onTapFavorite: () {
-                    NoteEntity newNote = NoteEntity(
-                      id: selectedNote.id,
-                      title: selectedNote.title,
-                      description: selectedNote.description,
-                      isFavorite:
-                          selectedNote.isFavorite == true ? false : true,
-                      noteColor: selectedNote.noteColor,
-                      createdAt: selectedNote.createdAt,
-                      notebookId: selectedNote.notebookId,
-                    );
-
-                    context.read<NoteBloc>().add(
-                          ToggleNoteFavoriteEvent(
-                            note: newNote,
-                          ),
-                        );
-                  },
-                );
-              },
+  Container _buildEmptyNotesUi() {
+    return Container(
+      padding: EdgeInsets.all(40.w),
+      child: Center(
+        child: Column(
+          children: [
+            Lottie.asset(
+              'assets/animations/empty-notes.json',
+              fit: BoxFit.contain,
+              height: 230.h,
             ),
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                  text: 'No notes found in\n',
+                  style: TextStyle(
+                    fontSize: 17.sp,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: '${notebookEntity?.name}',
+                      style: TextStyle(
+                        fontSize: 17.sp,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ]),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _buildNotesGrid() {
+    return BlocBuilder<SettingsBloc, SettingsState>(
+      builder: (context, state) {
+        if (state is AllSettingsFetchedState) {
+          noteViewType = state.selectedView!;
+          noteContentIsHidden = state.isNoteContentHidden!;
+          print(
+            "state noteViewType: ${state.selectedView}, isNoteContentHidden: ${state.isNoteContentHidden}",
           );
-        });
+        }
+        if (state is NoteViewSettingsChangedState) {
+          noteViewType = state.selectedView;
+        }
+        if (state is NoteContentViewToggledState) {
+          noteContentIsHidden = state.isNoteContentHidden;
+          print('state isNoteContentHidden: ${state.isNoteContentHidden}');
+        }
+
+        return GridView.builder(
+            shrinkWrap: true,
+            primary: false,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: _getChildAspectRatio(),
+              crossAxisCount: noteViewType == gridView ? 2 : 1,
+              crossAxisSpacing: 15.w,
+              mainAxisSpacing: 15.h,
+            ),
+            itemCount: notes.length,
+            itemBuilder: (BuildContext context, int index) {
+              var selectedNote = notes[index];
+              return GestureDetector(
+                onTap: () {
+                  router.pushNamed(
+                    AppRouters.notePage,
+                    params: {RouterParams.noteId: selectedNote.id.toString()},
+                  );
+                },
+                child: BlocBuilder<NoteBloc, NoteState>(
+                  builder: (context, state) {
+                    if (state is NoteFavoriteToggledState) {
+                      context.read<NoteBloc>().add(
+                            GetAllNotesEvent(
+                                notebookId: selectedNote.notebookId),
+                          );
+                    }
+                    return NoteItem(
+                      note: selectedNote,
+                      viewType: noteViewType,
+                      noteContentIsHidden: noteContentIsHidden,
+                      onTapFavorite: () {
+                        NoteEntity newNote = NoteEntity(
+                          id: selectedNote.id,
+                          title: selectedNote.title,
+                          description: selectedNote.description,
+                          isFavorite:
+                              selectedNote.isFavorite == true ? false : true,
+                          noteColor: selectedNote.noteColor,
+                          createdAt: selectedNote.createdAt,
+                          notebookId: selectedNote.notebookId,
+                          editedAt: selectedNote.editedAt,
+                          isLocked: selectedNote.isLocked,
+                        );
+
+                        context.read<NoteBloc>().add(
+                              ToggleNoteFavoriteEvent(
+                                note: newNote,
+                              ),
+                            );
+                      },
+                    );
+                  },
+                ),
+              );
+            });
+      },
+    );
   }
 
   double _getChildAspectRatio() {
-    if (showNoteContent && noteViewType == gridView) {
+    if (!noteContentIsHidden && (noteViewType == gridView)) {
       return 1;
-    } else if (!showNoteContent && noteViewType == gridView) {
+    } else if (noteContentIsHidden && (noteViewType == gridView)) {
       return 2;
-    } else if (showNoteContent && noteViewType == listView) {
+    } else if (!noteContentIsHidden && (noteViewType == listView)) {
       return 3.5;
-    } else {
+    } else if (noteContentIsHidden && (noteViewType == listView)) {
       return 5;
+    } else {
+      return 1;
     }
   }
 }

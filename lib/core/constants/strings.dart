@@ -4,6 +4,10 @@ class Strings {
 
   // HomeScreen
   static const homeScreenTitle = 'Home Screen';
+
+  // shared preferences keys
+  static const noteViewTypeKey = 'noteViewType';
+  static const isNoteContentHiddenKey = 'isNoteContentHidden';
 }
 
 enum NoteViewType {

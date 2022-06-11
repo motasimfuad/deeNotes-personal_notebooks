@@ -53,7 +53,10 @@ Future<void> init() async {
     ),
   );
 
-  getIt.registerFactory(() => SettingsBloc(pref: getIt()));
+  getIt.registerFactory(() => SettingsBloc(
+        pref: getIt(),
+        dataRepo: getIt(),
+      ));
 
   // UseCases
   // notebook usecases
@@ -94,6 +97,5 @@ Future<void> init() async {
   getIt.registerLazySingleton<NoteColorsProvider>(() => NoteColorsProvider());
 
   var sharedPref = await SharedPreferences.getInstance();
-  // getIt.registerLazySingleton<SharedPreferences>(() => sharedPref);
   getIt.registerSingleton<SharedPreferences>(sharedPref);
 }

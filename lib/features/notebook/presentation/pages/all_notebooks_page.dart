@@ -209,15 +209,15 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
                     ),
                   ),
                   SizedBox(height: 10.w),
-                  Text(
-                    'Made with\n❤️\nby KhyberLabs',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w500,
-                      // color: KColors.primary,
-                    ),
-                  ),
+                  // Text(
+                  //   'Made with\n❤️\nby KhyberLabs',
+                  //   textAlign: TextAlign.center,
+                  //   style: TextStyle(
+                  //     fontSize: 15.sp,
+                  //     fontWeight: FontWeight.w500,
+                  //     // color: KColors.primary,
+                  //   ),
+                  // ),
                 ],
               ),
             ),

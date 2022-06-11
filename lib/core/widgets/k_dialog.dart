@@ -11,6 +11,7 @@ KDialog({
   String? noButtonText,
   Color? yesButtonColor,
   Color? noButtonColor,
+  Color? barrierColor,
   String? bodyText,
   double? xInset,
   bool? showFooter = true,
@@ -106,6 +107,7 @@ KDialog({
   showDialog(
     context: context,
     barrierDismissible: isDismissible ?? false,
+    barrierColor: barrierColor ?? Colors.black54,
     builder: (_) {
       return AlertDialog(
         title: Row(

@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:notebooks/core/constants/constants.dart';
 
 class LoadingScreen extends StatelessWidget {
   const LoadingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.all(50.w),
+        child: Center(
+          child: Image.asset(
+            'assets/images/app/deeNotes_logo_icon.png',
+            fit: BoxFit.cover,
+            width: 80.w,
+          ),
+        ),
       ),
     );
   }

@@ -42,3 +42,6 @@ class CheckIntroWatchedEvent extends SettingsEvent {
   @override
   List<Object> get props => [];
 }
+
+// clear database
+class ClearDatabaseEvent extends SettingsEvent {}

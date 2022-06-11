@@ -4,13 +4,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:notebooks/core/constants/constants.dart';
 
+import '../../../../data/repositories/data_repository.dart';
+
 part 'settings_event.dart';
 part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SharedPreferences pref;
+  DataRepository dataRepo;
   SettingsBloc({
     required this.pref,
+    required this.dataRepo,
   }) : super(SettingsInitial()) {
     on<SettingsEvent>((event, emit) async {
       if (event is NoteViewSettingsChangedEvent) {
@@ -129,6 +133,21 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         } else {
           emit(const IntroWatchedState());
         }
+      }
+
+      // clear database
+      if (event is ClearDatabaseEvent) {
+        emit(DatabaseClearingState());
+        await dataRepo.closeDatabase();
+
+        emit(const DatabaseClearedState());
+
+        var view = pref.getBool(Strings.isNoteContentHiddenKey);
+        var val = pref.getString(Strings.noteViewTypeKey);
+        emit(AllSettingsFetchedState(
+          isNoteContentHidden: view,
+          selectedView: val?.getNoteViewType,
+        ));
       }
     });
   }

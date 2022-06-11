@@ -61,3 +61,12 @@ class IntroNotWatchedState extends SettingsState {
   @override
   List<Object> get props => [];
 }
+
+// database cleared
+class DatabaseClearingState extends SettingsState {}
+
+class DatabaseClearedState extends SettingsState {
+  const DatabaseClearedState();
+  @override
+  List<Object> get props => [];
+}

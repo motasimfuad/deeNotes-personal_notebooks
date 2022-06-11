@@ -7,14 +7,7 @@ abstract class SettingsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class UpdateSettingsEvent extends SettingsEvent {
-  // final NoteViewType? selectedView;
-  // final bool? toggleView;
-  // const UpdateSettingsEvent({
-  //   this.selectedView,
-  //   this.toggleView,
-  // });
-}
+class UpdateSettingsEvent extends SettingsEvent {}
 
 class NoteViewSettingsChangedEvent extends SettingsEvent {
   final NoteViewType selectedView;

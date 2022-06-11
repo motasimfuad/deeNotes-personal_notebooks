@@ -92,7 +92,7 @@ class NotebookOptionsModal extends StatelessWidget {
                               ),
                             );
                         router.pop();
-                        router.pushNamed(AppRouters.homePage);
+                        router.pushNamed(AppRouters.notebooksPage);
 
                         KSnackBar(
                           context: context,

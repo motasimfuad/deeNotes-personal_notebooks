@@ -18,7 +18,7 @@ class _BottomNavState extends State<BottomNav> {
   var screens = [
     const AllNotebooksPage(),
     // const FavoriteNotesPage(),
-    SettingsPage(),
+    const SettingsPage(),
   ];
 
   @override

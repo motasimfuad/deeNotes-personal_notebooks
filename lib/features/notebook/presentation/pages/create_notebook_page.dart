@@ -154,7 +154,7 @@ class _CreateNotebookPageState extends State<CreateNotebookPage> {
               CreateNotebookEvent(selectedNotebookEntity),
             );
 
-            router.goNamed(AppRouters.homePage);
+            router.goNamed(AppRouters.notebooksPage);
 
             context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
           } else {

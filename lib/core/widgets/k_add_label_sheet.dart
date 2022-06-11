@@ -7,8 +7,8 @@ import 'package:notebooks/core/widgets/k_text_field.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
 class KAddLabelSheet extends StatelessWidget {
-  NotebookEntity notebook;
-  KAddLabelSheet({
+  final NotebookEntity notebook;
+  const KAddLabelSheet({
     Key? key,
     required this.notebook,
   }) : super(key: key);

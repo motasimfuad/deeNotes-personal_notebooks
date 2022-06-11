@@ -55,32 +55,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       }
 
       if (event is UpdateSettingsEvent) {
-        // NoteViewType? eventViewType = event.selectedView;
-        // bool? eventToggleContentView = event.toggleView;
-
-        // String? prefViewTypeString = pref.getString(Strings.noteViewTypeKey);
-        // NoteViewType? prefViewType = prefViewTypeString?.noteViewTypeValue;
-        // bool? prefToggleContentView =
-        //     pref.getBool(Strings.isNoteContentHiddenKey);
-
-        // await pref.setString(
-        //   Strings.noteViewTypeKey,
-        //   eventViewType?.toString() ??
-        //       prefViewType?.toString() ??
-        //       NoteViewType.grid.toString(),
-        // );
-        // await pref.setBool(
-        //   Strings.isNoteContentHiddenKey,
-        //   eventToggleContentView ?? prefToggleContentView ?? false,
-        // );
-
-        //! next
-
         var view = pref.getBool(Strings.isNoteContentHiddenKey);
         var noteViewType = pref.getString(Strings.noteViewTypeKey);
-        print("bloc get >> noteViewType: $noteViewType");
-        print("bloc get >> view: $view");
-
         NoteViewType selectedView;
         if (noteViewType == null) {
           selectedView = NoteViewType.grid;
@@ -102,7 +78,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         } else {
           isNoteContentHidden = view;
         }
-        "bloc noteViewType: $selectedView, isNoteContentHidden: $isNoteContentHidden";
+        print(
+            "bloc noteViewType: $selectedView, isNoteContentHidden: $isNoteContentHidden");
         emit(AllSettingsFetchedState(
           selectedView: selectedView,
           isNoteContentHidden: isNoteContentHidden,
@@ -132,6 +109,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           emit(const IntroNotWatchedState());
         } else {
           emit(const IntroWatchedState());
+          var view = pref.getBool(Strings.isNoteContentHiddenKey);
+          var val = pref.getString(Strings.noteViewTypeKey);
+          emit(AllSettingsFetchedState(
+            isNoteContentHidden: view,
+            selectedView: val?.getNoteViewType,
+          ));
         }
       }
 
@@ -142,12 +125,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
         emit(const DatabaseClearedState());
 
-        var view = pref.getBool(Strings.isNoteContentHiddenKey);
-        var val = pref.getString(Strings.noteViewTypeKey);
-        emit(AllSettingsFetchedState(
-          isNoteContentHidden: view,
-          selectedView: val?.getNoteViewType,
-        ));
+        // var view = pref.getBool(Strings.isNoteContentHiddenKey);
+        // var val = pref.getString(Strings.noteViewTypeKey);
+        // emit(AllSettingsFetchedState(
+        //   isNoteContentHidden: view,
+        //   selectedView: val?.getNoteViewType,
+        // ));
       }
     });
   }

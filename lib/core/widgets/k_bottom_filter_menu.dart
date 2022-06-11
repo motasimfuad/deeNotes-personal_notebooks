@@ -9,8 +9,8 @@ import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart
 import '../constants/colors.dart';
 
 class KBottomFilterMenu extends StatelessWidget {
-  NotebookEntity notebook;
-  KBottomFilterMenu({
+  final NotebookEntity notebook;
+  const KBottomFilterMenu({
     Key? key,
     required this.notebook,
   }) : super(key: key);

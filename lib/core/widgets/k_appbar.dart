@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:notebooks/core/widgets/k_icon_button.dart';
 
+// ignore: must_be_immutable
 class KAppbar extends StatelessWidget {
   String label;
   BuildContext context;

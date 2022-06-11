@@ -56,7 +56,8 @@ final router = GoRouter(
 
               if (state is IntroNotWatchedState) {
                 return const IntroductionScreenPage();
-              } else if (state is IntroWatchedState) {
+              } else if (state is IntroWatchedState ||
+                  state is AllSettingsFetchedState) {
                 return const AllNotebooksPage();
               } else {
                 return const LoadingScreen();
@@ -70,7 +71,6 @@ final router = GoRouter(
       name: AppRouters.introScreen,
       path: '${AppRouters.homePage}${AppRouters.introScreen}',
       pageBuilder: (context, state) {
-        print("introScreen fullpath: ${state.fullpath}");
         return MaterialPage(
           key: state.pageKey,
           child: const IntroductionScreenPage(),

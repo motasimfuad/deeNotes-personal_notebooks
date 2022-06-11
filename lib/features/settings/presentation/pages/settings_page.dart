@@ -47,11 +47,13 @@ class _SettingsPageState extends State<SettingsPage> {
                 }
                 if (state is DatabaseClearedState) {
                   Navigator.pop(context);
+                  BlocProvider.of<SettingsBloc>(context)
+                      .add(UpdateSettingsEvent());
                   context
                       .read<NotebookBloc>()
                       .add(const GetAllNotebooksEvent());
 
-                  router.goNamed(AppRouters.homePage);
+                  router.goNamed(AppRouters.notebooksPage);
 
                   KSnackBar(
                     context: context,

@@ -174,7 +174,7 @@ class _EditNotebookPageState extends State<EditNotebookPage> {
 
             // router.pop();
 
-            router.goNamed(AppRouters.homePage);
+            router.goNamed(AppRouters.notebooksPage);
 
             context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
             print(

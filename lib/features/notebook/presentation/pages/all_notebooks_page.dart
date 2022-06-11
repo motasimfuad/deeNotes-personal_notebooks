@@ -7,6 +7,7 @@ import 'package:notebooks/core/widgets/k_fab.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/widgets/k_icon_button.dart';
+import '../../../settings/presentation/bloc/settings_bloc.dart';
 import '../../domain/entities/notebook_entity.dart';
 import '../bloc/notebook_bloc.dart';
 
@@ -24,6 +25,7 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
   @override
   void initState() {
     BlocProvider.of<NotebookBloc>(context).add(const GetAllNotebooksEvent());
+    // BlocProvider.of<SettingsBloc>(context).add(UpdateSettingsEvent());
     super.initState();
   }
 
@@ -81,6 +83,8 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
                   );
                 }
                 if (state is NotebookListLoaded) {
+                  // BlocProvider.of<SettingsBloc>(context)
+                  //     .add(UpdateSettingsEvent());
                   notebooks = state.notebooks;
                 }
                 if (notebooks.isEmpty) {
@@ -240,6 +244,8 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
                   ),
                   onTap: () {
                     Navigator.pop(context);
+                    BlocProvider.of<SettingsBloc>(context)
+                        .add(UpdateSettingsEvent());
                     router.pushNamed(AppRouters.settingsPage);
                   },
                 ),

@@ -1,6 +1,6 @@
 class Strings {
   // App
-  static const appTitle = 'App Name';
+  static const appTitle = 'deeNotes';
 
   // HomeScreen
   static const homeScreenTitle = 'Home Screen';

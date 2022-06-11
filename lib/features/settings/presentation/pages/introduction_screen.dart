@@ -35,6 +35,7 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
   }
 
   void _onIntroEnd(context) {
+    print('Intro end');
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => const AllNotebooksPage()),
     );
@@ -76,61 +77,51 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
       child: IntroductionScreen(
         key: introKey,
         globalBackgroundColor: Colors.white,
-        // globalHeader: Align(
-        //   alignment: Alignment.topRight,
-        //   child: SafeArea(
-        //     child: Padding(
-        //       padding: const EdgeInsets.only(top: 16, right: 16),
-        //       child: _buildImage('flutter.png', 100),
-        //     ),
-        //   ),
-        // ),
-        // globalFooter: SizedBox(
-        //   width: double.infinity,
-        //   height: 60,
-        //   child: ElevatedButton(
-        //     child: const Text(
-        //       'Let\'s go right away!',
-        //       style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-        //     ),
-        //     onPressed: () {},
-        //   ),
-        // ),
         pages: [
           PageViewModel(
-            title: "Notebooks",
+            title: Strings.appTitle,
             body:
-                "Notebooks is a simple, yet powerful, app that allows you to create and share your own personal notes.",
+                "It's a simple, yet powerful, app that\nallows you to create and share your\nown personal notes.\n\nA great way to keep track of your\nideas, thoughts, and more.",
             image: _buildLottie('animations/onboarding-first.json', 220.w),
             decoration: pageDecoration.copyWith(
-              imagePadding: EdgeInsets.symmetric(horizontal: 30.w),
-              imageFlex: 2,
+              imagePadding: EdgeInsets.symmetric(
+                horizontal: 30.w,
+                vertical: 50.h,
+              ),
+              imageAlignment: Alignment.bottomCenter,
+              titleTextStyle: TextStyle(
+                fontSize: 28.sp,
+                fontWeight: FontWeight.w700,
+                color: KColors.primary,
+              ),
+              imageFlex: 3,
+              bodyFlex: 2,
             ),
           ),
           PageViewModel(
             title: "Create Notebooks",
-            body:
-                "Create notebooks for different topics and store notes categorically.",
+            body: "You can create different notebooks to\norganize your notes.",
             image: _buildLottie('animations/onboarding-notebooks.json'),
             decoration: pageDecoration,
           ),
           PageViewModel(
             title: "Create Notes",
             body:
-                "Create and customize notes as you wish with beautiful colors.",
+                "Create and customize notes with beautiful colors as you wish.",
             image: _buildLottie('animations/onboarding-note.json'),
             decoration: pageDecoration,
           ),
           PageViewModel(
             title: "Safe and Secure",
             body:
-                "Your notes are stored in your device. No need to worry about losing them. Also, your notes are safe with you.",
+                "Your notes are  stored in your device.\nNo need to worry about losing them.\nSo, your notes are safe with you.",
             image: _buildLottie('animations/onboarding-safe.json'),
             decoration: pageDecoration,
           ),
           PageViewModel(
             title: "Let's get started!",
-            body: "Tap on the done button below to start using Notebooks.",
+            body:
+                "Tap on the done button below to start using ${Strings.appTitle}.",
             image: _buildLottie('animations/onboarding-done.json'),
             decoration: pageDecoration,
           ),

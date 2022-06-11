@@ -90,10 +90,12 @@ class _CreateNotebookPageState extends State<CreateNotebookPage> {
 
                                       return NotebookItem(
                                         notebook: selectedNotebookEntity,
+                                        isTotalNotesHidden: true,
                                       );
                                     } else {
                                       return NotebookItem(
                                         notebook: selectedNotebookEntity,
+                                        isTotalNotesHidden: true,
                                       );
                                     }
                                   },

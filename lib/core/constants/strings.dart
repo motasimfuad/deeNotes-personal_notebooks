@@ -8,6 +8,7 @@ class Strings {
   // shared preferences keys
   static const noteViewTypeKey = 'noteViewType';
   static const isNoteContentHiddenKey = 'isNoteContentHidden';
+  static const isIntroWatchedKey = 'isIntroWatchedKey';
 }
 
 enum NoteViewType {

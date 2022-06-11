@@ -104,6 +104,32 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           isNoteContentHidden: isNoteContentHidden,
         ));
       }
+
+      if (event is MakeIntroWatchedEvent) {
+        emit(const IntroLoadingState());
+        await pref.setBool(
+          Strings.isIntroWatchedKey,
+          true,
+        );
+        emit(const IntroWatchedState());
+      }
+
+      if (event is CheckIntroWatchedEvent) {
+        emit(const IntroLoadingState());
+        bool? isWatched = pref.getBool(Strings.isIntroWatchedKey);
+        if (isWatched == null) {
+          isWatched = false;
+          await pref.setBool(
+            Strings.isIntroWatchedKey,
+            isWatched,
+          );
+          emit(const IntroNotWatchedState());
+        } else if (isWatched == false) {
+          emit(const IntroNotWatchedState());
+        } else {
+          emit(const IntroWatchedState());
+        }
+      }
     });
   }
 }

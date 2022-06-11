@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:notebooks/core/router/app_router.dart';
 import 'package:notebooks/features/notebook/presentation/widgets/notebook_item.dart';
 import 'package:notebooks/core/widgets/k_fab.dart';
 
-import '../../../../core/constants/colors.dart';
+import '../../../../core/constants/constants.dart';
 import '../../../../core/widgets/k_icon_button.dart';
 import '../../domain/entities/notebook_entity.dart';
 import '../bloc/notebook_bloc.dart';
@@ -38,7 +37,7 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-              title: const Text('Notebooks'),
+              title: const Text(Strings.appTitle),
 
               elevation: 0,
               centerTitle: true,
@@ -195,8 +194,14 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
               ),
               child: Column(
                 children: [
+                  Image.asset(
+                    'assets/images/app/deeNotes_logo_icon.png',
+                    fit: BoxFit.cover,
+                    width: 60.w,
+                  ),
+                  SizedBox(height: 10.h),
                   Text(
-                    'Notebooks',
+                    Strings.appTitle,
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,

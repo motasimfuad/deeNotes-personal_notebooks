@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:notebooks/core/constants/constants.dart';
-import 'package:notebooks/features/notebook/presentation/pages/all_notebooks_page.dart';
+import 'package:notebooks/core/router/app_router.dart';
+import 'package:notebooks/features/settings/presentation/bloc/settings_bloc.dart';
 
 class IntroductionScreenPage extends StatefulWidget {
   const IntroductionScreenPage({Key? key}) : super(key: key);
@@ -15,17 +17,6 @@ class IntroductionScreenPage extends StatefulWidget {
 class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
-  Widget _buildImage(
-    String assetName,
-    // [
-    // double width = 350,
-    // ]
-  ) {
-    return Image.asset('assets/$assetName', fit: BoxFit.cover
-        // width: width,
-        );
-  }
-
   Widget _buildLottie(String assetName, [double? width]) {
     return Lottie.asset(
       'assets/$assetName',
@@ -35,20 +26,8 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
   }
 
   void _onIntroEnd(context) {
-    print('Intro end');
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => const AllNotebooksPage()),
-    );
-  }
-
-  Widget _buildFullscreenImage() {
-    return Image.asset(
-      'assets/fullscreen.jpg',
-      fit: BoxFit.cover,
-      height: double.infinity,
-      width: double.infinity,
-      alignment: Alignment.center,
-    );
+    BlocProvider.of<SettingsBloc>(context).add(const MakeIntroWatchedEvent());
+    router.goNamed(AppRouters.homePage);
   }
 
   @override
@@ -82,7 +61,7 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
             title: Strings.appTitle,
             body:
                 "It's a simple, yet powerful, app that\nallows you to create and share your\nown personal notes.\n\nA great way to keep track of your\nideas, thoughts, and more.",
-            image: _buildLottie('animations/onboarding-first.json', 220.w),
+            image: _buildLottie('animations/onboarding-first.json', 200.w),
             decoration: pageDecoration.copyWith(
               imagePadding: EdgeInsets.symmetric(
                 horizontal: 30.w,
@@ -129,10 +108,16 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
         onDone: () => _onIntroEnd(context),
         //onSkip: () => _onIntroEnd(context), // You can override onSkip callback
         showSkipButton: false,
-
         skipOrBackFlex: 0,
         nextFlex: 0,
         showBackButton: true,
+        nextStyle: const ButtonStyle().copyWith(
+          overlayColor: MaterialStateProperty.all(Colors.transparent),
+        ),
+        backStyle: const ButtonStyle().copyWith(
+          overlayColor: MaterialStateProperty.all(Colors.transparent),
+        ),
+
         //rtl: true, // Display as right-to-left
         back: const Icon(Icons.arrow_back_ios_rounded),
         skip: const Text('Skip', style: TextStyle(fontWeight: FontWeight.w600)),
@@ -140,13 +125,15 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
         done: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600)),
         // scrollPhysics: const BouncingScrollPhysics(),
         curve: Curves.fastLinearToSlowEaseIn,
-        controlsMargin: EdgeInsets.all(16.w),
+        controlsMargin: EdgeInsets.symmetric(
+          horizontal: 25.w,
+          vertical: 20.h,
+        ),
         controlsPadding: kIsWeb
             ? EdgeInsets.all(12.w)
             : EdgeInsets.fromLTRB(8.w, 4.h, 8.w, 4.h),
         dotsDecorator: DotsDecorator(
           size: Size(10.w, 10.w),
-          // color: const Color(0xFFBDBDBD),
           color: Colors.grey.shade300,
           activeSize: Size(22.w, 10.h),
           activeShape: RoundedRectangleBorder(

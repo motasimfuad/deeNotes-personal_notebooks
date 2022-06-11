@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notebooks/features/note/presentation/pages/edit_note_page.dart';
 import 'package:notebooks/features/note/presentation/pages/view_note_screen/view_note_page.dart';
@@ -7,11 +8,13 @@ import 'package:notebooks/features/notebook/presentation/pages/create_notebook_p
 import 'package:notebooks/features/notebook/presentation/pages/edit_notebook_page.dart';
 import 'package:notebooks/features/notebook/presentation/pages/notebook_page.dart';
 import 'package:notebooks/features/settings/presentation/pages/introduction_screen.dart';
+import 'package:notebooks/features/settings/presentation/pages/loading_screen.dart';
 import 'package:notebooks/features/settings/presentation/pages/note_settings_page.dart';
 import 'package:notebooks/features/settings/presentation/pages/settings_page.dart';
 
 import '../../features/note/presentation/pages/create_note_page.dart';
 import '../../features/note/presentation/pages/view_note_screen/view_note_full_screen.dart';
+import '../../features/settings/presentation/bloc/settings_bloc.dart';
 
 class AppRouters {
   static const String homePage = '/';
@@ -44,19 +47,36 @@ final router = GoRouter(
     GoRoute(
       name: AppRouters.homePage,
       path: AppRouters.homePage,
-      pageBuilder: (context, state) => MaterialPage(
-        key: state.pageKey,
-        child: const IntroductionScreenPage(),
-      ),
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: BlocBuilder<SettingsBloc, SettingsState>(
+            builder: (context, state) {
+              context.read<SettingsBloc>().add(const CheckIntroWatchedEvent());
+
+              if (state is IntroNotWatchedState) {
+                return const IntroductionScreenPage();
+              } else if (state is IntroWatchedState) {
+                return const AllNotebooksPage();
+              } else {
+                return const LoadingScreen();
+              }
+            },
+          ),
+        );
+      },
     ),
-    // GoRoute(
-    //   name: AppRouters.introScreen,
-    //   path: '/${AppRouters.homePage}/:${AppRouters.introScreen}',
-    //   pageBuilder: (context, state) => MaterialPage(
-    //     key: state.pageKey,
-    //     child: const IntroductionScreenPage(),
-    //   ),
-    // ),
+    GoRoute(
+      name: AppRouters.introScreen,
+      path: '${AppRouters.homePage}${AppRouters.introScreen}',
+      pageBuilder: (context, state) {
+        print("introScreen fullpath: ${state.fullpath}");
+        return MaterialPage(
+          key: state.pageKey,
+          child: const IntroductionScreenPage(),
+        );
+      },
+    ),
     GoRoute(
       name: AppRouters.notebooksPage,
       path: '/${AppRouters.notebooksPage}',

@@ -39,6 +39,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/notebooks/
+    - assets/images/app/
     - assets/animations/
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a

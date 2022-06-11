@@ -43,3 +43,21 @@ class NoteContentViewToggledState extends SettingsState {
   @override
   List<Object> get props => [isNoteContentHidden];
 }
+
+class IntroLoadingState extends SettingsState {
+  const IntroLoadingState();
+  @override
+  List<Object> get props => [];
+}
+
+class IntroWatchedState extends SettingsState {
+  const IntroWatchedState();
+  @override
+  List<Object> get props => [];
+}
+
+class IntroNotWatchedState extends SettingsState {
+  const IntroNotWatchedState();
+  @override
+  List<Object> get props => [];
+}

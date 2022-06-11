@@ -29,3 +29,16 @@ class ToggleNoteContentViewEvent extends SettingsEvent {
   @override
   List<Object> get props => [toggleView];
 }
+
+// intro watched
+class MakeIntroWatchedEvent extends SettingsEvent {
+  const MakeIntroWatchedEvent();
+  @override
+  List<Object> get props => [];
+}
+
+class CheckIntroWatchedEvent extends SettingsEvent {
+  const CheckIntroWatchedEvent();
+  @override
+  List<Object> get props => [];
+}

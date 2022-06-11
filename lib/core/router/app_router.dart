@@ -6,6 +6,7 @@ import 'package:notebooks/features/notebook/presentation/pages/all_notebooks_pag
 import 'package:notebooks/features/notebook/presentation/pages/create_notebook_page.dart';
 import 'package:notebooks/features/notebook/presentation/pages/edit_notebook_page.dart';
 import 'package:notebooks/features/notebook/presentation/pages/notebook_page.dart';
+import 'package:notebooks/features/settings/presentation/pages/introduction_screen.dart';
 import 'package:notebooks/features/settings/presentation/pages/note_settings_page.dart';
 import 'package:notebooks/features/settings/presentation/pages/settings_page.dart';
 
@@ -27,6 +28,7 @@ class AppRouters {
   static const String editNotePage = 'edit-note';
   static const String settingsPage = 'settings';
   static const String noteSettingsPage = 'note-settings';
+  static const String introScreen = 'intro-screen';
 }
 
 class RouterParams {
@@ -44,9 +46,17 @@ final router = GoRouter(
       path: AppRouters.homePage,
       pageBuilder: (context, state) => MaterialPage(
         key: state.pageKey,
-        child: const AllNotebooksPage(),
+        child: const IntroductionScreenPage(),
       ),
     ),
+    // GoRoute(
+    //   name: AppRouters.introScreen,
+    //   path: '/${AppRouters.homePage}/:${AppRouters.introScreen}',
+    //   pageBuilder: (context, state) => MaterialPage(
+    //     key: state.pageKey,
+    //     child: const IntroductionScreenPage(),
+    //   ),
+    // ),
     GoRoute(
       name: AppRouters.notebooksPage,
       path: '/${AppRouters.notebooksPage}',
@@ -143,7 +153,7 @@ final router = GoRouter(
       pageBuilder: (context, state) {
         return MaterialPage(
           key: state.pageKey,
-          child: SettingsPage(),
+          child: const SettingsPage(),
         );
       },
     ),

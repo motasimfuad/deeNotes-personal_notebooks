@@ -65,8 +65,8 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
       imagePadding: EdgeInsets.only(
         top: 50.h,
         bottom: 20.h,
-        left: 20.w,
-        right: 20.w,
+        left: 30.w,
+        right: 30.w,
       ),
       imageFlex: 3,
     );
@@ -110,25 +110,29 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
           PageViewModel(
             title: "Create Notebooks",
             body:
-                "Create notebooks for different topics and write notes in that notebook.",
-            // image: _buildFullscreenImage(),
+                "Create notebooks for different topics and store notes categorically.",
             image: _buildLottie('animations/onboarding-notebooks.json'),
             decoration: pageDecoration,
           ),
           PageViewModel(
             title: "Create Notes",
-            body: "Create and customize notes with colors as you wish.",
+            body:
+                "Create and customize notes as you wish with beautiful colors.",
             image: _buildLottie('animations/onboarding-note.json'),
+            decoration: pageDecoration,
+          ),
+          PageViewModel(
+            title: "Safe and Secure",
+            body:
+                "Your notes are stored in your device. No need to worry about losing them. Also, your notes are safe with you.",
+            image: _buildLottie('animations/onboarding-safe.json'),
             decoration: pageDecoration,
           ),
           PageViewModel(
             title: "Let's get started!",
             body: "Tap on the done button below to start using Notebooks.",
             image: _buildLottie('animations/onboarding-done.json'),
-            decoration: pageDecoration.copyWith(
-              imageFlex: 3,
-              imageAlignment: Alignment.center,
-            ),
+            decoration: pageDecoration,
           ),
         ],
         onDone: () => _onIntroEnd(context),

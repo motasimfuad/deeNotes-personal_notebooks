@@ -38,7 +38,6 @@ class RouterParams {
   static const String notebookId = 'notebookId';
   static const String noteId = 'noteId';
 }
-// AppRouter._();
 
 final router = GoRouter(
   urlPathStrategy: UrlPathStrategy.path,
@@ -189,7 +188,3 @@ final router = GoRouter(
     ),
   ],
 );
-
-// NotebookEntity _notebook(String? param) {
-//  return notebooks
-// }

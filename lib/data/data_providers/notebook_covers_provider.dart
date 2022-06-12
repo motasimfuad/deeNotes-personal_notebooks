@@ -52,11 +52,6 @@ class NotebookCoversProvider {
       url: 'assets/images/notebooks/cover_8.jpg',
     ),
     const NotebookCover(
-      id: 8,
-      name: 'cover_8',
-      url: 'assets/images/notebooks/cover_8.jpg',
-    ),
-    const NotebookCover(
       id: 9,
       name: 'cover_9',
       url: 'assets/images/notebooks/cover_9.jpg',

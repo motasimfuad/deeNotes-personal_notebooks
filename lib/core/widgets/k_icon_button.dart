@@ -43,7 +43,7 @@ class KIconButton extends StatelessWidget {
 
   Container _buildIconButtonBody(Color? clr) {
     return Container(
-      height: size?.h,
+      height: size?.w,
       width: size?.w,
       decoration: BoxDecoration(
         // color: bgColor ?? Colors.grey.shade200,

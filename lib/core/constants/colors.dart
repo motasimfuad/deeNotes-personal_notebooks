@@ -16,27 +16,6 @@ class KColors {
   static const secondaryDark = Color(0xff292b38);
 
   static const primary = Colors.indigo;
-
-  // static const int _primaryValue = 0xff626ed4;
-  // static const MaterialColor primary = MaterialColor(
-  //   _primaryValue,
-  //   <int, Color>{
-  //     50: Color(0xffeff1fb), //10%
-  //     100: Color(0xffd0d4f2), //20%
-  //     200: Color(0xffb1b7ea), //30%
-  //     300: Color(0xff919ae1), //40%
-  //     400: Color(0xff727dd8), //50%
-  //     500: Color(_primaryValue), //60%
-  //     600: Color(0xff5863bf), //70%
-  //     700: Color(0xff4e58aa), //80%
-  //     800: Color(0xff454d94), //90%
-  //     900: Color(0xff31376a),
-  //   },
-  // );
-
-// final MaterialColor kPrimary =
-//     MaterialColor(const Color(0xff626ed4).value, _primaryMap);
-
 }
 
 final Map<int, Color> _darkMap = {

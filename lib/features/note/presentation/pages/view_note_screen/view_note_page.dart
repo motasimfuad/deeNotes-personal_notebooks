@@ -74,174 +74,178 @@ class _ViewNotePageState extends State<ViewNotePage> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20.w,
-            vertical: 8.h,
-          ),
-          child: BlocBuilder<NoteBloc, NoteState>(
-            builder: (context, state) {
-              if (state is NoteLoading) {
-                return const SizedBox();
-              }
-              // if (state is NoteLoaded)
-              else {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        KIconButton(
-                          icon: Icons.delete_outline_rounded,
-                          iconType: IconType.bottomBar,
-                          tooltip: 'Delete note',
-                          iconColor: note?.noteColor.color,
-                          onPressed: () {
-                            kDialog(
-                              context: context,
-                              title: 'Delete note?',
-                              bodyText:
-                                  'Are you sure you want to delete this note?',
-                              yesBtnPressed: () {
-                                context.read<NoteBloc>().add(
-                                      DeleteNoteEvent(noteId: note?.id as int),
-                                    );
-                                Navigator.pop(context);
-                                kSnackBar(
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 20.w,
+              vertical: 10.h,
+            ),
+            child: BlocBuilder<NoteBloc, NoteState>(
+              builder: (context, state) {
+                if (state is NoteLoading) {
+                  return const SizedBox();
+                }
+                // if (state is NoteLoaded)
+                else {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          KIconButton(
+                            icon: Icons.delete_outline_rounded,
+                            iconType: IconType.bottomBar,
+                            tooltip: 'Delete note',
+                            iconColor: note?.noteColor.color,
+                            onPressed: () {
+                              kDialog(
+                                context: context,
+                                title: 'Delete note?',
+                                bodyText:
+                                    'Are you sure you want to delete this note?',
+                                yesBtnPressed: () {
+                                  context.read<NoteBloc>().add(
+                                        DeleteNoteEvent(
+                                            noteId: note?.id as int),
+                                      );
+                                  Navigator.pop(context);
+                                  kSnackBar(
+                                    context: context,
+                                    type: AlertType.success,
+                                    message: 'Note Deleted!',
+                                  );
+                                  router.pop();
+                                  context.read<NoteBloc>().add(
+                                        GetAllNotesEvent(
+                                            notebookId: note!.notebookId),
+                                      );
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          BlocConsumer<NoteBloc, NoteState>(
+                            listener: (context, state) {
+                              if (state is NoteFavoriteToggledState) {
+                                String favStatus = state.note.isFavorite == true
+                                    ? 'Note Added to Favorite'
+                                    : 'Note Removed from Favorite';
+
+                                kSnackbarFlat(
                                   context: context,
-                                  type: AlertType.success,
-                                  message: 'Note Deleted!',
+                                  message: favStatus,
+                                  bgColor: note!.noteColor.color,
                                 );
-                                router.pop();
+                              }
+                            },
+                            builder: (context, state) {
+                              if (state is NoteFavoriteToggledState) {
+                                note = state.note;
+
                                 context.read<NoteBloc>().add(
                                       GetAllNotesEvent(
                                           notebookId: note!.notebookId),
                                     );
-                              },
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        BlocConsumer<NoteBloc, NoteState>(
-                          listener: (context, state) {
-                            if (state is NoteFavoriteToggledState) {
-                              String favStatus = state.note.isFavorite == true
-                                  ? 'Note Added to Favorite'
-                                  : 'Note Removed from Favorite';
+                              }
+                              return KIconButton(
+                                icon: note?.isFavorite == true
+                                    ? Icons.favorite_rounded
+                                    : Icons.favorite_outline_rounded,
+                                iconType: IconType.bottomBar,
+                                tooltip: 'Add to favorite',
+                                iconColor: note?.noteColor.color,
+                                onPressed: () {
+                                  NoteEntity newNote = NoteEntity(
+                                    id: note!.id,
+                                    title: note!.title,
+                                    description: note!.description,
+                                    isFavorite:
+                                        note!.isFavorite == true ? false : true,
+                                    noteColor: note!.noteColor,
+                                    createdAt: note!.createdAt,
+                                    notebookId: note!.notebookId,
+                                    editedAt: note!.editedAt,
+                                    isLocked: note!.isLocked,
+                                  );
+
+                                  context.read<NoteBloc>().add(
+                                        ToggleNoteFavoriteEvent(
+                                          note: newNote,
+                                        ),
+                                      );
+                                },
+                              );
+                            },
+                          ),
+                          SizedBox(width: 12.w),
+                          KIconButton(
+                            icon: Icons.copy_rounded,
+                            iconType: IconType.bottomBar,
+                            tooltip: 'Copy Note',
+                            iconColor: note?.noteColor.color,
+                            onPressed: () {
+                              String noteText =
+                                  '${note?.title}\n${note?.description}';
+                              context.read<NoteBloc>().add(
+                                    CopyNoteToClipboardEvent(
+                                      noteText: noteText,
+                                    ),
+                                  );
+                              kSnackbarFlat(
+                                context: context,
+                                message: 'Note copied to clipboard',
+                                bgColor: note?.noteColor.color,
+                              );
+                            },
+                          ),
+                          SizedBox(width: 12.w),
+                          KIconButton(
+                            icon: Icons.open_in_new_rounded,
+                            iconType: IconType.bottomBar,
+                            tooltip: 'View in full screen',
+                            iconColor: note?.noteColor.color,
+                            onPressed: () {
+                              router.pushNamed(
+                                  AppRouters.viewNoteFullScreenPage,
+                                  params: {
+                                    RouterParams.noteId: note!.id.toString(),
+                                  });
 
                               kSnackbarFlat(
                                 context: context,
-                                message: favStatus,
-                                bgColor: note!.noteColor.color,
+                                message: 'Full Screen Mode',
+                                bgColor: note?.noteColor.color,
                               );
-                            }
-                          },
-                          builder: (context, state) {
-                            if (state is NoteFavoriteToggledState) {
-                              note = state.note;
-
-                              context.read<NoteBloc>().add(
-                                    GetAllNotesEvent(
-                                        notebookId: note!.notebookId),
-                                  );
-                            }
-                            return KIconButton(
-                              icon: note?.isFavorite == true
-                                  ? Icons.favorite_rounded
-                                  : Icons.favorite_outline_rounded,
-                              iconType: IconType.bottomBar,
-                              tooltip: 'Add to favorite',
-                              iconColor: note?.noteColor.color,
-                              onPressed: () {
-                                NoteEntity newNote = NoteEntity(
-                                  id: note!.id,
-                                  title: note!.title,
-                                  description: note!.description,
-                                  isFavorite:
-                                      note!.isFavorite == true ? false : true,
-                                  noteColor: note!.noteColor,
-                                  createdAt: note!.createdAt,
-                                  notebookId: note!.notebookId,
-                                  editedAt: note!.editedAt,
-                                  isLocked: note!.isLocked,
-                                );
-
-                                context.read<NoteBloc>().add(
-                                      ToggleNoteFavoriteEvent(
-                                        note: newNote,
-                                      ),
-                                    );
-                              },
-                            );
-                          },
-                        ),
-                        SizedBox(width: 12.w),
-                        KIconButton(
-                          icon: Icons.copy_rounded,
-                          iconType: IconType.bottomBar,
-                          tooltip: 'Copy Note',
-                          iconColor: note?.noteColor.color,
-                          onPressed: () {
-                            String noteText =
-                                '${note?.title}\n${note?.description}';
-                            context.read<NoteBloc>().add(
-                                  CopyNoteToClipboardEvent(
-                                    noteText: noteText,
-                                  ),
-                                );
-                            kSnackbarFlat(
-                              context: context,
-                              message: 'Note copied to clipboard',
-                              bgColor: note?.noteColor.color,
-                            );
-                          },
-                        ),
-                        SizedBox(width: 12.w),
-                        KIconButton(
-                          icon: Icons.open_in_new_rounded,
-                          iconType: IconType.bottomBar,
-                          tooltip: 'View in full screen',
-                          iconColor: note?.noteColor.color,
-                          onPressed: () {
-                            router.pushNamed(AppRouters.viewNoteFullScreenPage,
+                            },
+                          ),
+                          SizedBox(width: 12.w),
+                          KIconButton(
+                            icon: Icons.border_color_outlined,
+                            iconType: IconType.bottomBar,
+                            tooltip: 'Edit Note',
+                            iconColor: note?.noteColor.color,
+                            onPressed: () {
+                              router.pushNamed(
+                                AppRouters.editNotePage,
                                 params: {
                                   RouterParams.noteId: note!.id.toString(),
-                                });
-
-                            kSnackbarFlat(
-                              context: context,
-                              message: 'Full Screen Mode',
-                              bgColor: note?.noteColor.color,
-                            );
-                          },
-                        ),
-                        SizedBox(width: 12.w),
-                        KIconButton(
-                          icon: Icons.border_color_outlined,
-                          iconType: IconType.bottomBar,
-                          tooltip: 'Edit Note',
-                          iconColor: note?.noteColor.color,
-                          onPressed: () {
-                            router.pushNamed(
-                              AppRouters.editNotePage,
-                              params: {
-                                RouterParams.noteId: note!.id.toString(),
-                              },
-                            );
-                          },
-                        ),
-                      ],
-                    )
-                  ],
-                );
-              }
-              // else {
-              //   return Container();
-              // }
-            },
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      )
+                    ],
+                  );
+                }
+                // else {
+                //   return Container();
+                // }
+              },
+            ),
           ),
         ),
       ),

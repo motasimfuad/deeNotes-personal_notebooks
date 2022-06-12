@@ -93,7 +93,7 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
           PageViewModel(
             title: "Safe and Secure",
             body:
-                "Your notes are  stored in your device.\nNo need to worry about losing them.\nSo, your notes are safe with you.",
+                "Your notes are stored in your device.\nNo need to worry about losing them.\nSo, your notes are safe with you.",
             image: _buildLottie('animations/onboarding-safe.json'),
             decoration: pageDecoration,
           ),

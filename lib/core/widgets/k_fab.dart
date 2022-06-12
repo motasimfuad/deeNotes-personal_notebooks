@@ -14,15 +14,18 @@ class KFab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton.extended(
-      elevation: 3.5,
-      onPressed: onPressed,
-      tooltip: label,
-      icon: icon != null ? Icon(icon) : const SizedBox.shrink(),
-      label: Text(label),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(15.r),
+    return Container(
+      padding: EdgeInsets.all(5.w),
+      child: FloatingActionButton.extended(
+        elevation: 3.5,
+        onPressed: onPressed,
+        tooltip: label,
+        icon: icon != null ? Icon(icon) : const SizedBox.shrink(),
+        label: Text(label),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(15.r),
+          ),
         ),
       ),
     );

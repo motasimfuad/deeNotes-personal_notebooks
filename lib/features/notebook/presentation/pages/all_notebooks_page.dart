@@ -25,7 +25,6 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
   @override
   void initState() {
     BlocProvider.of<NotebookBloc>(context).add(const GetAllNotebooksEvent());
-    // BlocProvider.of<SettingsBloc>(context).add(UpdateSettingsEvent());
     super.initState();
   }
 
@@ -40,12 +39,9 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
           slivers: [
             SliverAppBar(
               title: const Text(Strings.appTitle),
-
               elevation: 0,
               centerTitle: true,
               backgroundColor: Colors.transparent,
-              // leading: Container(),
-              // leadingWidth: 10.w,
               titleTextStyle: TextStyle(
                 color: KColors.primary,
                 fontWeight: FontWeight.bold,
@@ -64,14 +60,9 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
                 SizedBox(width: 15.w),
               ],
             ),
-            // SliverGrid.count(crossAxisCount: 2)
-
             BlocConsumer<NotebookBloc, NotebookState>(
               listener: (context, state) {},
               builder: (context, state) {
-                if (state is NotebookInitial) {
-                  // context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
-                }
                 if (state is NotebookListLoading) {
                   return SliverToBoxAdapter(
                     child: SizedBox(
@@ -83,8 +74,6 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
                   );
                 }
                 if (state is NotebookListLoaded) {
-                  // BlocProvider.of<SettingsBloc>(context)
-                  //     .add(UpdateSettingsEvent());
                   notebooks = state.notebooks;
                 }
                 if (notebooks.isEmpty) {
@@ -162,15 +151,12 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: Align(
-        alignment: Alignment(1.w, 1.h),
-        child: KFab(
-          label: 'New Notebook',
-          icon: Icons.add_to_photos,
-          onPressed: () async {
-            router.pushNamed(AppRouters.createNotebookPage);
-          },
-        ),
+      floatingActionButton: KFab(
+        label: 'New Notebook',
+        icon: Icons.add_to_photos,
+        onPressed: () async {
+          router.pushNamed(AppRouters.createNotebookPage);
+        },
       ),
     );
   }

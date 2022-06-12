@@ -46,7 +46,7 @@ class NoteItem extends StatelessWidget {
                 Text(
                   note.title,
                   overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
+                  maxLines: viewType == NoteViewType.grid ? 2 : 1,
                   style: TextStyle(
                     color: note.noteColor.color,
                     fontSize: 16.sp,

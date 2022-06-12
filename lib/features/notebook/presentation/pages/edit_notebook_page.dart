@@ -110,10 +110,12 @@ class _EditNotebookPageState extends State<EditNotebookPage> {
 
                                       return NotebookItem(
                                         notebook: selectedNotebookEntity,
+                                        isTotalNotesHidden: true,
                                       );
                                     } else {
                                       return NotebookItem(
                                         notebook: selectedNotebookEntity,
+                                        isTotalNotesHidden: true,
                                       );
                                     }
                                   },

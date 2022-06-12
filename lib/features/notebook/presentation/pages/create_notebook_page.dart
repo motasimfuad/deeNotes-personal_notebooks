@@ -158,7 +158,7 @@ class _CreateNotebookPageState extends State<CreateNotebookPage> {
 
             context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
           } else {
-            KSnackBar(
+            kSnackBar(
               context: context,
               type: AlertType.failed,
               position: FlashPosition.top,

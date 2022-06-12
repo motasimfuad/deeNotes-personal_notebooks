@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 enum IconType { topNav, bottomBar }
 
+// ignore: must_be_immutable
 class KIconButton extends StatelessWidget {
   VoidCallback onPressed;
   double? size;

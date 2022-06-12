@@ -4,8 +4,6 @@ import 'package:notebooks/data/models/label.dart';
 import 'package:notebooks/data/models/note_color.dart';
 import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 
-import '../../../../data/data_providers/note_colors_provider.dart';
-
 class NoteModel extends NoteEntity {
   const NoteModel({
     int? id,
@@ -93,7 +91,6 @@ class NoteModel extends NoteEntity {
 
   String toJson() {
     var encoded = json.encode(toMap());
-    print('encoded: $encoded');
     return encoded;
   }
 
@@ -106,21 +103,3 @@ class NoteModel extends NoteEntity {
     return 'Note(id: $id, title: $title, description: $description, isFavorite: $isFavorite, isLocked: $isLocked, noteColor: $noteColor, createdAt: $createdAt, editedAt: $editedAt, labels: $labels, notebookId: $notebookId)';
   }
 }
-
-// delete later
-var noteColorsProvider = NoteColorsProvider();
-final sampleNote = NoteModel(
-  id: 32,
-  title: 'This is the first note',
-  description:
-      'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-  noteColor: noteColorsProvider.noteColors[20],
-  notebookId: 1,
-  createdAt: DateTime.now(),
-  // labels: [
-  //   Label(id: 01, name: 'label 1'),
-  //   Label(id: 02, name: 'label 2'),
-  //   Label(id: 03, name: 'label 3'),
-  //   Label(id: 04, name: 'label 4'),
-  // ],
-);

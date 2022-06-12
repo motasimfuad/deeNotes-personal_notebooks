@@ -16,9 +16,9 @@ import '../../../note/presentation/widgets/note_item.dart';
 import '../../../settings/presentation/bloc/settings_bloc.dart';
 
 class NoteBookPage extends StatefulWidget {
-  NotebookEntity? notebook;
-  int notebookId;
-  NoteBookPage({
+  final NotebookEntity? notebook;
+  final int notebookId;
+  const NoteBookPage({
     Key? key,
     this.notebook,
     required this.notebookId,
@@ -91,7 +91,7 @@ class _NoteBookPageState extends State<NoteBookPage> {
                         BlocConsumer<NoteBloc, NoteState>(
                           listener: (context, state) {
                             if (state is NoteCreated) {
-                              KSnackBar(
+                              kSnackBar(
                                 context: context,
                                 type: AlertType.success,
                                 message: 'Note created Successfully',
@@ -204,16 +204,12 @@ class _NoteBookPageState extends State<NoteBookPage> {
         if (state is AllSettingsFetchedState) {
           noteViewType = state.selectedView!;
           noteContentIsHidden = state.isNoteContentHidden!;
-          print(
-            "state noteViewType: ${state.selectedView}, isNoteContentHidden: ${state.isNoteContentHidden}",
-          );
         }
         if (state is NoteViewSettingsChangedState) {
           noteViewType = state.selectedView;
         }
         if (state is NoteContentViewToggledState) {
           noteContentIsHidden = state.isNoteContentHidden;
-          print('state isNoteContentHidden: ${state.isNoteContentHidden}');
         }
 
         return GridView.builder(

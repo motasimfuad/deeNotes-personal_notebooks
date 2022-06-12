@@ -9,8 +9,8 @@ import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 import '../../bloc/note_bloc.dart';
 
 class ViewNoteFullScreen extends StatefulWidget {
-  int noteId;
-  ViewNoteFullScreen({
+  final int noteId;
+  const ViewNoteFullScreen({
     Key? key,
     required this.noteId,
   }) : super(key: key);
@@ -35,7 +35,7 @@ class _ViewNoteFullScreenState extends State<ViewNoteFullScreen> {
       body: BlocConsumer<NoteBloc, NoteState>(
         listener: (context, state) {
           if (state is NoteNightModeState) {
-            KSnackbarFlat(
+            kSnackbarFlat(
               context: context,
               message: isNightMode == true ? 'Night mode off' : 'Night mode on',
               bgColor: note?.noteColor.color,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notebooks/core/constants/constants.dart';
 
-KBottomSheet({
+kBottomSheet({
   required BuildContext context,
   required Widget child,
   double? height,

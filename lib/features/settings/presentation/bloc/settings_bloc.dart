@@ -36,7 +36,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       }
 
       if (event is ToggleNoteContentViewEvent) {
-        print("bloc event.toggleView: ${event.toggleView}");
         await pref.setBool(
           Strings.isNoteContentHiddenKey,
           event.toggleView,
@@ -78,8 +77,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         } else {
           isNoteContentHidden = view;
         }
-        print(
-            "bloc noteViewType: $selectedView, isNoteContentHidden: $isNoteContentHidden");
         emit(AllSettingsFetchedState(
           selectedView: selectedView,
           isNoteContentHidden: isNoteContentHidden,

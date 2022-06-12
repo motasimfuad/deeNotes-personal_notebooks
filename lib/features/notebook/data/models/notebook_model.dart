@@ -3,6 +3,7 @@ import 'package:notebooks/features/note/data/models/note_model.dart';
 import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
+// ignore: must_be_immutable
 class NotebookModel extends NotebookEntity {
   NotebookModel({
     int? id,

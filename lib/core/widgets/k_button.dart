@@ -13,6 +13,7 @@ abstract class KButton extends StatelessWidget {
   final double? fontSize;
 
   const KButton({
+    Key? key,
     required this.text,
     required this.onPressed,
     this.backgroundColor,
@@ -20,7 +21,7 @@ abstract class KButton extends StatelessWidget {
     this.btnHeight,
     this.btnWidth,
     this.fontSize,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,12 +56,14 @@ abstract class KButton extends StatelessWidget {
 
 class KPrimaryButton extends KButton {
   KPrimaryButton({
+    Key? key,
     required String text,
     required VoidCallback onPressed,
     Color? btnColor,
     Color? textColor,
     double? btnHeight,
   }) : super(
+          key: key,
           onPressed: onPressed,
           text: text,
           fontSize: 17.sp,
@@ -73,9 +76,11 @@ class KPrimaryButton extends KButton {
 
 class KSmallButton extends KButton {
   KSmallButton({
+    Key? key,
     required String text,
     required VoidCallback onPressed,
   }) : super(
+          key: key,
           onPressed: onPressed,
           text: text,
           fontSize: 18,

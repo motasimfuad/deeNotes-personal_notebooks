@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:notebooks/core/constants/constants.dart';
 import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 
+// ignore: must_be_immutable
 class NoteItem extends StatelessWidget {
   NoteEntity note;
   Function()? onTapFavorite;

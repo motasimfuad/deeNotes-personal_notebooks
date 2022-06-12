@@ -4,7 +4,7 @@ import '../constants/constants.dart';
 
 enum DialogType { alert, form }
 
-KDialog({
+kDialog({
   required BuildContext context,
   String? title,
   String? yesButtonText,
@@ -190,12 +190,12 @@ KDialog({
         ),
         actions: showFooter == true
             ? <Widget>[
-                kDialogButton(
+                KDialogButton(
                   buttonText: noButtonText ?? getNoButtonText(dialogType),
                   bgColor: noButtonColor ?? getNoButtonColor(dialogType),
                   fontSize: dialogType == DialogType.form ? 15.5.sp : 14.sp,
                 ),
-                kDialogButton(
+                KDialogButton(
                   buttonText: yesButtonText ?? getYesButtonText(dialogType),
                   bgColor: yesButtonColor ?? getYesButtonColor(dialogType),
                   fontSize: dialogType == DialogType.form ? 15.5.sp : 14.sp,
@@ -208,12 +208,13 @@ KDialog({
   );
 }
 
-class kDialogButton extends StatelessWidget {
+// ignore: must_be_immutable
+class KDialogButton extends StatelessWidget {
   String buttonText;
   Color bgColor;
   Function()? onPressed;
   double? fontSize;
-  kDialogButton({
+  KDialogButton({
     Key? key,
     required this.buttonText,
     required this.bgColor,

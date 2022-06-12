@@ -4,6 +4,7 @@ import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 
 import '../../../../data/models/label.dart';
 
+// ignore: must_be_immutable
 class NotebookEntity extends Equatable {
   int? id;
   String name;

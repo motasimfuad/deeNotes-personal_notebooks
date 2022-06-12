@@ -171,14 +171,8 @@ class _EditNotebookPageState extends State<EditNotebookPage> {
             BlocProvider.of<NotebookBloc>(context).add(
               UpdateNotebookEvent(selectedNotebookEntity),
             );
-
-            // router.pop();
-
             router.goNamed(AppRouters.notebooksPage);
-
             context.read<NotebookBloc>().add(const GetAllNotebooksEvent());
-            print(
-                'notebookName: ${selectedNotebookEntity.name}, selectedCover: ${selectedNotebookEntity.cover}');
           }
         },
       ),

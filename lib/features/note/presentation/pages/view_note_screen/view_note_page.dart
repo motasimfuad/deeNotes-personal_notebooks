@@ -13,12 +13,9 @@ import '../../../../../core/widgets/k_snackbar_flat.dart';
 import '../../bloc/note_bloc.dart';
 
 class ViewNotePage extends StatefulWidget {
-  // NotebookEntity notebook;
-  // NoteEntity note;
-  int noteId;
-  ViewNotePage({
+  final int noteId;
+  const ViewNotePage({
     Key? key,
-    // required this.notebook,
     required this.noteId,
   }) : super(key: key);
 
@@ -42,7 +39,7 @@ class _ViewNotePageState extends State<ViewNotePage> {
         child: BlocConsumer<NoteBloc, NoteState>(
           listener: (context, state) {
             if (state is NoteUpdated) {
-              KSnackBar(
+              kSnackBar(
                 context: context,
                 position: FlashPosition.bottom,
                 type: AlertType.success,
@@ -58,7 +55,6 @@ class _ViewNotePageState extends State<ViewNotePage> {
             }
             if (state is NoteLoaded) {
               note = state.note;
-              print("note?.editedAt: ${note?.editedAt}");
             }
             if (state is NoteUpdated) {
               context.read<NoteBloc>().add(
@@ -101,7 +97,7 @@ class _ViewNotePageState extends State<ViewNotePage> {
                           tooltip: 'Delete note',
                           iconColor: note?.noteColor.color,
                           onPressed: () {
-                            KDialog(
+                            kDialog(
                               context: context,
                               title: 'Delete note?',
                               bodyText:
@@ -111,7 +107,7 @@ class _ViewNotePageState extends State<ViewNotePage> {
                                       DeleteNoteEvent(noteId: note?.id as int),
                                     );
                                 Navigator.pop(context);
-                                KSnackBar(
+                                kSnackBar(
                                   context: context,
                                   type: AlertType.success,
                                   message: 'Note Deleted!',
@@ -136,7 +132,7 @@ class _ViewNotePageState extends State<ViewNotePage> {
                                   ? 'Note Added to Favorite'
                                   : 'Note Removed from Favorite';
 
-                              KSnackbarFlat(
+                              kSnackbarFlat(
                                 context: context,
                                 message: favStatus,
                                 bgColor: note!.noteColor.color,
@@ -196,7 +192,7 @@ class _ViewNotePageState extends State<ViewNotePage> {
                                     noteText: noteText,
                                   ),
                                 );
-                            KSnackbarFlat(
+                            kSnackbarFlat(
                               context: context,
                               message: 'Note copied to clipboard',
                               bgColor: note?.noteColor.color,
@@ -215,7 +211,7 @@ class _ViewNotePageState extends State<ViewNotePage> {
                                   RouterParams.noteId: note!.id.toString(),
                                 });
 
-                            KSnackbarFlat(
+                            kSnackbarFlat(
                               context: context,
                               message: 'Full Screen Mode',
                               bgColor: note?.noteColor.color,

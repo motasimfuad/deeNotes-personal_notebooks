@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class KFab extends StatelessWidget {
-  IconData? icon;
-  String label;
-  VoidCallback onPressed;
-  KFab({
+  final IconData? icon;
+  final String label;
+  final VoidCallback onPressed;
+  const KFab({
     Key? key,
     this.icon,
     required this.label,

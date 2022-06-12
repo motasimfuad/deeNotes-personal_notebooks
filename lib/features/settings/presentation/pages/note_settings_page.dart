@@ -48,7 +48,7 @@ class _NoteSettingsPageState extends State<NoteSettingsPage> {
                 listener: (context, state) {
                   if (state is NoteViewSettingsChangedState) {
                     selectedView = state.selectedView;
-                    KSnackBar(
+                    kSnackBar(
                       context: context,
                       durationSeconds: 1,
                       message:

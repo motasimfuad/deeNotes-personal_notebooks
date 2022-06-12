@@ -7,9 +7,9 @@ import 'package:notebooks/data/models/note_color.dart';
 import 'package:notebooks/features/note/presentation/bloc/note_bloc.dart';
 
 class KSelectColorSheet extends StatefulWidget {
-  NoteColor? noteColor;
-  Function(NoteColor)? onSelected;
-  KSelectColorSheet({
+  final NoteColor? noteColor;
+  final Function(NoteColor)? onSelected;
+  const KSelectColorSheet({
     Key? key,
     this.noteColor,
     this.onSelected,
@@ -73,7 +73,6 @@ class _KSelectColorSheetState extends State<KSelectColorSheet> {
                     );
                   }
                   if (state is AllNoteColorsFetchedState) {
-                    print('AllNoteColorsFetchedState');
                     noteColors = state.colors;
 
                     if (selectedNoteColor == null && widget.noteColor != null) {
@@ -86,23 +85,12 @@ class _KSelectColorSheetState extends State<KSelectColorSheet> {
                       isSelected = noteColors.indexWhere(
                           (element) => element.id == selectedNoteColor?.id);
                     }
-
-                    print("isSelected: $isSelected");
-                    print("noteColors >> fetched : ${noteColors.length}");
                   }
                   if (state is NoteColorSelectedState) {
-                    print('NoteColorSelectedState');
                     selectedNoteColor = state.color;
                     isSelected = noteColors
                         .indexWhere((element) => element.id == state.color.id);
-                    print("isSelected: $isSelected");
-                    print("noteColors >> selected: ${noteColors.length}");
                   }
-                  // if (state is! NoteColorSelectedState) {
-                  //   selectedNoteColor = noteColors.first;
-                  //   // isSelected = 0;
-                  //   widget.onSelected?.call(selectedNoteColor!);
-                  // }
                   return GridView.builder(
                     padding: EdgeInsets.only(bottom: 20.h),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

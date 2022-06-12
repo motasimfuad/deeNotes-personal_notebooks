@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
 
-KSnackbarFlat({
+kSnackbarFlat({
   required BuildContext context,
   required String? message,
   Color? bgColor,

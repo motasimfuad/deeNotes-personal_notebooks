@@ -4,6 +4,7 @@ import 'package:notebooks/core/constants/constants.dart';
 
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
+// ignore: must_be_immutable
 class NotebookItem extends StatelessWidget {
   NotebookEntity? notebook;
   int? totalNotes;

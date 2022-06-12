@@ -9,6 +9,7 @@ abstract class SettingsState extends Equatable {
 
 class SettingsInitial extends SettingsState {}
 
+// ignore: must_be_immutable
 class AllSettingsFetchedState extends SettingsState {
   NoteViewType? selectedView;
   bool? isNoteContentHidden;

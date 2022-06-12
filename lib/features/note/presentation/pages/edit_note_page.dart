@@ -15,8 +15,8 @@ import '../../../../core/widgets/k_snackbar.dart';
 import '../../../../data/models/note_color.dart';
 
 class EditNotePage extends StatefulWidget {
-  int noteId;
-  EditNotePage({
+  final int noteId;
+  const EditNotePage({
     Key? key,
     required this.noteId,
   }) : super(key: key);
@@ -35,7 +35,6 @@ class _EditNotePageState extends State<EditNotePage> {
 
   @override
   void initState() {
-    print('initState');
     context.read<NoteBloc>().add(FindNoteEvent(id: widget.noteId));
 
     titleController.text = note?.title ?? '';
@@ -199,7 +198,7 @@ class _EditNotePageState extends State<EditNotePage> {
             );
             router.pop();
           } else {
-            KSnackBar(
+            kSnackBar(
               context: context,
               position: FlashPosition.top,
               type: AlertType.warning,
@@ -232,7 +231,7 @@ class _EditNotePageState extends State<EditNotePage> {
                   //     ),
                   //   ),
                   // );
-                  KBottomSheet(
+                  kBottomSheet(
                     context: context,
                     child: KSelectColorSheet(
                       noteColor: updatedNoteColor ?? note!.noteColor,

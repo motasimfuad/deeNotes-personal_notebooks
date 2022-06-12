@@ -40,7 +40,7 @@ class _SettingsPageState extends State<SettingsPage> {
             BlocConsumer<SettingsBloc, SettingsState>(
               listener: (context, state) {
                 if (state is DatabaseClearingState) {
-                  KSnackBar(
+                  kSnackBar(
                     context: context,
                     message: 'Database Deleting...',
                   );
@@ -55,7 +55,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
                   router.goNamed(AppRouters.notebooksPage);
 
-                  KSnackBar(
+                  kSnackBar(
                     context: context,
                     message: 'Database Deleted',
                   );
@@ -65,20 +65,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 if (state is AllSettingsFetchedState) {
                   displayName = state.selectedView!.name;
                   isNoteContentHidden = state.isNoteContentHidden!;
-                  print(
-                      "AllSettings >> noteViewType: $displayName, isNoteContentHidden: $isNoteContentHidden");
                 } else if (state is NoteViewSettingsChangedState) {
                   displayName = state.selectedView.name;
-                  print(
-                      "NoteViewSettingsChanged >> noteViewType: $displayName, isNoteContentHidden: $isNoteContentHidden");
                 } else if (state is NoteContentViewToggledState) {
                   isNoteContentHidden = state.isNoteContentHidden;
-                  print(
-                      "NoteContent >> noteViewType: $displayName, isNoteContentHidden: $isNoteContentHidden");
-                } else if (state is DatabaseClearedState) {
-                  // context
-                  //     .read<NotebookBloc>()
-                  //     .add(const GetAllNotebooksEvent());
                 }
 
                 return Expanded(
@@ -90,39 +80,6 @@ class _SettingsPageState extends State<SettingsPage> {
           ],
         ),
       ),
-    );
-  }
-
-  Column _buildCustomPage(BuildContext context) {
-    return Column(
-      children: [
-        SwitchListTile(
-          value: isNoteContentHidden,
-          onChanged: (val) {
-            setState(() {
-              context.read<SettingsBloc>().add(
-                    ToggleNoteContentViewEvent(toggleView: val),
-                  );
-              isNoteContentHidden = val;
-            });
-            print(isNoteContentHidden);
-          },
-        ),
-        StatefulBuilder(
-          builder: (context, setState) => SwitchListTile(
-            value: isNoteContentHidden,
-            onChanged: (val) {
-              setState(() {
-                context.read<SettingsBloc>().add(
-                      ToggleNoteContentViewEvent(toggleView: val),
-                    );
-                isNoteContentHidden = val;
-              });
-              print(isNoteContentHidden);
-            },
-          ),
-        )
-      ],
     );
   }
 
@@ -142,7 +99,7 @@ class _SettingsPageState extends State<SettingsPage> {
               title: const Text('Language'),
               value: const Text('English'),
               onPressed: (context) {
-                KSnackBar(
+                kSnackBar(
                   context: context,
                   message: 'More languages coming soon!',
                 );
@@ -193,7 +150,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
               onPressed: (context) {
-                KDialog(
+                kDialog(
                   context: context,
                   title: 'Delete Database?',
                   barrierColor: Colors.red.withOpacity(0.85),

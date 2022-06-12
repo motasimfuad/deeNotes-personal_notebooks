@@ -12,6 +12,7 @@ class FavoriteNotesPage extends StatefulWidget {
 }
 
 class _FavoriteNotesPageState extends State<FavoriteNotesPage> {
+  // ignore: unused_field
   List<NotebookEntity> _notebooks = [];
 
   @override

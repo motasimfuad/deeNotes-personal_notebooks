@@ -6,7 +6,7 @@ import '../constants/colors.dart';
 
 enum AlertType { success, failed, warning, info, notImplemented }
 
-KSnackBar({
+kSnackBar({
   required BuildContext context,
   AlertType type = AlertType.notImplemented,
   String? message,

@@ -179,7 +179,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
             );
             router.pop();
           } else {
-            KSnackBar(
+            kSnackBar(
               context: context,
               position: FlashPosition.top,
               type: AlertType.warning,
@@ -196,7 +196,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
             children: [
               IconButton(
                 onPressed: () {
-                  KBottomSheet(
+                  kBottomSheet(
                     context: context,
                     child: KSelectColorSheet(
                       noteColor: noteColor,

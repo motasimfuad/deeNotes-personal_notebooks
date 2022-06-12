@@ -78,7 +78,7 @@ class NotebookOptionsModal extends StatelessWidget {
                   bgColor: KColors.danger,
                   iconColor: Colors.white,
                   onPressed: () {
-                    KDialog(
+                    kDialog(
                       context: context,
                       title: 'Delete Notebook?',
                       bodyText:
@@ -94,7 +94,7 @@ class NotebookOptionsModal extends StatelessWidget {
                         router.pop();
                         router.pushNamed(AppRouters.notebooksPage);
 
-                        KSnackBar(
+                        kSnackBar(
                           context: context,
                           type: AlertType.success,
                           message: 'Notebook deleted Successfully!',

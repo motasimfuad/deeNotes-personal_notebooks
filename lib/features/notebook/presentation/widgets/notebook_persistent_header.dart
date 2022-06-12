@@ -56,7 +56,7 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
             bgColor: Colors.grey.withOpacity(0.3),
             iconColor: Colors.white,
             onPressed: () {
-              KDialog(
+              kDialog(
                 context: context,
                 title: 'Notebook Details',
                 showFooter: false,

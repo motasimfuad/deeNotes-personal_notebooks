@@ -1,13 +1,13 @@
 <p align="center"> 
   <tr>
-     <td><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/11b107cf-5a67-4055-b750-e25c6cd6bc13/deeNotes-logo-gif-min.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220612%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220612T132843Z&X-Amz-Expires=86400&X-Amz-Signature=6bc659608ddef8c317b6182a4aa3704bb2e98f3c91c82ec2f70f0aa2b698f693&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22deeNotes-logo-gif-min.gif%22&x-id=GetObject" width=120 ></td>
+     <td><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/11b107cf-5a67-4055-b750-e25c6cd6bc13/deeNotes-logo-gif-min.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220612%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220612T132843Z&X-Amz-Expires=86400&X-Amz-Signature=6bc659608ddef8c317b6182a4aa3704bb2e98f3c91c82ec2f70f0aa2b698f693&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22deeNotes-logo-gif-min.gif%22&x-id=GetObject" width=100 ></td>
   </tr>
  </p>
 
-<h1 align="center">deeNotes - Personal Notebooks</h1>
+<h1 align="center">deeNotes - Your personal notebooks</h1>
 </br>
 
-<p align="center" > It's a simple, yet powerful, app that allows you to create and share your own personal notes. A great way to keep track of your ideas, thoughts, and more. You can create different notebooks to organize your notes. </p>
+<p align="center" > It's a simple, yet powerful, app that allows you to create and share your own personal notes. A great way to keep track of your ideas, thoughts, and more. You can create different notebooks to organize your notes. </br> The app is fully offline, so no need to worry about the online threads.</p>
 
 
 <div align="center">
@@ -19,7 +19,7 @@
 </div>
 
 
-</br>
+</br></br>
 
 ## Features
 - Create notebooks on different topics for managing notes easily
@@ -39,39 +39,52 @@
 ## Screenshots
 <table align="center">
   <tr>
-     <td>Home Screen</td>
-     <td>Dynamic Sidebar</td>
-     <td>Custom items table</td>
-  </tr>
-  <tr>
-    <td><img src="https://oceanic-opossum-637.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F94b52ec7-d5b6-4e44-b4a6-c1083a975e7f%2Fapp-mockup-ios-screenshot-4-default-5.5-inch-1.png?table=block&id=acf16253-3e64-4aa4-b20e-37ca50bb239b&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=2000&userId=&cache=v2" width=300 ></td>
-    <td><img src="https://oceanic-opossum-637.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F272bb3f4-4d16-409d-b0e2-f2e93f8644f4%2Fapp-mockup-ios-screenshot-4-default-5.5-inch-2.png?table=block&id=67ed0d33-d41e-413d-84aa-c0f07aa57371&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=2000&userId=&cache=v2" width=300 ></td>
-    <td><img src="https://oceanic-opossum-637.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F00e67538-275a-45ca-bc48-8b02e4fa934f%2Fapp-mockup-ios-screenshot-4-default-5.5-inch-3.png?table=block&id=082f6506-b686-4b0a-b683-c58e988679ad&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=2000&userId=&cache=v2" width=300 ></td>
+    <td><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Ff0b032f3-8b27-4e04-ab3d-8ef643a1003e%2FdeeNotes_-_mockups-HI_(1)-min.png?table=block&id=98c77a59-77e8-4207-9c42-5fe6c0f2d112&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=2000&userId=73918c78-f0a6-467b-83c8-c747d80076b1&cache=v2" width=300 ></td>
+    <td><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fc672c731-0c7f-4b02-95bf-5ccb3023803f%2FdeeNotes_-_mockups-HI_(2)-min.png?table=block&id=41c293b0-d787-4dfa-a985-ba2f1ca734da&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=1920&userId=73918c78-f0a6-467b-83c8-c747d80076b1&cache=v2" width=300 ></td>
+    <td><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F58091260-b768-44ba-b573-4a90431e1e58%2FdeeNotes_-_mockups-HI_(3)-min.png?table=block&id=951ffbca-9fb7-40a0-8e72-3191d7769664&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=1920&userId=73918c78-f0a6-467b-83c8-c747d80076b1&cache=v2" width=300 ></td>
   </tr>
  </table>
 <table align="center">
+
   <tr>
-     <td>Profile Screen</td>
-     <td>Dynamic UI</td>
-     <td>Managed with BLoC</td>
+    <td><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F69dac1dc-55ae-4541-9f1a-1eb4b638427e%2FdeeNotes_-_mockups-HI_(4)-min.png?table=block&id=5c2ca843-463d-484e-97df-3e5376252031&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=1920&userId=73918c78-f0a6-467b-83c8-c747d80076b1&cache=v2" width=300 ></td>
+    <td><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Ff53da06f-7ae2-463c-a7e9-ec5ef8dd1800%2FdeeNotes_-_mockups-HI_(5)-min.png?table=block&id=d03f40fd-3784-4374-b736-f9bdeec711bb&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=1920&userId=73918c78-f0a6-467b-83c8-c747d80076b1&cache=v2" width=300 ></td>
+    <td><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fb44693a8-449c-49bc-ba80-151894c98cd4%2FdeeNotes_-_mockups-HI_(6)-min.png?table=block&id=92ca050a-ef79-47cf-9a8e-d6a9bbebcfae&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=1920&userId=73918c78-f0a6-467b-83c8-c747d80076b1&cache=v2" width=300 ></td>
   </tr>
+ </table>
+ <table align="center">
   <tr>
-    <td><img src="https://oceanic-opossum-637.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F7d154865-ec67-4e25-8431-7aafe83addb2%2Fapp-mockup-ios-screenshot-4-default-5.5-inch-4.png?table=block&id=4e50288b-213f-478d-86fc-a6daffd79b34&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=2000&userId=&cache=v2" width=300 ></td>
-    <td><img src="https://oceanic-opossum-637.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F0f4caec8-64a1-449e-b35e-2bef43f8c7be%2Fapp-mockup-ios-screenshot-4-default-5.5-inch-5.png?table=block&id=684acc80-e41c-4ed9-b4f2-a7ad2d1af91f&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=2000&userId=&cache=v2" width=300 ></td>
-    <td><img src="https://oceanic-opossum-637.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fcbfe0fd9-920d-41d1-82b3-0e6c1236bcfb%2Fapp-mockup-ios-screenshot-4-default-5.5-inch-6.png?table=block&id=14990dcd-b77c-44f1-8b83-82785edcaba8&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=2000&userId=&cache=v2" width=300 ></td>
+    <td><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F9649d388-b2ef-4dab-b639-10b6dce887df%2FdeeNotes_-_mockups-HI_(7)-min.png?table=block&id=9935a672-7442-459c-bff8-e1b06606ae7d&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=1920&userId=73918c78-f0a6-467b-83c8-c747d80076b1&cache=v2" width=300 ></td>
+    <td><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F23dfb438-87cb-492e-86a1-2205371e03b5%2FdeeNotes_-_mockups-HI_(8)-min.png?table=block&id=47af5831-cda8-4928-9b8d-e1264d8e0348&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=1920&userId=73918c78-f0a6-467b-83c8-c747d80076b1&cache=v2" width=300 ></td>
+    <td><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F542d3f0e-0b04-4dbd-a9ea-76aa67e9a764%2FdeeNotes_-_mockups-HI_(9)-min.png?table=block&id=65d264f0-d4b0-47bd-a5a3-70bec8280a32&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=1920&userId=73918c78-f0a6-467b-83c8-c747d80076b1&cache=v2" width=300 ></td>
+  </tr>
+ </table>
+ <table align="center">
+  <tr>
+    <td><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F2ece9605-f76f-4591-b94f-3a95c1f615ae%2FdeeNotes_-_mockups-HI_(10)-min.png?table=block&id=9dec9040-439f-4ed0-b1d8-f37d7aaa74ce&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=1920&userId=73918c78-f0a6-467b-83c8-c747d80076b1&cache=v2" width=300 ></td>
+    <td><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F252e8d33-a33a-45bb-93be-8943a810df2b%2FdeeNotes_-_mockups-HI_(11)-min.png?table=block&id=0cce3edc-2365-43fd-a4a2-c1f0ba16222c&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=1920&userId=73918c78-f0a6-467b-83c8-c747d80076b1&cache=v2" width=300 ></td>
+    <td><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F6c163537-d4c8-4b65-a600-f6558046d41d%2FdeeNotes_-_mockups-HI_(12)-min.png?table=block&id=91331c1e-4cf7-41d7-bad4-9d5921448be3&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=1920&userId=73918c78-f0a6-467b-83c8-c747d80076b1&cache=v2" width=300 ></td>
   </tr>
  </table>
 
 
+</br>
+
+## Roadmap
+- Individual note lock
+- Full notenook lock
+- App lock functionality
+- Favorite notes view
+- Search notes
+- Add label in notes
+- Custom notebook cover upload
+- Share notes as image/pdf
+- Download notes as text file
+- Export database to drive/excel
 
 
+</br>
 
-<p align="center">
-  <b>Some Links:</b><br>
-  <a href="#">Link 1</a> |
-  <a href="#">Link 2</a> |
-  <a href="#">Link 3</a>
-</p>
 
 ## Clean Architecture
 ```

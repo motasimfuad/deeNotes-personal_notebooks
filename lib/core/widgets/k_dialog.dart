@@ -235,7 +235,7 @@ class KDialogButton extends StatelessWidget {
       ),
       style: TextButton.styleFrom(
         padding: EdgeInsets.symmetric(
-          horizontal: 5.w,
+          horizontal: 8.w,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.r),

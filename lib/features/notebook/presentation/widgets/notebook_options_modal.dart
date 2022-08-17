@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:notebooks/core/constants/constants.dart';
-import 'package:notebooks/core/router/app_router.dart';
-import 'package:notebooks/core/widgets/k_dialog.dart';
 import 'package:notebooks/core/widgets/k_icon_button.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 import 'package:notebooks/features/notebook/presentation/widgets/notebook_item.dart';
-
-import '../../../../core/widgets/k_snackbar.dart';
-import '../bloc/notebook_bloc.dart';
 
 class NotebookOptionsModal extends StatelessWidget {
   final NotebookEntity notebook;
   final int totalNotes;
   final int totalFavorites;
+  final Function() onDeletePressed;
+  final Function() onEditPressed;
   const NotebookOptionsModal({
     Key? key,
     required this.notebook,
     required this.totalNotes,
     required this.totalFavorites,
+    required this.onDeletePressed,
+    required this.onEditPressed,
   }) : super(key: key);
 
   @override
@@ -77,46 +75,40 @@ class NotebookOptionsModal extends StatelessWidget {
                   icon: Icons.delete,
                   bgColor: KColors.danger,
                   iconColor: Colors.white,
-                  onPressed: () {
-                    kDialog(
-                      context: context,
-                      title: 'Delete Notebook?',
-                      bodyText:
-                          'Are you sure you want to delete this notebook?\nAll notes written in this notebook will also be removed. \n\nThis action cannot be undone!',
-                      yesButtonText: 'YES, DELETE',
-                      noButtonText: 'CANCEL',
-                      yesBtnPressed: () {
-                        context.read<NotebookBloc>().add(
-                              DeleteNotebookEvent(
-                                notebookId: notebook.id!,
-                              ),
-                            );
-                        router.pop();
-                        router.pushNamed(AppRouters.notebooksPage);
+                  onPressed: onDeletePressed,
+                  // onPressed: () {
+                  //   Navigator.pop(context);
+                  //   kDialog(
+                  //     context: context,
+                  //     title: 'Delete Notebook?',
+                  //     bodyText:
+                  //         'Are you sure you want to delete this notebook?\nAll notes written in this notebook will also be removed. \n\nThis action cannot be undone!',
+                  //     yesButtonText: 'YES, DELETE',
+                  //     noButtonText: 'CANCEL',
+                  //     yesBtnPressed: () {
+                  //       context.read<NotebookBloc>().add(
+                  //             DeleteNotebookEvent(
+                  //               notebookId: notebook.id!,
+                  //             ),
+                  //           );
+                  //       router.pop();
+                  //       router.pushNamed(AppRouters.notebooksPage);
 
-                        kSnackBar(
-                          context: context,
-                          type: AlertType.success,
-                          message: 'Notebook deleted Successfully!',
-                        );
-                      },
-                    );
-                  },
+                  //       kSnackBar(
+                  //         context: context,
+                  //         type: AlertType.success,
+                  //         message: 'Notebook deleted Successfully!',
+                  //       );
+                  //     },
+                  //   );
+                  // },
                 ),
                 SizedBox(width: 6.h),
                 KIconButton(
                   icon: Icons.edit,
                   bgColor: KColors.primary,
                   iconColor: Colors.white,
-                  onPressed: () {
-                    Navigator.pop(context);
-                    router.pushNamed(
-                      AppRouters.editNotebookPage,
-                      params: {
-                        'notebookId': notebook.id.toString(),
-                      },
-                    );
-                  },
+                  onPressed: onEditPressed,
                 ),
               ],
             ),

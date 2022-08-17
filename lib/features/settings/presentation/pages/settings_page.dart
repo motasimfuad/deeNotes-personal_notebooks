@@ -97,7 +97,7 @@ class _SettingsPageState extends State<SettingsPage> {
             SettingsTile.navigation(
               leading: const Icon(Icons.language),
               title: const Text('Language'),
-              value: const Text('English'),
+              value: Text('English'.toUpperCase()),
               onPressed: (context) {
                 kSnackBar(
                   context: context,
@@ -113,7 +113,7 @@ class _SettingsPageState extends State<SettingsPage> {
             SettingsTile.navigation(
               leading: const Icon(Icons.grid_view_outlined),
               title: const Text('Notes View'),
-              value: Text(displayName),
+              value: Text(displayName.toUpperCase()),
               onPressed: (context) {
                 router.pushNamed(AppRouters.noteSettingsPage);
               },
@@ -154,6 +154,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   context: context,
                   title: 'Delete Database?',
                   barrierColor: Colors.red.withOpacity(0.85),
+                  yesButtonText: 'Yes, Delete Everything!',
                   bodyText:
                       'Are you sure you want to delete the database? Everything will be lost!\n\nThis action cannot be undone.',
                   yesBtnPressed: () {

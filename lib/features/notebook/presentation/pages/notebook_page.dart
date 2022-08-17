@@ -162,7 +162,7 @@ class _NoteBookPageState extends State<NoteBookPage> {
           },
         ),
         floatingActionButton: KFab(
-          label: 'New Note',
+          label: 'NEW NOTE',
           icon: Icons.post_add,
           onPressed: () {
             router.pushNamed(

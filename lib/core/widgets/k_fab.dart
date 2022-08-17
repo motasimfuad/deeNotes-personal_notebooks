@@ -21,7 +21,12 @@ class KFab extends StatelessWidget {
         onPressed: onPressed,
         tooltip: label,
         icon: icon != null ? Icon(icon) : const SizedBox.shrink(),
-        label: Text(label),
+        label: Text(
+          label.toUpperCase(),
+          style: const TextStyle(
+            fontWeight: FontWeight.w500,
+          ),
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(15.r),

@@ -167,7 +167,7 @@ class _EditNotebookPageState extends State<EditNotebookPage> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: KFab(
-          label: 'Edit',
+          label: 'EDIT',
           icon: Icons.add_to_photos,
           onPressed: () {
             if (selectedNotebookEntity != null &&

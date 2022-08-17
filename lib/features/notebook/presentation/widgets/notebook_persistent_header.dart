@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:notebooks/core/router/app_router.dart';
@@ -8,6 +9,8 @@ import 'package:notebooks/core/widgets/k_icon_button.dart';
 import 'package:notebooks/features/notebook/domain/entities/notebook_entity.dart';
 
 import '../../../../core/constants/colors.dart';
+import '../../../../core/widgets/k_snackbar.dart';
+import '../bloc/notebook_bloc.dart';
 import 'notebook_options_modal.dart';
 
 class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
@@ -70,6 +73,41 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
                     notebook: notebook,
                     totalNotes: totalNotes,
                     totalFavorites: totalFavorites,
+                    onDeletePressed: () {
+                      Navigator.pop(context);
+                      kDialog(
+                        context: context,
+                        title: 'Delete Notebook?',
+                        bodyText:
+                            'Are you sure you want to delete this notebook?\nAll notes written in this notebook will also be removed. \n\nThis action cannot be undone!',
+                        yesButtonText: 'YES, DELETE',
+                        noButtonText: 'CANCEL',
+                        yesBtnPressed: () {
+                          context.read<NotebookBloc>().add(
+                                DeleteNotebookEvent(
+                                  notebookId: notebook.id!,
+                                ),
+                              );
+                          router.pop();
+                          router.pushNamed(AppRouters.notebooksPage);
+
+                          kSnackBar(
+                            context: context,
+                            type: AlertType.success,
+                            message: 'Notebook deleted Successfully!',
+                          );
+                        },
+                      );
+                    },
+                    onEditPressed: () {
+                      Navigator.pop(context);
+                      router.pushNamed(
+                        AppRouters.editNotebookPage,
+                        params: {
+                          'notebookId': notebook.id.toString(),
+                        },
+                      );
+                    },
                   )
                 ],
               );

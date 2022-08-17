@@ -76,27 +76,6 @@ class _EditNotePageState extends State<EditNotePage> {
                         Navigator.pop(context);
                       },
                     ),
-                    // Padding(
-                    //   padding: EdgeInsets.symmetric(
-                    //     horizontal: 20.w,
-                    //     vertical: 10.h,
-                    //   ),
-                    //   child: KLabels(
-                    //     notebook: notebook,
-                    //     onPressed: () => showModalBottomSheet(
-                    //       context: context,
-                    //       isScrollControlled: true,
-                    //       clipBehavior: Clip.antiAlias,
-                    //       shape: const RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.vertical(
-                    //           top: Radius.circular(20),
-                    //         ),
-                    //       ),
-                    //       builder: (context) =>
-                    //           KAddLabelSheet(notebook: notebook),
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
                 Expanded(
@@ -215,22 +194,6 @@ class _EditNotePageState extends State<EditNotePage> {
             children: [
               IconButton(
                 onPressed: () {
-                  // showModalBottomSheet(
-                  //   context: context,
-                  //   builder: (context) => SizedBox(
-                  //     child: KSelectColorSheet(
-                  //       noteColor: noteColor,
-                  //     ),
-                  //   ),
-                  //   isDismissible: false,
-                  //   isScrollControlled: false,
-                  //   clipBehavior: Clip.antiAlias,
-                  //   shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.vertical(
-                  //       top: Radius.circular(20.r),
-                  //     ),
-                  //   ),
-                  // );
                   kBottomSheet(
                     context: context,
                     child: KSelectColorSheet(

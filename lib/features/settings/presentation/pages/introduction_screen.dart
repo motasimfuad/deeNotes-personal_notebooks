@@ -60,7 +60,7 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
           PageViewModel(
             title: Strings.appTitle,
             body:
-                "It's a simple, yet powerful, app that\nallows you to create and share your\nown personal notes.\n\nA great way to keep track of your\nideas, thoughts, and more.",
+                "A simple, yet powerful app that \nallows you to create and share your \nown personal notes. \n\nGreat way to keep track of your ideas, thoughts, and more.",
             image: _buildLottie('animations/onboarding-first.json', 200.w),
             decoration: pageDecoration.copyWith(
               imagePadding: EdgeInsets.symmetric(
@@ -93,19 +93,18 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
           PageViewModel(
             title: "Safe and Secure",
             body:
-                "Your notes are stored in your device.\nNo need to worry about losing them.\nSo, your notes are safe with you.",
+                "Your notes are stored in your device.\nNo need to worry about losing them. Your notes are safe with you.",
             image: _buildLottie('animations/onboarding-safe.json'),
             decoration: pageDecoration,
           ),
           PageViewModel(
-            title: "Let's get started!",
-            body: "Welcome to ${Strings.appTitle}.",
+            title: Strings.appTitle,
+            body: "Let's get started!",
             image: _buildLottie('animations/onboarding-done.json'),
             decoration: pageDecoration,
           ),
         ],
         onDone: () => _onIntroEnd(context),
-        //onSkip: () => _onIntroEnd(context), // You can override onSkip callback
         showSkipButton: false,
         skipOrBackFlex: 0,
         nextFlex: 0,
@@ -116,13 +115,10 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
         backStyle: const ButtonStyle().copyWith(
           overlayColor: MaterialStateProperty.all(Colors.transparent),
         ),
-
-        //rtl: true, // Display as right-to-left
         back: const Icon(Icons.arrow_back_ios_rounded),
         skip: const Text('Skip', style: TextStyle(fontWeight: FontWeight.w600)),
         next: const Icon(Icons.arrow_forward_ios_rounded),
-        done: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600)),
-        // scrollPhysics: const BouncingScrollPhysics(),
+        done: const Text('DONE', style: TextStyle(fontWeight: FontWeight.w600)),
         curve: Curves.fastLinearToSlowEaseIn,
         controlsMargin: EdgeInsets.symmetric(
           horizontal: 25.w,

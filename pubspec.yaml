@@ -32,10 +32,10 @@ dependencies:
   sqflite: ^2.0.2
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.9.3
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.9.3
 
 flutter_native_splash:
   color: "#ffffff"

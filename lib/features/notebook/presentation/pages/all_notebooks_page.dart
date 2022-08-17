@@ -175,7 +175,6 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
           right: 0.w,
           bottom: 10.w,
         ),
-        // height: double.maxFinite,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -241,14 +240,16 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Drag right or tap to close',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                            fontStyle: FontStyle.italic,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.grey.shade400,
+                        Expanded(
+                          child: Text(
+                            'Drag right or tap to close',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 13.sp,
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey.shade400,
+                            ),
                           ),
                         ),
                         SizedBox(width: 5.w),

@@ -10,6 +10,7 @@
 .svn/
 
 key.properties
+android/app/upload-deeNotes-keystore.jks
 **/*.keystore
 **/*.jks
 

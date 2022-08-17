@@ -54,7 +54,6 @@ class NotebookCoversList extends StatelessWidget {
                           image: AssetImage(
                               nbCoversProvider.notebookCovers[index].url),
                           fit: BoxFit.cover,
-                          // opacity: 0.8,
                           colorFilter: ColorFilter.mode(
                             Colors.black.withOpacity(0.3),
                             BlendMode.multiply,
@@ -80,7 +79,8 @@ class NotebookCoversList extends StatelessWidget {
                     ),
                     image: DecorationImage(
                       image: AssetImage(
-                          nbCoversProvider.notebookCovers[index].url),
+                        nbCoversProvider.notebookCovers[index].url,
+                      ),
                       fit: BoxFit.cover,
                     ),
                   ),

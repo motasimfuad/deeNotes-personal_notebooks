@@ -33,8 +33,6 @@ class _EditNotebookPageState extends State<EditNotebookPage> {
   @override
   void initState() {
     context.read<NotebookBloc>().add(FindNotebookEvent(widget.notebookId));
-    // _nameController.text = selectedNotebookEntity?.name;
-
     super.initState();
   }
 
@@ -66,7 +64,6 @@ class _EditNotebookPageState extends State<EditNotebookPage> {
           builder: (context, state) {
             if (state is NotebookLoaded) {
               selectedNotebookEntity = state.notebook;
-              print(selectedNotebookEntity?.cover);
             }
             return SafeArea(
               child: Column(

@@ -109,6 +109,7 @@ class NotebookOptionsModal extends StatelessWidget {
                   bgColor: KColors.primary,
                   iconColor: Colors.white,
                   onPressed: () {
+                    Navigator.pop(context);
                     router.pushNamed(
                       AppRouters.editNotebookPage,
                       params: {

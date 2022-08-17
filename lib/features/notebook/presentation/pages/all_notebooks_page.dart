@@ -90,15 +90,18 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
                               onTap: () {
                                 router.pushNamed(AppRouters.createNotebookPage);
                               },
-                              child: Lottie.asset(
-                                'assets/animations/empty-notebooks.json',
+                              child: SizedBox(
+                                height: 180.h,
+                                child: Lottie.asset(
+                                  'assets/animations/empty-notebooks.json',
+                                ),
                               ),
                             ),
                             Text(
-                              'Create your first notebook by \ntapping the button!',
+                              'Create your first notebook!',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 17.sp,
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -198,16 +201,6 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
                       color: KColors.primary,
                     ),
                   ),
-                  SizedBox(height: 10.w),
-                  // Text(
-                  //   'Made with\n❤️\nby KhyberLabs',
-                  //   textAlign: TextAlign.center,
-                  //   style: TextStyle(
-                  //     fontSize: 15.sp,
-                  //     fontWeight: FontWeight.w500,
-                  //     // color: KColors.primary,
-                  //   ),
-                  // ),
                 ],
               ),
             ),

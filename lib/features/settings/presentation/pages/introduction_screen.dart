@@ -99,8 +99,7 @@ class _IntroductionScreenPageState extends State<IntroductionScreenPage> {
           ),
           PageViewModel(
             title: "Let's get started!",
-            body:
-                "Tap on the done button below to start using ${Strings.appTitle}.",
+            body: "Welcome to ${Strings.appTitle}.",
             image: _buildLottie('animations/onboarding-done.json'),
             decoration: pageDecoration,
           ),

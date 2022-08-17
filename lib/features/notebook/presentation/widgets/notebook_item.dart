@@ -106,7 +106,7 @@ class NotebookItem extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize:
-                                isTotalNotesHidden == true ? 20.sp : 18.sp,
+                                isTotalNotesHidden == true ? 18.sp : 18.sp,
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
                           ),

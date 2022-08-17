@@ -1,6 +1,6 @@
 <p align="center"> 
   <tr>
-     <td><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/11b107cf-5a67-4055-b750-e25c6cd6bc13/deeNotes-logo-gif-min.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220612%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220612T132843Z&X-Amz-Expires=86400&X-Amz-Signature=6bc659608ddef8c317b6182a4aa3704bb2e98f3c91c82ec2f70f0aa2b698f693&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22deeNotes-logo-gif-min.gif%22&x-id=GetObject" width=100 ></td>
+     <td><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F2df6213c-cec7-4782-9c8e-cc0a328c62f8%2FdeeNotes-logo-gif-min.gif?table=block&id=b379ab22-6b2d-4efb-9dce-b43beec29fd4&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&userId=73918c78-f0a6-467b-83c8-c747d80076b1&cache=v2" width=100 ></td>
   </tr>
  </p>
 
@@ -67,6 +67,15 @@
   </tr>
  </table>
 
+</br>
+</br>
+</br>
+
+<p align="center">
+  <a href="https://drive.google.com/drive/folders/1UP479KqnAZkXvCOoU8UuNToVUwO2gxyE?usp=sharing">
+  <img width="180" src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fee4cde11-e7d3-459c-ba63-b0ddb81c8eb7%2FScreenshot_112.png?id=54440bd0-85f6-4401-9fbf-566dc9619563&table=block&spaceId=3107c0c8-1d6e-462e-8ab2-26ba76caa796&width=2000&userId=73918c78-f0a6-467b-83c8-c747d80076b1&cache=v2">
+  </a>
+</p>
 
 </br>
 
@@ -92,7 +101,6 @@
 ├─ core
 │  ├─ constant
 │  ├─ errors
-│  ├─ exceptions
 │  ├─ router
 │  ├─ themes
 │  ├─ usecases

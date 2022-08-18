@@ -224,7 +224,7 @@ class _NoteBookPageState extends State<NoteBookPage> {
               childAspectRatio: _getChildAspectRatio(),
               crossAxisCount: noteViewType == gridView ? 2 : 1,
               crossAxisSpacing: 15.w,
-              mainAxisSpacing: 15.h,
+              mainAxisSpacing: 15.w,
             ),
             itemCount: notes.length,
             itemBuilder: (BuildContext context, int index) {
@@ -283,7 +283,7 @@ class _NoteBookPageState extends State<NoteBookPage> {
     } else if (noteContentIsHidden && (noteViewType == gridView)) {
       return 2;
     } else if (!noteContentIsHidden && (noteViewType == listView)) {
-      return 3.5;
+      return 3.3;
     } else if (noteContentIsHidden && (noteViewType == listView)) {
       return 5;
     } else {

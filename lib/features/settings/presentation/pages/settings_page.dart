@@ -161,8 +161,8 @@ class _SettingsPageState extends State<SettingsPage> {
               title: const Text(
                 'Delete Database',
                 style: TextStyle(
-                  color: KColors.danger,
-                  fontWeight: FontWeight.w500,
+                  color: KColors.grey,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               onPressed: (context) {
@@ -170,7 +170,8 @@ class _SettingsPageState extends State<SettingsPage> {
                   context: context,
                   title: 'Delete Database?',
                   barrierColor: Colors.red.withOpacity(0.85),
-                  yesButtonText: 'Yes, Delete Everything!',
+                  yesButtonText: 'Yes, Delete Everything!'.toUpperCase(),
+                  noButtonText: 'No'.toUpperCase(),
                   bodyText:
                       'Are you sure you want to delete the database? Everything will be lost!\n\nThis action cannot be undone.',
                   yesBtnPressed: () {

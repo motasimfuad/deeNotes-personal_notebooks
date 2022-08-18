@@ -39,34 +39,38 @@ class NoteItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  note.title,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: viewType == NoteViewType.grid ? 2 : 1,
-                  style: TextStyle(
-                    color: note.noteColor.color,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    note.title,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: viewType == NoteViewType.grid ? 2 : 1,
+                    style: TextStyle(
+                      color: note.noteColor.color,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                SizedBox(height: noteContentIsHidden ? 0 : 5.h),
-                noteContentIsHidden
-                    ? const SizedBox()
-                    : Text(
-                        note.description,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: viewType == NoteViewType.grid ? 4 : 2,
-                        style: TextStyle(
-                          color: Colors.grey.shade900,
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      )
-              ],
+                  SizedBox(height: noteContentIsHidden ? 0 : 5.h),
+                  noteContentIsHidden
+                      ? const SizedBox()
+                      : Expanded(
+                          child: Text(
+                            note.description,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: viewType == NoteViewType.grid ? 5 : 2,
+                            style: TextStyle(
+                              color: Colors.grey.shade900,
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        )
+                ],
+              ),
             ),
             Row(
               mainAxisSize: MainAxisSize.max,

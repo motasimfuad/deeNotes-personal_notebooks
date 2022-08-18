@@ -61,7 +61,7 @@ class NoteItem extends StatelessWidget {
                           child: Text(
                             note.description,
                             overflow: TextOverflow.ellipsis,
-                            maxLines: viewType == NoteViewType.grid ? 5 : 2,
+                            maxLines: viewType == NoteViewType.grid ? 6 : 2,
                             style: TextStyle(
                               color: Colors.grey.shade900,
                               fontSize: 13.sp,
@@ -75,7 +75,7 @@ class NoteItem extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Expanded(
                   child: Text(
@@ -99,7 +99,7 @@ class NoteItem extends StatelessWidget {
                         ? Icons.favorite_rounded
                         : Icons.favorite_outline_rounded,
                     color: note.noteColor.color,
-                    size: 20,
+                    size: 18.w,
                   ),
                 ),
               ],
@@ -110,25 +110,3 @@ class NoteItem extends StatelessWidget {
     );
   }
 }
-
-
-// UnconstrainedBox(
-//                       child: Container(
-//                         decoration: BoxDecoration(
-//                           borderRadius:
-//                               const BorderRadius.all(Radius.circular(10)),
-//                           color: note.color,
-//                         ),
-//                         margin: EdgeInsets.only(right: 5.w),
-//                         padding: EdgeInsets.symmetric(
-//                             horizontal: 7.w, vertical: 2.5.h),
-//                         child:  Text(
-//                           '${note.labels?[index].name.toString()}',
-//                           style: TextStyle(
-//                             fontSize: 8,
-//                             color: Colors.white,
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-

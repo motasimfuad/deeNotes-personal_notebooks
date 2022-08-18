@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notebooks/core/constants/colors.dart';
+import 'package:notebooks/core/constants/constants.dart';
 import 'package:notebooks/core/router/app_router.dart';
 import 'package:notebooks/core/widgets/k_dialog.dart';
 import 'package:notebooks/features/settings/presentation/bloc/settings_bloc.dart';
@@ -97,7 +97,12 @@ class _SettingsPageState extends State<SettingsPage> {
             SettingsTile.navigation(
               leading: const Icon(Icons.language),
               title: const Text('Language'),
-              value: Text('English'.toUpperCase()),
+              value: Text(
+                'English'.toUpperCase(),
+                style: TextStyle(
+                  fontSize: 12.sp,
+                ),
+              ),
               onPressed: (context) {
                 kSnackBar(
                   context: context,
@@ -113,7 +118,12 @@ class _SettingsPageState extends State<SettingsPage> {
             SettingsTile.navigation(
               leading: const Icon(Icons.grid_view_outlined),
               title: const Text('Notes View'),
-              value: Text(displayName.toUpperCase()),
+              value: Text(
+                displayName.toUpperCase(),
+                style: TextStyle(
+                  fontSize: 12.sp,
+                ),
+              ),
               onPressed: (context) {
                 router.pushNamed(AppRouters.noteSettingsPage);
               },
@@ -128,8 +138,13 @@ class _SettingsPageState extends State<SettingsPage> {
               },
               leading: const Icon(Icons.border_horizontal_rounded),
               initialValue: isNoteContentHidden,
-              title: const Text('Hide note content'),
-              description: const Text('Hide note content in list page'),
+              title: const Text('Hide Note Content'),
+              description: Text(
+                'Hide note content in list page',
+                style: TextStyle(
+                  fontSize: 13.sp,
+                ),
+              ),
               onToggle: (val) {
                 context.read<SettingsBloc>().add(
                       ToggleNoteContentViewEvent(toggleView: val),
@@ -147,6 +162,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 'Delete Database',
                 style: TextStyle(
                   color: KColors.danger,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               onPressed: (context) {

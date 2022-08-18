@@ -11,7 +11,7 @@ class LoadingScreen extends StatelessWidget {
         padding: EdgeInsets.all(50.w),
         child: Center(
           child: Image.asset(
-            'assets/images/app/deeNotes_logo_icon.png',
+            'assets/images/app/deeNotes-playstore-logo.png',
             fit: BoxFit.cover,
             width: 80.w,
           ),

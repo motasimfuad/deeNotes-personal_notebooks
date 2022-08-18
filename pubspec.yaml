@@ -39,13 +39,13 @@ dev_dependencies:
 
 flutter_native_splash:
   color: "#ffffff"
-  image: "assets/images/app/deeNotes_logo_300px.png"
+  image: "assets/images/app/deeNotes-playstore-logo.png"
 
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/app/deeNotes_logo_1024px.png"
-  adaptive_icon_foreground: "assets/images/app/logo_foreground.png"
+  image_path: "assets/images/app/deeNotes-app-icon.png"
+  adaptive_icon_foreground: "assets/images/app/deeNotes-app-icon.png"
   adaptive_icon_background: "#ffffff"
 
 flutter:

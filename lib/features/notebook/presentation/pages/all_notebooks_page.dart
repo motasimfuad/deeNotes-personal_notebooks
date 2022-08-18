@@ -187,7 +187,7 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/images/app/deeNotes_logo_icon.png',
+                    'assets/images/app/deeNotes-playstore-logo.png',
                     fit: BoxFit.cover,
                     width: 60.w,
                   ),

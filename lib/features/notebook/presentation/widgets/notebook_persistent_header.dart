@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:notebooks/core/router/app_router.dart';
 import 'package:notebooks/core/widgets/k_bottom_filter_menu.dart';
 import 'package:notebooks/core/widgets/k_dialog.dart';
@@ -103,7 +102,7 @@ class NotebookPersistentHeader extends SliverPersistentHeaderDelegate {
                       Navigator.pop(context);
                       router.pushNamed(
                         AppRouters.editNotebookPage,
-                        params: {
+                        pathParameters: {
                           'notebookId': notebook.id.toString(),
                         },
                       );

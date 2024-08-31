@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:notebooks/core/router/app_router.dart';
-import 'package:notebooks/features/notebook/presentation/widgets/notebook_item.dart';
 import 'package:notebooks/core/widgets/k_fab.dart';
+import 'package:notebooks/features/notebook/presentation/widgets/notebook_item.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/widgets/k_icon_button.dart';
@@ -134,7 +134,7 @@ class _AllNotebooksPageState extends State<AllNotebooksPage> {
                           onTap: () {
                             router.pushNamed(
                               AppRouters.notebookPage,
-                              params: {
+                              pathParameters: {
                                 'notebookId': reversedList[index].id.toString(),
                               },
                             );

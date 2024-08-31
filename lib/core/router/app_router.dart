@@ -40,7 +40,6 @@ class RouterParams {
 }
 
 final router = GoRouter(
-  urlPathStrategy: UrlPathStrategy.path,
   initialLocation: AppRouters.homePage,
   routes: [
     GoRoute(
@@ -90,7 +89,7 @@ final router = GoRouter(
           name: AppRouters.notebookPage,
           path: ':notebookId',
           pageBuilder: (context, state) {
-            final notebookId = state.params['notebookId'];
+            final notebookId = state.pathParameters['notebookId'];
 
             return MaterialPage(
               key: state.pageKey,
@@ -104,7 +103,7 @@ final router = GoRouter(
       name: AppRouters.notePage,
       path: '/${AppRouters.allNotes}/:${RouterParams.noteId}',
       pageBuilder: (context, state) {
-        final noteId = state.params[RouterParams.noteId];
+        final noteId = state.pathParameters[RouterParams.noteId];
         return MaterialPage(
           child: ViewNotePage(noteId: int.parse(noteId.toString())),
         );
@@ -115,7 +114,7 @@ final router = GoRouter(
       path:
           '/${AppRouters.allNotes}/:${RouterParams.noteId}/${AppRouters.editNotePage}',
       pageBuilder: (context, state) {
-        final noteId = state.params[RouterParams.noteId];
+        final noteId = state.pathParameters[RouterParams.noteId];
         return MaterialPage(
           child: EditNotePage(noteId: int.parse(noteId.toString())),
         );
@@ -126,7 +125,7 @@ final router = GoRouter(
       path:
           '/${AppRouters.allNotes}/:${RouterParams.noteId}/${AppRouters.viewNoteFullScreenPage}',
       pageBuilder: (context, state) {
-        final noteId = state.params[RouterParams.noteId];
+        final noteId = state.pathParameters[RouterParams.noteId];
         return MaterialPage(
           child: ViewNoteFullScreen(noteId: int.parse(noteId.toString())),
         );
@@ -146,7 +145,7 @@ final router = GoRouter(
       name: AppRouters.createNotePage,
       path: '/:notebookId/${AppRouters.createNotePage}',
       pageBuilder: (context, state) {
-        final notebookId = state.params['notebookId'];
+        final notebookId = state.pathParameters['notebookId'];
 
         return MaterialPage(
           key: state.pageKey,
@@ -158,7 +157,7 @@ final router = GoRouter(
       name: AppRouters.editNotebookPage,
       path: '/${AppRouters.editNotebookPage}/:notebookId',
       pageBuilder: (context, state) {
-        final notebookId = state.params['notebookId'];
+        final notebookId = state.pathParameters['notebookId'];
 
         return MaterialPage(
           key: state.pageKey,

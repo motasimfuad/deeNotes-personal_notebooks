@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:notebooks/core/router/app_router.dart';
-
 import 'package:notebooks/core/widgets/k_fab.dart';
 import 'package:notebooks/core/widgets/k_snackbar.dart';
 import 'package:notebooks/features/note/domain/entities/note_entity.dart';
@@ -167,7 +166,7 @@ class _NoteBookPageState extends State<NoteBookPage> {
           onPressed: () {
             router.pushNamed(
               AppRouters.createNotePage,
-              params: {
+              pathParameters: {
                 'notebookId': widget.notebookId.toString(),
               },
             );
@@ -233,7 +232,9 @@ class _NoteBookPageState extends State<NoteBookPage> {
                 onTap: () {
                   router.pushNamed(
                     AppRouters.notePage,
-                    params: {RouterParams.noteId: selectedNote.id.toString()},
+                    pathParameters: {
+                      RouterParams.noteId: selectedNote.id.toString()
+                    },
                   );
                 },
                 child: BlocBuilder<NoteBloc, NoteState>(

@@ -4,7 +4,6 @@ import 'package:notebooks/core/constants/constants.dart';
 import 'package:notebooks/core/router/app_router.dart';
 import 'package:notebooks/core/widgets/k_dialog.dart';
 import 'package:notebooks/core/widgets/k_snackbar.dart';
-
 import 'package:notebooks/features/note/domain/entities/note_entity.dart';
 
 import '../../../../../core/widgets/k_appbar.dart';
@@ -210,7 +209,7 @@ class _ViewNotePageState extends State<ViewNotePage> {
                             onPressed: () {
                               router.pushNamed(
                                   AppRouters.viewNoteFullScreenPage,
-                                  params: {
+                                  pathParameters: {
                                     RouterParams.noteId: note!.id.toString(),
                                   });
 
@@ -230,7 +229,7 @@ class _ViewNotePageState extends State<ViewNotePage> {
                             onPressed: () {
                               router.pushNamed(
                                 AppRouters.editNotePage,
-                                params: {
+                                pathParameters: {
                                   RouterParams.noteId: note!.id.toString(),
                                 },
                               );

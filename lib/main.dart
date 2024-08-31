@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notebooks/all_providers.dart';
-import 'dependency_injection.dart' as di;
 
 import 'core/constants/strings.dart';
-import 'core/themes/app_theme.dart';
 import 'core/router/app_router.dart';
+import 'core/themes/app_theme.dart';
+import 'dependency_injection.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,28 +21,23 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MediaQuery(
-      data: MediaQueryData.fromWindow(
-        WidgetsBinding.instance.window,
-      ),
-      child: ScreenUtilInit(
-        minTextAdapt: true,
-        designSize: const Size(392.7, 834.9),
-        builder: () => AllProviders(
-          child: MaterialApp.router(
-            builder: (context, widget) {
-              ScreenUtil.setContext(context);
-              return MediaQuery(
-                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                child: widget!,
-              );
-            },
-            title: Strings.appTitle,
-            theme: AppTheme.lightTheme,
-            debugShowCheckedModeBanner: false,
-            routeInformationParser: router.routeInformationParser,
-            routerDelegate: router.routerDelegate,
-          ),
+    return ScreenUtilInit(
+      minTextAdapt: true,
+      designSize: const Size(392.7, 834.9),
+      builder: (context, widget) => AllProviders(
+        child: MaterialApp.router(
+          builder: (context, widget) {
+            return MediaQuery(
+              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+              child: widget!,
+            );
+          },
+          title: Strings.appTitle,
+          theme: AppTheme.lightTheme,
+          debugShowCheckedModeBanner: false,
+          routeInformationParser: router.routeInformationParser,
+          routerDelegate: router.routerDelegate,
+          routeInformationProvider: router.routeInformationProvider,
         ),
       ),
     );

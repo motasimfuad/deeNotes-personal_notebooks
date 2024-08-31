@@ -1,8 +1,10 @@
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-export 'package:flash/flash.dart';
+
 import '../constants/colors.dart';
+
+export 'package:flash/flash.dart';
 
 enum AlertType { success, failed, warning, info, notImplemented }
 
@@ -23,26 +25,25 @@ kSnackBar({
     persistent: true,
     builder: (_, controller) {
       return Flash(
-        enableVerticalDrag: isDismissible == true ? true : false,
         controller: controller,
-        margin: EdgeInsets.all(20.h),
-        behavior: FlashBehavior.floating,
         position: position ?? FlashPosition.bottom,
-        borderRadius: BorderRadius.circular(15.r),
-        boxShadows: kElevationToShadow[4],
-        backgroundColor: generateBgColor(type),
-
-        onTap: isDismissible == true
-            ? () {
-                controller.dismiss();
-              }
-            : () {},
-        // barrierDismissible: isDismissible == true ? true : false,
-
+        dismissDirections: isDismissible == true
+            ? const [
+                FlashDismissDirection.startToEnd,
+              ]
+            : [],
         forwardAnimationCurve: Curves.easeInOutCubic,
         reverseAnimationCurve: Curves.easeOutQuint,
-        useSafeArea: true,
         child: FlashBar(
+          controller: controller,
+          useSafeArea: true,
+          behavior: FlashBehavior.floating,
+          backgroundColor: generateBgColor(type),
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.r),
+          ),
+          margin: EdgeInsets.all(20.h),
           content: Text(
             message ?? generateText(type),
             style: TextStyle(
